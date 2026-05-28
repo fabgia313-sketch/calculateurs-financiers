@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CalcFin — Calculateurs financiers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: 'ss01', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  body {
+    min-height: 100vh;
+    line-height: 1.5;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  .mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+
+  /* ===== Ambient backdrop glow ===== */
+  .backdrop-glow {
+    position: fixed;
+    top: -300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.7;
+  }
+
+  /* ===== Container ===== */
+  .container {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== Header ===== */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .logo-mark {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--accent);
+    display: grid;
+    place-items: center;
+    color: #001A12;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: -0.03em;
+    font-family: 'Geist Mono', monospace;
+  }
+
+  nav.primary {
+    display: none;
+    align-items: center;
+    gap: 32px;
+  }
+  @media (min-width: 768px) {
+    nav.primary { display: flex; }
+  }
+  nav.primary a {
+    color: var(--fg-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 450;
+    transition: color 0.15s ease;
+  }
+  nav.primary a:hover { color: var(--fg); }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+  .lang-switcher button {
+    background: transparent;
+    border: none;
+    color: var(--fg-muted);
+    padding: 5px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+    transition: all 0.18s ease;
+  }
+  .lang-switcher button.active {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 14px;
+    border-radius: 8px;
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+  }
+  .cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding: 88px 0 56px;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .hero { padding: 140px 0 96px; }
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px 6px 8px;
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+    border-radius: 999px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin-bottom: 32px;
+  }
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 20%, transparent);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+
+  h1.hero-title {
+    font-size: clamp(40px, 7.5vw, 92px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+    max-width: 14ch;
+    margin: 0 auto;
+    text-wrap: balance;
+  }
+  h1.hero-title .accent-word {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+  h1.hero-title .num {
+    font-family: 'Geist Mono', monospace;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-sub {
+    margin: 28px auto 0;
+    max-width: 52ch;
+    color: var(--fg-muted);
+    font-size: clamp(15px, 1.4vw, 17px);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .hero-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 40px;
+    color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-meta .sep {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--fg-faint);
+  }
+
+  /* ===== Tools section ===== */
+  .tools-section {
+    padding: 64px 0 120px;
+  }
+  @media (min-width: 768px) {
+    .tools-section { padding: 96px 0 160px; }
+  }
+
+  .section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .section-eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: clamp(28px, 3.6vw, 44px);
+    letter-spacing: -0.025em;
+    font-weight: 500;
+    line-height: 1.05;
+    max-width: 22ch;
+  }
+  .section-count {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--fg-faint);
+    letter-spacing: 0.06em;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  @media (min-width: 640px) {
+    .tools-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .tools-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+  }
+
+  /* ===== Tool card ===== */
+  .tool-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                border-color 0.3s ease,
+                background 0.3s ease;
+    isolation: isolate;
+    min-height: 180px;
+  }
+  @media (min-width: 768px) {
+    .tool-card { padding: 28px; min-height: 220px; }
+  }
+
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 0%, var(--accent-soft) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    z-index: -1;
+  }
+  .tool-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-hover);
+  }
+  .tool-card:hover::before { opacity: 1; }
+
+  .tool-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .tool-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: color-mix(in oklab, var(--fg) 6%, transparent);
+    display: grid;
+    place-items: center;
+    color: var(--fg-muted);
+    transition: background 0.35s ease, color 0.35s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .tool-card:hover .tool-icon {
+    background: var(--accent);
+    color: #001A12;
+    transform: rotate(-4deg) scale(1.04);
+  }
+  .tool-icon svg { width: 18px; height: 18px; stroke-width: 1.6; }
+
+  .tool-arrow {
+    width: 28px; height: 28px;
+    display: grid; place-items: center;
+    color: var(--fg-faint);
+    border-radius: 50%;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                color 0.3s ease, background 0.3s ease;
+  }
+  .tool-arrow svg { width: 14px; height: 14px; stroke-width: 1.8; }
+  .tool-card:hover .tool-arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+
+  .tool-card-body { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+
+  .tool-num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--fg-faint);
+    margin-bottom: 6px;
+  }
+  .tool-title {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+  @media (min-width: 768px) {
+    .tool-title { font-size: 19px; }
+  }
+  .tool-desc {
+    font-size: 13.5px;
+    color: var(--fg-muted);
+    line-height: 1.45;
+    letter-spacing: -0.003em;
+  }
+
+  /* ===== Trust strip ===== */
+  .trust-strip {
+    margin-top: 64px;
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  @media (min-width: 768px) {
+    .trust-strip { grid-template-columns: repeat(4, 1fr); }
+  }
+  .trust-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .trust-num {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    font-family: 'Geist Mono', monospace;
+  }
+  .trust-label {
+    font-size: 12px;
+    color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ===== Footer ===== */
+  footer.site {
+    border-top: 1px solid var(--border);
+    padding: 56px 0 40px;
+    margin-top: 40px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 56px;
+  }
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 64px;
+    }
+  }
+  .footer-brand .logo { margin-bottom: 16px; }
+  .footer-tagline {
+    color: var(--fg-muted);
+    font-size: 13px;
+    max-width: 32ch;
+    line-height: 1.55;
+  }
+  .footer-col h4 {
+    font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-col a {
+    color: var(--fg-muted);
+    text-decoration: none;
+    font-size: 13.5px;
+    transition: color 0.15s ease;
+  }
+  .footer-col a:hover { color: var(--fg); }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  @media (min-width: 768px) {
+    .footer-bottom { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+  }
+  .disclaimer {
+    color: var(--fg-faint);
+    font-size: 11.5px;
+    line-height: 1.55;
+    max-width: 70ch;
+  }
+  .footer-copy {
+    color: var(--fg-faint);
+    font-size: 11.5px;
+    font-family: 'Geist Mono', monospace;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="backdrop-glow"></div>
+
+<header class="site">
+  <div class="container header-inner">
+    <a href="#" class="logo" aria-label="CalcFin — Accueil">
+      <span class="logo-mark">C</span>
+      <span>CalcFin</span>
+    </a>
+
+    <nav class="primary" aria-label="Navigation principale">
+      <a href="#tools" data-i18n="nav.tools">Outils</a>
+      <a href="#guides" data-i18n="nav.guides">Guides</a>
+      <a href="#about" data-i18n="nav.about">À propos</a>
+    </nav>
+
+    <div class="header-right">
+      <div class="lang-switcher" role="group" aria-label="Langue">
+        <button data-lang="fr" class="active" type="button">FR</button>
+        <button data-lang="en" type="button">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="badge" role="status">
+        <span class="badge-dot" aria-hidden="true"></span>
+        <span data-i18n="hero.badge">Barèmes 2026 à jour</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span data-i18n="hero.title.a">Vos finances,</span><br />
+        <span data-i18n="hero.title.b">calculées</span> <span data-i18n="hero.title.c">en</span> <span class="num">3</span> <span data-i18n="hero.title.d">secondes</span><span class="accent-word">.</span>
+      </h1>
+
+      <p class="hero-sub" data-i18n="hero.sub">
+        Huit calculateurs précis pour vos décisions financières.
+        Sans formulaire interminable, sans inscription, sans publicité.
+      </p>
+
+      <div class="hero-meta" aria-hidden="true">
+        <span><span data-i18n="meta.no_signup">— Sans inscription</span></span>
+        <span class="sep"></span>
+        <span data-i18n="meta.instant">Résultats instantanés</span>
+        <span class="sep"></span>
+        <span data-i18n="meta.legal">Conforme légalement</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="tools-section" id="tools">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-eyebrow" data-i18n="tools.eyebrow">Boîte à outils</div>
+          <h2 class="section-title" data-i18n="tools.title">Huit calculateurs.<br />Aucun bullshit.</h2>
+        </div>
+        <div class="section-count mono">08 / 08</div>
+      </div>
+
+      <div class="tools-grid" id="tools-grid"></div>
+
+      <div class="trust-strip" aria-label="Indicateurs de confiance">
+        <div class="trust-item">
+          <div class="trust-num">2026</div>
+          <div class="trust-label" data-i18n="trust.1">Barèmes officiels</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-num">~3s</div>
+          <div class="trust-label" data-i18n="trust.2">Temps de calcul moyen</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-num">0€</div>
+          <div class="trust-label" data-i18n="trust.3">Coût d'utilisation</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-num">100%</div>
+          <div class="trust-label" data-i18n="trust.4">Calculs côté client</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-mark">C</span>
+          <span>CalcFin</span>
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">
+          Calculateurs financiers de référence pour la France.
+          Mis à jour à chaque loi de finances.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer.col1">Calculateurs</h4>
+        <ul>
+          <li><a href="#" data-i18n="cal.1">Salaire brut → net</a></li>
+          <li><a href="#" data-i18n="cal.2">Salaire net → brut</a></li>
+          <li><a href="#" data-i18n="cal.3">Prêt immobilier</a></li>
+          <li><a href="#" data-i18n="cal.4">Impôt sur le revenu</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer.col2">Ressources</h4>
+        <ul>
+          <li><a href="#" data-i18n="res.1">Guides fiscaux</a></li>
+          <li><a href="#" data-i18n="res.2">Barèmes 2026</a></li>
+          <li><a href="#" data-i18n="res.3">Lexique</a></li>
+          <li><a href="#" data-i18n="res.4">Changelog</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer.col3">Légal</h4>
+        <ul>
+          <li><a href="#" data-i18n="leg.1">Mentions légales</a></li>
+          <li><a href="#" data-i18n="leg.2">Confidentialité</a></li>
+          <li><a href="#" data-i18n="leg.3">Conditions</a></li>
+          <li><a href="#" data-i18n="leg.4">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="disclaimer" data-i18n="footer.disclaimer">
+        Les calculs fournis sont indicatifs et basés sur les barèmes en vigueur.
+        Ils ne se substituent pas à un conseil professionnel (expert-comptable, notaire, avocat fiscaliste).
+        CalcFin décline toute responsabilité quant à l'usage des résultats.
+      </p>
+      <p class="footer-copy">© 2026 — CALCFIN</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== Tool data =====
+  const TOOLS = [
+    {
+      id: 'brut-net',
+      num: '01',
+      title: { fr: 'Salaire brut → net', en: 'Gross → net salary' },
+      desc:  {
+        fr: "Convertissez votre brut en net selon votre statut et votre convention.",
+        en: "Convert gross to net based on your status and agreement."
+      },
+      icon: 'arrow-down'
+    },
+    {
+      id: 'net-brut',
+      num: '02',
+      title: { fr: 'Salaire net → brut', en: 'Net → gross salary' },
+      desc:  {
+        fr: "Le calcul inverse, pour négocier votre prochain salaire en connaissance.",
+        en: "The reverse — negotiate your next salary with confidence."
+      },
+      icon: 'arrow-up'
+    },
+    {
+      id: 'pret-immo',
+      num: '03',
+      title: { fr: 'Prêt immobilier', en: 'Mortgage loan' },
+      desc:  {
+        fr: "Mensualités, capacité d'emprunt, coût total, assurance et frais inclus.",
+        en: "Monthly payments, borrowing capacity, total cost, insurance included."
+      },
+      icon: 'home'
+    },
+    {
+      id: 'impot',
+      num: '04',
+      title: { fr: 'Impôt sur le revenu', en: 'Income tax' },
+      desc:  {
+        fr: "Tranches 2026, quotient familial, décote et plafonnements automatiques.",
+        en: "2026 brackets, family quotient, decote and automatic caps."
+      },
+      icon: 'receipt'
+    },
+    {
+      id: 'rupture',
+      num: '05',
+      title: { fr: 'Rupture conventionnelle', en: 'Mutual termination' },
+      desc:  {
+        fr: "Indemnité légale, supra-légale et fiscalité, en un seul calcul.",
+        en: "Legal and supra-legal indemnity with full tax treatment."
+      },
+      icon: 'briefcase'
+    },
+    {
+      id: 'retraite',
+      num: '06',
+      title: { fr: 'Retraite', en: 'Retirement' },
+      desc:  {
+        fr: "Âge légal, trimestres validés et estimation de votre pension nette.",
+        en: "Legal age, validated quarters and estimated net pension."
+      },
+      icon: 'hourglass'
+    },
+    {
+      id: 'tva',
+      num: '07',
+      title: { fr: 'TVA', en: 'VAT' },
+      desc:  {
+        fr: "HT vers TTC et inversement, pour tous les taux français en vigueur.",
+        en: "Excl. ↔ incl. tax, all current French rates supported."
+      },
+      icon: 'percent'
+    },
+    {
+      id: 'are',
+      num: '08',
+      title: { fr: 'Chômage ARE', en: 'Unemployment (ARE)' },
+      desc:  {
+        fr: "Allocation journalière, durée d'indemnisation et différé spécifique.",
+        en: "Daily allowance, duration and specific deferral period."
+      },
+      icon: 'umbrella'
+    }
+  ];
+
+  // ===== Lucide-style line icons (MIT) =====
+  const ICONS = {
+    'arrow-down': '<path d="M12 5v14M19 12l-7 7-7-7"/>',
+    'arrow-up': '<path d="M12 19V5M5 12l7-7 7 7"/>',
+    'home': '<path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1V9.5Z"/>',
+    'receipt': '<path d="M5 3v18l2-1.5L9 21l2-1.5L13 21l2-1.5L17 21l2-1.5V3l-2 1.5L15 3l-2 1.5L11 3 9 4.5 7 3 5 4.5Z"/><path d="M9 8h6M9 12h6M9 16h4"/>',
+    'briefcase': '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/>',
+    'hourglass': '<path d="M6 3h12M6 21h12M6 3v3.5a4 4 0 0 0 1.5 3.1L12 12l-4.5 2.4A4 4 0 0 0 6 17.5V21M18 3v3.5a4 4 0 0 1-1.5 3.1L12 12l4.5 2.4a4 4 0 0 1 1.5 3.1V21"/>',
+    'percent': '<line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
+    'umbrella': '<path d="M12 2v2M3 12a9 9 0 0 1 18 0c-1.5-1-3-1-4.5 0s-3 1-4.5 0-3-1-4.5 0-3 1-4.5 0Z"/><path d="M12 12v7a2.5 2.5 0 0 1-5 0"/>',
+    'arrow-up-right': '<path d="M7 17 17 7M8 7h9v9"/>'
+  };
+
+  function svg(name, extra = '') {
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" ${extra}>${ICONS[name]}</svg>`;
+  }
+
+  // ===== Render tool cards =====
+  const grid = document.getElementById('tools-grid');
+  grid.innerHTML = TOOLS.map(t => `
+    <a href="#" class="tool-card" data-tool="${t.id}">
+      <div class="tool-card-top">
+        <div class="tool-icon">${svg(t.icon)}</div>
+        <div class="tool-arrow">${svg('arrow-up-right')}</div>
+      </div>
+      <div class="tool-card-body">
+        <div class="tool-num mono">${t.num}</div>
+        <div class="tool-title" data-tool-title>${t.title.fr}</div>
+        <div class="tool-desc" data-tool-desc>${t.desc.fr}</div>
+      </div>
+    </a>
+  `).join('');
+
+  // ===== i18n =====
+  const I18N = {
+    fr: {
+      'nav.tools': 'Outils', 'nav.guides': 'Guides', 'nav.about': 'À propos',
+      'hero.badge': 'Barèmes 2026 à jour',
+      'hero.title.a': 'Vos finances,',
+      'hero.title.b': 'calculées', 'hero.title.c': 'en', 'hero.title.d': 'secondes',
+      'hero.sub': "Huit calculateurs précis pour vos décisions financières. Sans formulaire interminable, sans inscription, sans publicité.",
+      'meta.no_signup': '— Sans inscription',
+      'meta.instant': 'Résultats instantanés',
+      'meta.legal': 'Conforme légalement',
+      'tools.eyebrow': 'Boîte à outils',
+      'tools.title': 'Huit calculateurs.<br />Aucun bullshit.',
+      'trust.1': 'Barèmes officiels',
+      'trust.2': 'Temps de calcul moyen',
+      'trust.3': "Coût d'utilisation",
+      'trust.4': 'Calculs côté client',
+      'footer.tagline': "Calculateurs financiers de référence pour la France. Mis à jour à chaque loi de finances.",
+      'footer.col1': 'Calculateurs', 'footer.col2': 'Ressources', 'footer.col3': 'Légal',
+      'cal.1': 'Salaire brut → net', 'cal.2': 'Salaire net → brut', 'cal.3': 'Prêt immobilier', 'cal.4': 'Impôt sur le revenu',
+      'res.1': 'Guides fiscaux', 'res.2': 'Barèmes 2026', 'res.3': 'Lexique', 'res.4': 'Changelog',
+      'leg.1': 'Mentions légales', 'leg.2': 'Confidentialité', 'leg.3': 'Conditions', 'leg.4': 'Contact',
+      'footer.disclaimer': "Les calculs fournis sont indicatifs et basés sur les barèmes en vigueur. Ils ne se substituent pas à un conseil professionnel (expert-comptable, notaire, avocat fiscaliste). CalcFin décline toute responsabilité quant à l'usage des résultats."
+    },
+    en: {
+      'nav.tools': 'Tools', 'nav.guides': 'Guides', 'nav.about': 'About',
+      'hero.badge': '2026 tax tables updated',
+      'hero.title.a': 'Your finances,',
+      'hero.title.b': 'calculated', 'hero.title.c': 'in', 'hero.title.d': 'seconds',
+      'hero.sub': "Eight precise calculators for your financial decisions. No endless forms, no sign-up, no ads.",
+      'meta.no_signup': '— No sign-up',
+      'meta.instant': 'Instant results',
+      'meta.legal': 'Legally compliant',
+      'tools.eyebrow': 'Toolkit',
+      'tools.title': 'Eight calculators.<br />Zero bullshit.',
+      'trust.1': 'Official brackets',
+      'trust.2': 'Average compute time',
+      'trust.3': 'Cost to use',
+      'trust.4': 'Client-side only',
+      'footer.tagline': "Reference financial calculators for France. Updated with every finance law.",
+      'footer.col1': 'Calculators', 'footer.col2': 'Resources', 'footer.col3': 'Legal',
+      'cal.1': 'Gross → net salary', 'cal.2': 'Net → gross salary', 'cal.3': 'Mortgage loan', 'cal.4': 'Income tax',
+      'res.1': 'Tax guides', 'res.2': '2026 brackets', 'res.3': 'Glossary', 'res.4': 'Changelog',
+      'leg.1': 'Legal notice', 'leg.2': 'Privacy', 'leg.3': 'Terms', 'leg.4': 'Contact',
+      'footer.disclaimer': "Calculations are indicative and based on current tax tables. They do not replace professional advice (accountant, notary, tax lawyer). CalcFin disclaims any responsibility for use of results."
+    }
+  };
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (I18N[lang][key] !== undefined) el.innerHTML = I18N[lang][key];
+    });
+    document.querySelectorAll('.tool-card').forEach((card, i) => {
+      card.querySelector('[data-tool-title]').textContent = TOOLS[i].title[lang];
+      card.querySelector('[data-tool-desc]').textContent = TOOLS[i].desc[lang];
+    });
+    document.querySelectorAll('.lang-switcher button').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+  }
+  document.querySelectorAll('.lang-switcher button').forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.dataset.lang));
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const el = document.querySelector(id);
+        if (el) { e.preventDefault(); window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' }); }
+      }
+    });
+  });
+</script>
+
+
+</body>
+</html>
