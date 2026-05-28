@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Calculateur Impôt sur le Revenu 2026 — CalcFin</title>
+<meta name="description" content="Estimez votre impôt sur le revenu 2026 (revenus 2025). Barèmes officiels LF2026, quotient familial, décote, TMI et taux moyen calculés automatiquement." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:#0A0A0F;--bg-elev:#111118;--bg-card:#0E0E15;
+    --border:rgba(255,255,255,0.06);--border-hover:rgba(0,229,160,0.35);
+    --fg:#F5F5F2;--fg-muted:rgba(245,245,242,0.56);--fg-faint:rgba(245,245,242,0.38);
+    --accent:#00E5A0;--accent-soft:rgba(0,229,160,0.10);
+    --radius-lg:24px;--radius-md:16px;--radius-sm:10px;
+  }
+  :root[data-theme="light"]{--bg:#FAFAF8;--bg-elev:#FFFFFF;--bg-card:#FFFFFF;--border:rgba(10,10,15,0.07);--border-hover:rgba(0,180,125,0.40);--fg:#0A0A0F;--fg-muted:rgba(10,10,15,0.58);--fg-faint:rgba(10,10,15,0.38);--accent:#00B47D;--accent-soft:rgba(0,180,125,0.10);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--bg);color:var(--fg);font-family:'Geist',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.5;}
+  .mono{font-family:'Geist Mono',monospace;}
+  .backdrop-glow{position:fixed;top:-300px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse at center,var(--accent-soft) 0%,transparent 65%);pointer-events:none;z-index:0;opacity:0.7;}
+  .container{width:100%;max-width:1240px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+
+  /* HEADER */
+  header.site{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);background:color-mix(in oklab,var(--bg) 78%,transparent);border-bottom:1px solid var(--border);}
+  .header-inner{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .logo{display:flex;align-items:center;gap:8px;font-weight:600;font-size:16px;letter-spacing:-0.01em;color:var(--fg);text-decoration:none;}
+  .logo-mark{width:22px;height:22px;border-radius:6px;background:var(--accent);display:grid;place-items:center;color:#001A12;font-weight:700;font-size:11px;font-family:'Geist Mono',monospace;}
+  nav.primary{display:none;align-items:center;gap:32px;}
+  @media(min-width:768px){nav.primary{display:flex;}}
+  nav.primary a{color:var(--fg-muted);text-decoration:none;font-size:14px;font-weight:450;transition:color 0.15s ease;}
+  nav.primary a:hover{color:var(--fg);}
+  .header-right{display:flex;align-items:center;gap:12px;}
+  .lang-switcher{display:inline-flex;align-items:center;background:transparent;border:1px solid var(--border);border-radius:999px;padding:3px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.06em;}
+  .lang-switcher button{background:transparent;border:none;color:var(--fg-muted);padding:5px 10px;border-radius:999px;cursor:pointer;font-family:inherit;font-size:inherit;transition:all 0.18s ease;}
+  .lang-switcher button.active{background:var(--fg);color:var(--bg);}
+
+  /* BREADCRUMB */
+  .breadcrumb{display:flex;align-items:center;gap:8px;padding:20px 0 0;font-size:13px;color:var(--fg-faint);}
+  .breadcrumb a{color:var(--fg-faint);text-decoration:none;transition:color 0.15s;}
+  .breadcrumb a:hover{color:var(--fg-muted);}
+
+  /* PAGE HEADER */
+  .page-header{padding:28px 0 40px;}
+  .page-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--accent-soft);border:1px solid color-mix(in oklab,var(--accent) 30%,transparent);border-radius:999px;font-size:11px;color:var(--accent);font-family:'Geist Mono',monospace;letter-spacing:0.04em;margin-bottom:16px;}
+  .page-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in oklab,var(--accent) 40%,transparent);}50%{box-shadow:0 0 0 5px transparent;}}
+  .page-title{font-size:clamp(28px,5vw,48px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin-bottom:12px;}
+  .page-title em{color:var(--accent);font-style:normal;}
+  .page-sub{font-size:16px;color:var(--fg-muted);max-width:520px;}
+
+  /* LAYOUT */
+  .calc-layout{display:grid;grid-template-columns:1fr;gap:24px;padding-bottom:48px;}
+  @media(min-width:900px){.calc-layout{grid-template-columns:1fr 1fr;align-items:start;}}
+
+  /* CARD */
+  .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;}
+  .card-title{font-size:13px;font-weight:500;color:var(--fg-faint);letter-spacing:0.06em;text-transform:uppercase;font-family:'Geist Mono',monospace;margin-bottom:24px;}
+
+  /* FORM */
+  .field{margin-bottom:20px;}
+  .field label{display:block;font-size:13px;font-weight:500;color:var(--fg-muted);margin-bottom:8px;}
+  .field-hint{font-size:11px;color:var(--fg-faint);margin-top:4px;}
+  .input-wrap{position:relative;}
+  .input-wrap input{width:100%;height:48px;padding:0 56px 0 16px;background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--fg);font-size:16px;font-family:'Geist Mono',monospace;font-weight:500;outline:none;transition:border-color 0.18s ease,box-shadow 0.18s ease;-moz-appearance:textfield;}
+  .input-wrap input::-webkit-inner-spin-button,.input-wrap input::-webkit-outer-spin-button{-webkit-appearance:none;}
+  .input-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
+  .input-unit{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--fg-faint);font-family:'Geist Mono',monospace;pointer-events:none;}
+  .seg-control{display:flex;gap:4px;background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius-sm);padding:4px;}
+  .seg-control button{flex:1;height:36px;border:none;border-radius:7px;background:transparent;color:var(--fg-muted);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.18s ease;font-family:'Geist',sans-serif;}
+  .seg-control button.active{background:var(--fg);color:var(--bg);font-weight:600;}
+
+  /* RESULTS */
+  .kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+  .kpi{background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px 20px;}
+  .kpi.accent{background:var(--accent-soft);border-color:color-mix(in oklab,var(--accent) 25%,transparent);}
+  .kpi-label{font-size:11px;color:var(--fg-faint);font-family:'Geist Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;}
+  .kpi.accent .kpi-label{color:var(--accent);opacity:0.8;}
+  .kpi-value{font-size:22px;font-weight:700;letter-spacing:-0.03em;font-family:'Geist Mono',monospace;color:var(--fg);}
+  .kpi.accent .kpi-value{color:var(--accent);}
+  .kpi-sub{font-size:11px;color:var(--fg-faint);margin-top:2px;}
+
+  /* Breakdown tranches */
+  .breakdown{display:flex;flex-direction:column;gap:2px;margin-bottom:16px;}
+  .breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:var(--radius-sm);transition:background 0.15s;}
+  .breakdown-row:hover{background:var(--bg-elev);}
+  .breakdown-row.total{background:var(--accent-soft);border:1px solid color-mix(in oklab,var(--accent) 20%,transparent);margin-top:8px;}
+  .b-label{font-size:13px;color:var(--fg-muted);}
+  .b-val{font-size:13px;font-weight:600;font-family:'Geist Mono',monospace;color:var(--fg);}
+  .breakdown-row.total .b-label{color:var(--accent);font-weight:500;}
+  .breakdown-row.total .b-val{color:var(--accent);font-size:14px;}
+  .b-taux{font-size:11px;color:var(--fg-faint);font-family:'Geist Mono',monospace;margin-left:4px;}
+
+  /* TMI badge */
+  .tmi-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--bg-elev);border:1px solid var(--border);border-radius:999px;font-size:13px;color:var(--fg-muted);margin-bottom:16px;}
+  .tmi-badge strong{color:var(--fg);font-family:'Geist Mono',monospace;}
+
+  /* Barre taux moyen */
+  .taux-moyen-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;margin-bottom:12px;background:var(--bg-elev);border-radius:var(--radius-sm);border:1px solid var(--border);}
+  .taux-moyen-label{font-size:13px;color:var(--fg-muted);}
+  .taux-moyen-val{font-size:18px;font-weight:700;font-family:'Geist Mono',monospace;color:var(--fg);}
+
+  /* Mensualisation */
+  .mensual-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--accent-soft);border:1px solid color-mix(in oklab,var(--accent) 20%,transparent);border-radius:var(--radius-sm);}
+  .mensual-label{font-size:13px;color:var(--accent);}
+  .mensual-val{font-size:14px;font-weight:700;font-family:'Geist Mono',monospace;color:var(--accent);}
+
+  /* Info décote */
+  .decote-info{margin-top:12px;padding:10px 14px;background:var(--bg-elev);border-radius:var(--radius-sm);border:1px solid var(--border);font-size:12px;color:var(--fg-faint);line-height:1.5;}
+
+  /* EXPLAINER */
+  .explainer{margin:48px 0;}
+  .explainer h2{font-size:24px;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;}
+  .explainer p{font-size:15px;color:var(--fg-muted);line-height:1.7;margin-bottom:12px;}
+  .explainer h3{font-size:17px;font-weight:600;margin:24px 0 10px;}
+  .bareme-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px;}
+  .bareme-table th{padding:10px 14px;text-align:left;font-size:11px;color:var(--fg-faint);font-family:'Geist Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;background:var(--bg-elev);border-bottom:1px solid var(--border);}
+  .bareme-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--fg-muted);}
+  .bareme-table td:last-child{font-family:'Geist Mono',monospace;font-weight:600;color:var(--fg);}
+
+  /* RELATED */
+  .related{padding:48px 0;border-top:1px solid var(--border);}
+  .related-title{font-size:20px;font-weight:700;margin-bottom:20px;letter-spacing:-0.02em;}
+  .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+  .related-card{display:block;padding:16px 20px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);text-decoration:none;color:var(--fg);transition:border-color 0.18s,transform 0.18s;}
+  .related-card:hover{border-color:var(--border-hover);transform:translateY(-2px);}
+  .related-card-title{font-size:14px;font-weight:600;margin-bottom:4px;}
+  .related-card-desc{font-size:12px;color:var(--fg-faint);}
+
+  /* FOOTER */
+  footer.site{border-top:1px solid var(--border);padding:24px 0;}
+  .footer-inner{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;}
+  @media(min-width:768px){.footer-inner{flex-direction:row;justify-content:space-between;text-align:left;}}
+  .footer-disclaimer{font-size:12px;color:var(--fg-faint);max-width:600px;line-height:1.6;}
+  .footer-brand{font-size:13px;color:var(--fg-faint);font-family:'Geist Mono',monospace;}
+</style>
+</head>
+<body>
+
+<div class="backdrop-glow"></div>
+
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+      <div class="header-right">
+        <div class="lang-switcher">
+          <button class="active" data-lang="fr">FR</button>
+          <button data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="/">Accueil</a>
+      <span>›</span>
+      <span>Impôt sur le revenu</span>
+    </div>
+
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Barèmes LF 2026 — revenus 2025</div>
+      <h1 class="page-title">Impôt sur le <em>revenu 2026</em></h1>
+      <p class="page-sub">Estimez votre impôt sur les revenus 2025. Tranches officielles, quotient familial, décote et taux moyen calculés automatiquement.</p>
+    </div>
+
+    <div class="calc-layout">
+
+      <!-- INPUTS -->
+      <div class="card">
+        <div class="card-title">Votre situation</div>
+
+        <div class="field">
+          <label>Revenus nets annuels <span style="color:var(--fg-faint);font-size:11px">(salaires, pensions…)</span></label>
+          <div class="input-wrap">
+            <input type="number" id="revenus" value="45000" min="0" step="1000" />
+            <span class="input-unit">€</span>
+          </div>
+          <div class="field-hint">L'abattement de 10 % (min 509 €, max 14 555 €) est appliqué automatiquement</div>
+        </div>
+
+        <div class="field">
+          <label>Situation familiale</label>
+          <div class="seg-control" id="seg-situation">
+            <button class="active" data-sit="celibataire">Célibataire</button>
+            <button data-sit="marie">Marié(e) / Pacsé(e)</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Nombre d'enfants à charge</label>
+          <div class="seg-control" id="seg-enfants">
+            <button class="active" data-enfants="0">0</button>
+            <button data-enfants="1">1</button>
+            <button data-enfants="2">2</button>
+            <button data-enfants="3">3</button>
+            <button data-enfants="4">4+</button>
+          </div>
+          <div class="field-hint">Chaque enfant ajoute 0,5 part (1 part à partir du 3ème)</div>
+        </div>
+
+        <div class="field">
+          <label>Revenus du conjoint <span style="color:var(--fg-faint);font-size:11px">(si marié/pacsé)</span></label>
+          <div class="input-wrap">
+            <input type="number" id="revenus-conjoint" value="0" min="0" step="1000" />
+            <span class="input-unit">€</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Autres revenus imposables <span style="color:var(--fg-faint);font-size:11px">(loyers, dividendes…)</span></label>
+          <div class="input-wrap">
+            <input type="number" id="autres-revenus" value="0" min="0" step="500" />
+            <span class="input-unit">€</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RESULTS -->
+      <div>
+        <div class="card">
+          <div class="card-title">Résultat</div>
+
+          <div class="kpi-grid">
+            <div class="kpi accent">
+              <div class="kpi-label">Impôt net</div>
+              <div class="kpi-value" id="kpi-impot">—</div>
+              <div class="kpi-sub">après décote</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Taux moyen</div>
+              <div class="kpi-value" id="kpi-taux-moyen">—</div>
+              <div class="kpi-sub">sur revenu imposable</div>
+            </div>
+          </div>
+
+          <div class="tmi-badge">
+            Tranche marginale (TMI) : <strong id="tmi-val">—</strong>
+          </div>
+
+          <!-- Détail par tranche -->
+          <div class="breakdown" id="breakdown-tranches"></div>
+
+          <!-- Taux moyen barre -->
+          <div class="taux-moyen-row" style="margin-top:16px;">
+            <span class="taux-moyen-label">Revenu net imposable</span>
+            <span class="taux-moyen-val" id="rni-val">—</span>
+          </div>
+
+          <div class="taux-moyen-row">
+            <span class="taux-moyen-label">Nombre de parts</span>
+            <span class="taux-moyen-val" id="parts-val">—</span>
+          </div>
+
+          <!-- Mensualisation -->
+          <div class="mensual-row" style="margin-top:4px;">
+            <span class="mensual-label">Soit par mois (prélèvement à la source)</span>
+            <span class="mensual-val" id="mensual-val">—</span>
+          </div>
+
+          <!-- Info décote -->
+          <div class="decote-info" id="decote-info"></div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPLAINER -->
+    <div class="explainer">
+      <h2>Comment est calculé l'impôt sur le revenu 2026 ?</h2>
+      <p>L'impôt sur le revenu (IR) est calculé sur les revenus perçus en 2025, déclarés au printemps 2026. Il est progressif : seule la fraction de revenu dépassant chaque seuil est taxée au taux correspondant.</p>
+
+      <h3>Barème officiel 2026 (LF n° 2026-103 du 19 février 2026)</h3>
+      <table class="bareme-table">
+        <thead><tr><th>Fraction du revenu par part</th><th>Taux</th></tr></thead>
+        <tbody>
+          <tr><td>Jusqu'à 11 600 €</td><td>0 %</td></tr>
+          <tr><td>De 11 601 € à 29 579 €</td><td>11 %</td></tr>
+          <tr><td>De 29 580 € à 84 577 €</td><td>30 %</td></tr>
+          <tr><td>De 84 578 € à 181 917 €</td><td>41 %</td></tr>
+          <tr><td>Au-delà de 181 917 €</td><td>45 %</td></tr>
+        </tbody>
+      </table>
+
+      <h3>L'abattement de 10 %</h3>
+      <p>Les salaires et pensions bénéficient d'un abattement automatique de 10 % pour frais professionnels, plafonné entre <strong>509 € minimum</strong> et <strong>14 555 € maximum</strong>. Il réduit le revenu imposable avant application du barème.</p>
+
+      <h3>Le quotient familial</h3>
+      <p>Le revenu imposable est divisé par le nombre de parts fiscales du foyer avant d'appliquer le barème. Une personne seule = 1 part, un couple = 2 parts, +0,5 part par enfant (1 part à partir du 3ème). L'avantage fiscal par demi-part est plafonné à <strong>1 807 €</strong> en 2026.</p>
+
+      <h3>La décote</h3>
+      <p>La décote réduit l'impôt des foyers modestes. En 2026 : <strong>897 € − 45,25 % × impôt brut</strong> pour un célibataire, <strong>1 483 € − 45,25 % × impôt brut</strong> pour un couple. Elle s'annule progressivement dès que l'impôt brut dépasse 1 982 € (célib) ou 3 277 € (couple).</p>
+
+      <h3>Taux marginal vs taux moyen</h3>
+      <p>Votre <strong>taux marginal (TMI)</strong> est le taux de la dernière tranche atteinte — celui qu'on cite souvent, mais qui ne s'applique qu'à la fraction supérieure. Votre <strong>taux moyen</strong> est le rapport entre l'impôt total et le revenu imposable — toujours inférieur au TMI.</p>
+    </div>
+
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Cotisations salariales 2026</div>
+        </a>
+        <a href="/fr/salaire-net-brut/" class="related-card">
+          <div class="related-card-title">Salaire net → brut</div>
+          <div class="related-card-desc">Négociez votre salaire</div>
+        </a>
+        <a href="/fr/pret-immobilier/" class="related-card">
+          <div class="related-card-title">Prêt immobilier</div>
+          <div class="related-card-desc">Mensualités et capacité d'emprunt</div>
+        </a>
+        <a href="/fr/rupture-conventionnelle/" class="related-card">
+          <div class="related-card-title">Rupture conventionnelle</div>
+          <div class="related-card-desc">Indemnité légale et fiscalité</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Simulation indicative basée sur les barèmes officiels LF 2026 (loi n° 2026-103 du 19 février 2026). Ne tient pas compte des crédits/réductions d'impôt, revenus exceptionnels, ni de situations particulières. Consultez impots.gouv.fr pour votre calcul officiel.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== BARÈME OFFICIEL LF 2026 =====
+// Source : LOI n° 2026-103 du 19 février 2026, art. 4
+const TRANCHES = [
+  { limite: 11600,  taux: 0.00 },
+  { limite: 29579,  taux: 0.11 },
+  { limite: 84577,  taux: 0.30 },
+  { limite: 181917, taux: 0.41 },
+  { limite: Infinity, taux: 0.45 }
+];
+
+// Abattement salarial 10% — min 509 €, max 14 555 €
+function abattement(revenu) {
+  const a = revenu * 0.10;
+  return Math.min(Math.max(a, 509), 14555);
+}
+
+// Calcul impôt brut sur 1 part
+function impotSurQuotient(quotient) {
+  let impot = 0;
+  let prev = 0;
+  for (const t of TRANCHES) {
+    if (quotient <= prev) break;
+    const tranche = Math.min(quotient, t.limite) - prev;
+    impot += tranche * t.taux;
+    prev = t.limite;
+  }
+  return impot;
+}
+
+// Détail des tranches pour l'affichage
+function detailTranches(quotient) {
+  const rows = [];
+  let prev = 0;
+  for (const t of TRANCHES) {
+    if (quotient <= prev) break;
+    const base = Math.min(quotient, t.limite) - prev;
+    const impot = base * t.taux;
+    if (base > 0) rows.push({ taux: t.taux, base, impot });
+    prev = t.limite;
+    if (t.limite === Infinity) break;
+  }
+  return rows;
+}
+
+// TMI
+function tmi(quotient) {
+  let taux = 0;
+  let prev = 0;
+  for (const t of TRANCHES) {
+    if (quotient <= prev) break;
+    taux = t.taux;
+    prev = t.limite;
+    if (t.limite === Infinity) break;
+  }
+  return taux;
+}
+
+// Décote 2026
+// Célibataire : max(0, 897 - 45.25% × impot_brut), s'annule si impot > 1982
+// Couple : max(0, 1483 - 45.25% × impot_brut), s'annule si impot > 3277
+function decote(impotBrut, marie) {
+  const seuil  = marie ? 1483 : 897;
+  const plafond = marie ? 3277 : 1982;
+  if (impotBrut >= plafond) return 0;
+  return Math.max(0, seuil - 0.4525 * impotBrut);
+}
+
+// Parts fiscales
+function parts(situation, enfants) {
+  let p = situation === 'marie' ? 2 : 1;
+  // Enfants : +0.5 par enfant, +1 à partir du 3ème (soit +0.5 bonus)
+  if (enfants >= 1) p += 0.5;
+  if (enfants >= 2) p += 0.5;
+  if (enfants >= 3) p += 1 * (enfants - 2); // 1 part par enfant à partir du 3ème
+  return p;
+}
+
+// Plafonnement quotient familial
+// Avantage max = 1807 € par demi-part supplémentaire au-delà du foyer de base
+function plafonnementQF(impotSansParts, impotAvecParts, demipartsSup) {
+  const avantageReel  = impotSansParts - impotAvecParts;
+  const avantageMax   = demipartsSup * 1807;
+  if (avantageReel > avantageMax) {
+    return impotSansParts - avantageMax;
+  }
+  return impotAvecParts;
+}
+
+// ===== STATE =====
+let situation = 'celibataire';
+let nbEnfants = 0;
+
+function fmt(v) { return v.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'; }
+function fmtPct(v) { return (v * 100).toFixed(1) + ' %'; }
+
+// ===== CALCUL PRINCIPAL =====
+function calcIR(revenusBruts, revConj, autresRevenus, sit, enfants) {
+  const marie = sit === 'marie';
+  const nbParts = parts(sit, enfants);
+  const partsBase = marie ? 2 : 1; // parts sans enfants
+  const demipartsSup = (nbParts - partsBase) * 2; // nombre de demi-parts enfants
+
+  // Abattements
+  const abt1  = abattement(revenusBruts);
+  const abt2  = marie ? abattement(revConj) : 0;
+  const rni   = Math.max(0, revenusBruts - abt1) + Math.max(0, revConj - abt2) + autresRevenus;
+
+  // Impôt sur foyer de base (sans parts enfants)
+  const quotientBase  = rni / partsBase;
+  const impotBase1p   = impotSurQuotient(quotientBase) * partsBase;
+
+  // Impôt avec toutes les parts
+  const quotientTotal = rni / nbParts;
+  const impotTotal    = impotSurQuotient(quotientTotal) * nbParts;
+
+  // Plafonnement QF
+  let impotBrut = enfants > 0 ? plafonnementQF(impotBase1p, impotTotal, demipartsSup) : impotBase1p;
+  impotBrut = Math.max(0, impotBrut);
+
+  // Décote
+  const dec = decote(impotBrut, marie);
+  const impotNet = Math.max(0, impotBrut - dec);
+
+  // Taux
+  const tauxMoyen = rni > 0 ? impotNet / rni : 0;
+  const tmiVal    = tmi(rni / nbParts);
+  const detail    = detailTranches(rni / nbParts);
+
+  return { rni, nbParts, impotBrut, dec, impotNet, tauxMoyen, tmiVal, detail, marie };
+}
+
+function render() {
+  const rev   = parseFloat(document.getElementById('revenus').value) || 0;
+  const revC  = parseFloat(document.getElementById('revenus-conjoint').value) || 0;
+  const autres = parseFloat(document.getElementById('autres-revenus').value) || 0;
+
+  const r = calcIR(rev, revC, autres, situation, nbEnfants);
+
+  // KPIs
+  document.getElementById('kpi-impot').textContent      = fmt(r.impotNet);
+  document.getElementById('kpi-taux-moyen').textContent = fmtPct(r.tauxMoyen);
+  document.getElementById('tmi-val').textContent        = fmtPct(r.tmiVal);
+  document.getElementById('rni-val').textContent        = fmt(r.rni);
+  document.getElementById('parts-val').textContent      = r.nbParts.toFixed(1).replace('.0','');
+  document.getElementById('mensual-val').textContent    = fmt(r.impotNet / 12);
+
+  // Breakdown tranches
+  const tbody = document.getElementById('breakdown-tranches');
+  tbody.innerHTML = r.detail.map(d => `
+    <div class="breakdown-row">
+      <span class="b-label">Tranche à ${(d.taux*100).toFixed(0)} % <span class="b-taux">(sur ${fmt(d.base)})</span></span>
+      <span class="b-val">${fmt(d.impot)}</span>
+    </div>
+  `).join('') + `
+    <div class="breakdown-row" style="border-top:1px solid var(--border);margin-top:4px;">
+      <span class="b-label">Impôt brut</span>
+      <span class="b-val">${fmt(r.impotBrut)}</span>
+    </div>
+    ${r.dec > 0 ? `<div class="breakdown-row">
+      <span class="b-label">Décote appliquée</span>
+      <span class="b-val" style="color:var(--accent)">− ${fmt(r.dec)}</span>
+    </div>` : ''}
+    <div class="breakdown-row total">
+      <span class="b-label">Impôt net à payer</span>
+      <span class="b-val">${fmt(r.impotNet)}</span>
+    </div>
+  `;
+
+  // Info décote
+  const decoteEl = document.getElementById('decote-info');
+  if (r.dec > 0) {
+    decoteEl.textContent = `✅ Décote appliquée : ${fmt(r.dec)} déduits de votre impôt brut. Ce mécanisme réduit automatiquement l'impôt des foyers modestes.`;
+    decoteEl.style.display = 'block';
+  } else {
+    decoteEl.style.display = 'none';
+  }
+}
+
+// ===== EVENTS =====
+['revenus','revenus-conjoint','autres-revenus'].forEach(id => {
+  document.getElementById(id).addEventListener('input', render);
+});
+
+document.querySelectorAll('#seg-situation button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    situation = btn.dataset.sit;
+    document.querySelectorAll('#seg-situation button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // Afficher/masquer champ conjoint
+    const conjField = document.getElementById('revenus-conjoint').closest('.field');
+    conjField.style.display = situation === 'marie' ? 'block' : 'none';
+    render();
+  });
+});
+
+document.querySelectorAll('#seg-enfants button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    nbEnfants = parseInt(btn.dataset.enfants);
+    document.querySelectorAll('#seg-enfants button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  });
+});
+
+document.querySelectorAll('.lang-switcher button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.lang-switcher button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Init — cacher champ conjoint par défaut
+document.getElementById('revenus-conjoint').closest('.field').style.display = 'none';
+render();
+</script>
+
+</body>
+</html>
