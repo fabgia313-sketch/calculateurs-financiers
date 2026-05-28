@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Calculateur TVA 2026 — HT en TTC ou TTC en HT instantané</title>
+  <meta name="description" content="Calculez la TVA en temps réel : convertissez un prix HT en TTC ou TTC en HT. Taux 20%, 10%, 5,5%, 2,1%. Sans inscription, résultat immédiat.">
+  <link rel="canonical" href="https://www.votresite.fr/fr/tva/">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Calculateur TVA 2026 — HT ↔ TTC en un clic">
+  <meta property="og:description" content="Convertissez instantanément un prix HT en TTC ou TTC en HT. Tous les taux TVA 2026.">
+  <meta property="og:url" content="https://www.votresite.fr/fr/tva/">
+  <meta property="og:locale" content="fr_FR">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Quel est le taux de TVA normal en France en 2026 ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Le taux normal de TVA est de 20 % en 2026. Il s'applique par défaut à la majorité des biens et services pour lesquels aucun taux spécifique n'est prévu."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment calculer la TVA à partir d'un prix HT ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Multipliez le prix HT par (1 + taux). Exemple : 100 € HT × 1,20 = 120 € TTC. Le montant de TVA est la différence : 20 €."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment retrouver le prix HT à partir d'un prix TTC ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divisez le prix TTC par (1 + taux). Exemple : 120 € TTC ÷ 1,20 = 100 € HT."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels produits sont soumis au taux de TVA à 5,5 % ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Le taux de 5,5 % s'applique aux produits alimentaires de première nécessité, aux livres, aux abonnements d'énergie (gaz, électricité) et aux travaux de rénovation énergétique dans les logements de plus de 2 ans."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels produits bénéficient du taux de TVA à 2,1 % ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Le taux super-réduit de 2,1 % s'applique principalement aux médicaments remboursables par la Sécurité sociale et à certaines publications de presse."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.votresite.fr/" },
+      { "@type": "ListItem", "position": 2, "name": "Outils France", "item": "https://www.votresite.fr/fr/" },
+      { "@type": "ListItem", "position": 3, "name": "Calculateur TVA" }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── TOKENS (dark theme CalcFin) ── */
+    :root {
+      --bg:         #0d0d0d;
+      --bg-elev:    #161616;
+      --bg-card:    #1a1a1a;
+      --border:     #2a2a2a;
+      --border-hi:  #3a3a3a;
+      --fg:         #f0f0f0;
+      --fg-muted:   #888;
+      --fg-dim:     #555;
+      --accent:     #00e87a;
+      --accent-dim: #00e87a22;
+      --accent-mid: #00c466;
+      --danger:     #ff4d4d;
+      --radius:     12px;
+      --radius-sm:  8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--fg);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
+    }
+    .nav-logo-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #000;
+    }
+    .nav-primary {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-primary a {
+      color: var(--fg-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-primary a:hover { color: var(--fg); background: var(--bg-elev); }
+    .nav-lang {
+      display: flex;
+      gap: 4px;
+    }
+    .nav-lang button {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--fg-muted);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .nav-lang button.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── TOOLS NAV ── */
+    .tools-nav {
+      background: var(--bg-elev);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      height: 44px;
+    }
+    .tools-nav::-webkit-scrollbar { display: none; }
+    .tools-nav a {
+      color: var(--fg-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      transition: color 0.15s, background 0.15s;
+    }
+    .tools-nav a:hover { color: var(--fg); background: var(--bg-card); }
+    .tools-nav a.active {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      border-radius: 0;
+    }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 32px 80px; }
+
+    /* ── PAGE HEADER ── */
+    .page-header { margin-bottom: 40px; }
+    .page-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    h1 span { color: var(--accent); }
+    .page-sub {
+      font-size: 1rem;
+      color: var(--fg-muted);
+      font-weight: 400;
+      max-width: 500px;
+    }
+
+    /* ── CALC CARD ── */
+    .calc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 14px;
+    }
+
+    /* ── MODE TOGGLE ── */
+    .mode-toggle {
+      display: flex;
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 3px;
+      gap: 3px;
+      margin-bottom: 28px;
+    }
+    .mode-toggle button {
+      flex: 1;
+      padding: 9px 16px;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--fg-muted);
+      background: transparent;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .mode-toggle button.active {
+      background: var(--bg-card);
+      color: var(--fg);
+      border: 1px solid var(--border-hi);
+    }
+
+    /* ── TAUX SELECTOR ── */
+    .taux-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+    .taux-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .taux-btn {
+      background: var(--bg-elev);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .taux-btn:hover { border-color: var(--border-hi); }
+    .taux-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .taux-btn .rate {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--fg);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .taux-btn.active .rate { color: var(--accent); }
+    .taux-btn .label {
+      font-size: 0.7rem;
+      color: var(--fg-dim);
+      display: block;
+      line-height: 1.3;
+    }
+    .taux-btn.active .label { color: var(--accent); opacity: 0.7; }
+
+    /* ── INPUT ── */
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: flex-end;
+      margin-bottom: 24px;
+    }
+    .input-group { display: flex; flex-direction: column; gap: 8px; }
+    label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .input-wrapper { position: relative; }
+    .input-wrapper .unit {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+      color: var(--fg-dim);
+      font-weight: 600;
+      pointer-events: none;
+      font-family: 'Space Mono', monospace;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 14px 50px 14px 16px;
+      background: var(--bg-elev);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'Space Mono', monospace;
+      font-size: 1.05rem;
+      color: var(--fg);
+      transition: border-color 0.15s, box-shadow 0.15s;
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+    input[type="number"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+    input[type="number"]::placeholder { color: var(--fg-dim); }
+
+    /* ── RESULT ── */
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    .result-box {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+    .result-box.highlight {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+    .result-box-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--fg-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .result-box.highlight .result-box-label { color: var(--accent); opacity: 0.7; }
+    .result-box-value {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--fg);
+      letter-spacing: -0.02em;
+      transition: all 0.2s;
+    }
+    .result-box.highlight .result-box-value { color: var(--accent); font-size: 1.7rem; }
+    .result-box-value.bump { animation: bump 0.25s ease; }
+    @keyframes bump {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .result-box-sub {
+      font-size: 0.75rem;
+      color: var(--fg-dim);
+      margin-top: 4px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+
+    /* ── TAUX TABLE ── */
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      color: var(--fg);
+    }
+    .taux-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .taux-table th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--fg-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+    .taux-table td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--fg-muted);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .taux-table tr:last-child td { border-bottom: none; }
+    .taux-table tr:hover td { background: var(--bg-elev); }
+    .taux-table .rate-cell {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .taux-table .name-cell {
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    /* ── FAQ ── */
+    .faq { display: flex; flex-direction: column; gap: 8px; }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 16px 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--fg);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-q:hover { background: var(--bg-elev); }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .faq-item.open .faq-icon {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: rotate(180deg);
+    }
+    .faq-item.open .faq-icon svg path { stroke: #000; }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: 0.86rem;
+      color: var(--fg-muted);
+      line-height: 1.65;
+      padding: 0 20px;
+    }
+    .faq-item.open .faq-a { max-height: 160px; padding: 0 20px 16px; }
+
+    /* ── RELATED TOOLS ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      text-decoration: none;
+      color: var(--fg);
+      transition: border-color 0.15s, transform 0.15s;
+      display: block;
+    }
+    .tool-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .tool-card .tool-icon { font-size: 1.3rem; margin-bottom: 10px; }
+    .tool-card h3 { font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; }
+    .tool-card p { font-size: 0.78rem; color: var(--fg-muted); }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      font-size: 0.78rem;
+      color: var(--fg-dim);
+      margin-top: 40px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 16px; }
+      .tools-nav { padding: 0 16px; }
+      .page { padding: 32px 16px 60px; }
+      .calc-card { padding: 20px 16px; }
+      .taux-grid { grid-template-columns: repeat(2, 1fr); }
+      .result-grid { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: 1fr 1fr; }
+      .nav-primary { display: none; }
+      h1 { font-size: 1.7rem; }
+    }
+
+    @media (max-width: 480px) {
+      .mode-toggle button { font-size: 0.78rem; padding: 8px 10px; }
+      .result-box.highlight .result-box-value { font-size: 1.4rem; }
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <span class="nav-logo-icon">CF</span>
+      CalcFin
+    </a>
+    <ul class="nav-primary">
+      <li><a href="/#outils">Outils</a></li>
+      <li><a href="/#guides">Guides</a></li>
+      <li><a href="/#apropos">À propos</a></li>
+    </ul>
+    <div class="nav-lang">
+      <button class="active">FR</button>
+      <button>EN</button>
+    </div>
+  </nav>
+
+  <!-- TOOLS NAV -->
+  <div class="tools-nav">
+    <a href="/fr/salaire-brut-net/">Brut → Net</a>
+    <a href="/fr/salaire-net-brut/">Net → Brut</a>
+    <a href="/fr/pret-immobilier/">Prêt immo</a>
+    <a href="/fr/impot/">Impôt IR</a>
+    <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+    <a href="/fr/retraite/">Retraite</a>
+    <a href="/fr/tva/" class="active">TVA</a>
+    <a href="/fr/are/">Chômage ARE</a>
+  </div>
+
+  <main class="page" id="main-content">
+
+    <!-- HEADER -->
+    <header class="page-header">
+      <div class="page-tag">
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3" fill="currentColor" opacity="0.5"/><circle cx="4" cy="4" r="2" fill="currentColor"/></svg>
+        Taux 2026 · Calcul instantané
+      </div>
+      <h1>Calculateur <span>TVA</span></h1>
+      <p class="page-sub">Convertissez un prix HT en TTC ou retrouvez le HT à partir d'un TTC. Tous les taux français 2026.</p>
+    </header>
+
+    <!-- CALCULATOR -->
+    <div class="calc-card">
+
+      <!-- Mode toggle -->
+      <div class="mode-toggle">
+        <button class="active" id="btn-ht" onclick="setMode('ht')">
+          <span>HT → TTC</span>
+        </button>
+        <button id="btn-ttc" onclick="setMode('ttc')">
+          <span>TTC → HT</span>
+        </button>
+      </div>
+
+      <!-- Taux selector -->
+      <div class="taux-label">Taux de TVA</div>
+      <div class="taux-grid">
+        <button class="taux-btn active" onclick="setTaux(20, this)">
+          <span class="rate">20 %</span>
+          <span class="label">Taux normal</span>
+        </button>
+        <button class="taux-btn" onclick="setTaux(10, this)">
+          <span class="rate">10 %</span>
+          <span class="label">Intermédiaire</span>
+        </button>
+        <button class="taux-btn" onclick="setTaux(5.5, this)">
+          <span class="rate">5,5 %</span>
+          <span class="label">Réduit</span>
+        </button>
+        <button class="taux-btn" onclick="setTaux(2.1, this)">
+          <span class="rate">2,1 %</span>
+          <span class="label">Super-réduit</span>
+        </button>
+      </div>
+
+      <!-- Input -->
+      <div class="input-row">
+        <div class="input-group" style="flex:1">
+          <label id="input-label" for="montant">Prix HT</label>
+          <div class="input-wrapper">
+            <input type="number" id="montant" placeholder="100,00" min="0" step="0.01" oninput="calcul()" autofocus>
+            <span class="unit">€</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="result-grid">
+        <div class="result-box" id="box-ht">
+          <div class="result-box-label">Prix HT</div>
+          <div class="result-box-value" id="val-ht">—</div>
+          <div class="result-box-sub">Hors taxe</div>
+        </div>
+        <div class="result-box" id="box-tva">
+          <div class="result-box-label">Montant TVA</div>
+          <div class="result-box-value" id="val-tva">—</div>
+          <div class="result-box-sub" id="sub-tva">à reverser à l'État</div>
+        </div>
+        <div class="result-box highlight" id="box-ttc">
+          <div class="result-box-label">Prix TTC</div>
+          <div class="result-box-value" id="val-ttc">—</div>
+          <div class="result-box-sub">Toutes taxes comprises</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TAUX TABLE -->
+    <hr class="divider">
+    <section>
+      <h2 class="section-title">Les 4 taux de TVA en France 2026</h2>
+      <table class="taux-table">
+        <thead>
+          <tr>
+            <th>Taux</th>
+            <th>Nom</th>
+            <th>Exemples de produits et services</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rate-cell">20 %</td>
+            <td class="name-cell">Taux normal</td>
+            <td>Majorité des biens et services, électronique, vêtements, services professionnels, alcool, tabac</td>
+          </tr>
+          <tr>
+            <td class="rate-cell">10 %</td>
+            <td class="name-cell">Taux intermédiaire</td>
+            <td>Restauration, transport de voyageurs, travaux de rénovation (hors énergétique), médicaments non remboursables, billetterie événements</td>
+          </tr>
+          <tr>
+            <td class="rate-cell">5,5 %</td>
+            <td class="name-cell">Taux réduit</td>
+            <td>Alimentation de première nécessité, livres, abonnements gaz et électricité, travaux de rénovation énergétique (logements &gt; 2 ans)</td>
+          </tr>
+          <tr>
+            <td class="rate-cell">2,1 %</td>
+            <td class="name-cell">Taux super-réduit</td>
+            <td>Médicaments remboursables par la Sécurité sociale, certaines publications de presse</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="divider">
+
+    <!-- FAQ -->
+    <section>
+      <h2 class="section-title">Questions fréquentes</h2>
+      <div class="faq">
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Comment calculer la TVA à partir d'un prix HT ?
+            <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-a">Multipliez le prix HT par (1 + taux). Pour un taux à 20 % : 100 € × 1,20 = 120 € TTC. Le montant de TVA est simplement la différence : 120 − 100 = 20 €.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Comment retrouver le prix HT à partir d'un TTC ?
+            <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-a">Divisez le prix TTC par (1 + taux). Pour un taux à 20 % : 120 € ÷ 1,20 = 100 € HT. Attention : diviser par le taux directement (120 × 0,80) donne le même résultat pour 20 %, mais c'est la formule correcte qui fonctionne pour tous les taux.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Quel taux de TVA appliquer par défaut ?
+            <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-a">Le taux normal de 20 % s'applique par défaut à tout bien ou service pour lequel aucun taux spécifique n'est prévu. En cas de doute, c'est toujours ce taux qu'il faut utiliser.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Un auto-entrepreneur est-il soumis à la TVA ?
+            <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-a">Pas forcément. En franchise en base de TVA (chiffre d'affaires &lt; 37 500 € pour les services, &lt; 85 000 € pour le commerce en 2026), vous ne facturez pas de TVA et devez mentionner "TVA non applicable, art. 293 B du CGI" sur vos factures.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Les taux de TVA ont-ils changé en 2026 ?
+            <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-a">Non, les quatre taux restent stables en 2026 (20 %, 10 %, 5,5 %, 2,1 %). La seule évolution notable est que depuis le 1er août 2025, le taux normal de 20 % s'applique désormais aux factures d'électricité, conformément à l'harmonisation européenne.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- RELATED TOOLS -->
+    <section>
+      <h2 class="section-title">Outils complémentaires</h2>
+      <div class="tools-grid">
+        <a href="/fr/salaire-brut-net/" class="tool-card">
+          <div class="tool-icon">💼</div>
+          <h3>Salaire brut → net</h3>
+          <p>Convertissez votre salaire brut en net</p>
+        </a>
+        <a href="/fr/impot/" class="tool-card">
+          <div class="tool-icon">🧾</div>
+          <h3>Impôt sur le revenu</h3>
+          <p>Estimez votre impôt 2026</p>
+        </a>
+        <a href="/fr/rupture-conventionnelle/" class="tool-card">
+          <div class="tool-icon">📋</div>
+          <h3>Rupture conventionnelle</h3>
+          <p>Calculez votre indemnité légale</p>
+        </a>
+      </div>
+    </section>
+
+    <p class="disclaimer">
+      <span>🔒</span>
+      <span>Résultats donnés à titre indicatif. Aucune donnée n'est transmise ni stockée — tous les calculs s'effectuent dans votre navigateur. Pour votre situation personnelle, consultez un expert-comptable.</span>
+    </p>
+
+  </main>
+
+  <script>
+    let mode = 'ht';
+    let taux = 20;
+
+    function setMode(m) {
+      mode = m;
+      document.getElementById('btn-ht').classList.toggle('active', m === 'ht');
+      document.getElementById('btn-ttc').classList.toggle('active', m === 'ttc');
+      document.getElementById('input-label').textContent = m === 'ht' ? 'Prix HT' : 'Prix TTC';
+
+      // Swap highlight
+      document.getElementById('box-ttc').classList.toggle('highlight', m === 'ht');
+      document.getElementById('box-ht').classList.toggle('highlight', m === 'ttc');
+
+      document.getElementById('montant').value = '';
+      resetResults();
+    }
+
+    function setTaux(t, btn) {
+      taux = t;
+      document.querySelectorAll('.taux-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      calcul();
+    }
+
+    function fmt(n) {
+      return new Intl.NumberFormat('fr-FR', {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(n);
+    }
+
+    function bump(id) {
+      const el = document.getElementById(id);
+      el.classList.remove('bump');
+      void el.offsetWidth;
+      el.classList.add('bump');
+    }
+
+    function resetResults() {
+      ['val-ht','val-tva','val-ttc'].forEach(id => {
+        document.getElementById(id).textContent = '—';
+      });
+    }
+
+    function calcul() {
+      const val = parseFloat(document.getElementById('montant').value);
+      if (!val || val <= 0) { resetResults(); return; }
+
+      let ht, ttc, montantTva;
+      const coeff = 1 + taux / 100;
+
+      if (mode === 'ht') {
+        ht = val;
+        ttc = val * coeff;
+      } else {
+        ttc = val;
+        ht = val / coeff;
+      }
+      montantTva = ttc - ht;
+
+      document.getElementById('val-ht').textContent = fmt(ht);
+      document.getElementById('val-tva').textContent = fmt(montantTva);
+      document.getElementById('val-ttc').textContent = fmt(ttc);
+
+      bump('val-ht'); bump('val-tva'); bump('val-ttc');
+    }
+
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+
+</body>
+</html>
