@@ -349,6 +349,27 @@
 
         </div>
 
+        <!-- Graphique capital vs intérêts -->
+        <div class="amort-section">
+          <div class="amort-header">
+            <div class="amort-title">Capital vs Intérêts</div>
+          </div>
+          <div class="card" style="padding:20px 24px 24px;">
+            <div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+              <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--fg-muted);">
+                <div style="width:12px;height:12px;border-radius:2px;background:var(--accent);flex-shrink:0;"></div> Capital remboursé
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--fg-muted);">
+                <div style="width:12px;height:12px;border-radius:2px;background:rgba(245,245,242,0.18);flex-shrink:0;"></div> Intérêts payés
+              </div>
+            </div>
+            <div id="chart-bars" style="display:flex;align-items:flex-end;gap:3px;height:120px;overflow-x:auto;padding-bottom:4px;"></div>
+            <div id="chart-labels" style="display:flex;gap:3px;margin-top:4px;overflow-x:auto;"></div>
+            <div id="bascule-msg" style="margin-top:14px;padding:10px 14px;background:var(--accent-soft);border:1px solid color-mix(in oklab,var(--accent) 20%,transparent);border-radius:var(--radius-sm);font-size:13px;color:var(--accent);"></div>
+            <div id="midpoint-msg" style="margin-top:8px;padding:10px 14px;background:var(--bg-elev);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;color:var(--fg-muted);"></div>
+          </div>
+        </div>
+
         <!-- Tableau d'amortissement -->
         <div class="amort-section">
           <div class="amort-header">
@@ -530,9 +551,64 @@ function render() {
     msgEl.textContent = 'Saisissez vos revenus pour calculer le taux d\'endettement';
   }
 
-  // Tableau d'amortissement
+  // Tableau d'amortissement + graphique
   amortData = calcAmort(capital, tauxVal, duree);
   renderAmort();
+  renderChart();
+}
+
+function renderChart() {
+  const barsEl   = document.getElementById('chart-bars');
+  const labelsEl = document.getElementById('chart-labels');
+  const basculeEl= document.getElementById('bascule-msg');
+  const midEl    = document.getElementById('midpoint-msg');
+
+  if (!amortData.length) return;
+
+  // Max pour normaliser les barres
+  const maxVal = Math.max(...amortData.map(r => r.capital + r.interets));
+
+  // Point de bascule : première année où capital > intérêts
+  const bascule = amortData.find(r => r.capital > r.interets);
+
+  // Mi-parcours
+  const mid = amortData[Math.floor(amortData.length / 2) - 1];
+  const capitalCumMid = amortData.slice(0, Math.floor(amortData.length / 2)).reduce((s, r) => s + r.capital, 0);
+  const totalCapital  = amortData.reduce((s, r) => s + r.capital, 0);
+
+  // Générer les barres (on en affiche max 30, on regroupe si > 30)
+  const data = amortData;
+  const barW = Math.max(6, Math.min(24, Math.floor(320 / data.length)));
+
+  barsEl.innerHTML = data.map(r => {
+    const total = r.capital + r.interets;
+    const capH  = Math.round((r.capital  / maxVal) * 100);
+    const intH  = Math.round((r.interets / maxVal) * 100);
+    const isBascule = bascule && r.annee === bascule.annee;
+    return `
+      <div style="display:flex;flex-direction:column;align-items:center;gap:1px;flex-shrink:0;width:${barW}px;" title="Année ${r.annee} — Capital : ${fmt(r.capital,0)} | Intérêts : ${fmt(r.interets,0)}">
+        <div style="width:100%;height:${intH}px;background:rgba(245,245,242,0.18);border-radius:2px 2px 0 0;transition:height 0.3s;"></div>
+        <div style="width:100%;height:${capH}px;background:${isBascule ? '#00E5A0' : 'rgba(0,229,160,0.55)'};border-radius:0 0 2px 2px;transition:height 0.3s;${isBascule ? 'box-shadow:0 0 0 1px var(--accent);' : ''}"></div>
+      </div>`;
+  }).join('');
+
+  // Labels années (afficher 1 sur N pour pas surcharger)
+  const step = Math.ceil(data.length / 6);
+  labelsEl.innerHTML = data.map((r, i) => {
+    const show = i === 0 || (i + 1) % step === 0 || i === data.length - 1;
+    return `<div style="flex-shrink:0;width:${barW}px;text-align:center;font-size:10px;color:var(--fg-faint);font-family:'Geist Mono',monospace;">${show ? r.annee : ''}</div>`;
+  }).join('');
+
+  // Message point de bascule
+  basculeEl.textContent = bascule
+    ? `📍 Point de bascule en année ${bascule.annee} — à partir de là, vous remboursez plus de capital que d'intérêts chaque mois.`
+    : '';
+
+  // Message mi-parcours
+  if (mid) {
+    const pct = totalCapital > 0 ? (capitalCumMid / totalCapital * 100).toFixed(0) : 0;
+    midEl.textContent = `📊 À mi-parcours (année ${mid.annee}), vous aurez remboursé ${fmt(capitalCumMid, 0)} de capital, soit ${pct} % du total.`;
+  }
 }
 
 function renderAmort() {
