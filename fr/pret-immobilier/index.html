@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simulateur Prêt Immobilier 2026 — CalcFin</title>
+<meta name="description" content="Calculez vos mensualités, votre capacité d'emprunt et le coût total de votre crédit immobilier. Barèmes 2026, tableau d'amortissement inclus." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F; --bg-elev: #111118; --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06); --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2; --fg-muted: rgba(245,245,242,0.56); --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0; --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px; --radius-md: 16px; --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8; --bg-elev: #FFFFFF; --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07); --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F; --fg-muted: rgba(10,10,15,0.58); --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D; --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--fg); font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5; }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow { position: fixed; top: -300px; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%); pointer-events: none; z-index: 0; opacity: 0.7; }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* HEADER */
+  header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); background: color-mix(in oklab, var(--bg) 78%, transparent); border-bottom: 1px solid var(--border); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .lang-switcher { display: inline-flex; align-items: center; background: transparent; border: 1px solid var(--border); border-radius: 999px; padding: 3px; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.06em; }
+  .lang-switcher button { background: transparent; border: none; color: var(--fg-muted); padding: 5px 10px; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: inherit; transition: all 0.18s ease; }
+  .lang-switcher button.active { background: var(--fg); color: var(--bg); }
+
+  /* BREADCRUMB */
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+
+  /* PAGE HEADER */
+  .page-header { padding: 28px 0 40px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(28px, 5vw, 48px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 520px; }
+
+  /* LAYOUT */
+  .calc-layout { display: grid; grid-template-columns: 1fr; gap: 24px; padding-bottom: 48px; }
+  @media (min-width: 900px) { .calc-layout { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+  /* CARD */
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; }
+  .card-title { font-size: 13px; font-weight: 500; color: var(--fg-faint); letter-spacing: 0.06em; text-transform: uppercase; font-family: 'Geist Mono', monospace; margin-bottom: 24px; }
+
+  /* FORM */
+  .field { margin-bottom: 20px; }
+  .field label { display: block; font-size: 13px; font-weight: 500; color: var(--fg-muted); margin-bottom: 8px; }
+  .field-hint { font-size: 11px; color: var(--fg-faint); margin-top: 4px; }
+  .input-wrap { position: relative; }
+  .input-wrap input { width: 100%; height: 48px; padding: 0 56px 0 16px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--fg); font-size: 16px; font-family: 'Geist Mono', monospace; font-weight: 500; outline: none; transition: border-color 0.18s ease, box-shadow 0.18s ease; -moz-appearance: textfield; }
+  .input-wrap input::-webkit-inner-spin-button, .input-wrap input::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .input-wrap input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .input-unit { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; pointer-events: none; }
+
+  /* Range slider */
+  .range-wrap { margin-top: 8px; }
+  input[type=range] { width: 100%; height: 4px; -webkit-appearance: none; appearance: none; background: var(--border); border-radius: 999px; outline: none; cursor: pointer; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); cursor: pointer; }
+  .range-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; margin-top: 4px; }
+
+  /* Seg control */
+  .seg-control { display: flex; gap: 4px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px; }
+  .seg-control button { flex: 1; height: 36px; border: none; border-radius: 7px; background: transparent; color: var(--fg-muted); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.18s ease; font-family: 'Geist', sans-serif; }
+  .seg-control button.active { background: var(--fg); color: var(--bg); font-weight: 600; }
+
+  /* RESULTS */
+  .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  .kpi { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 20px; }
+  .kpi.accent { background: var(--accent-soft); border-color: color-mix(in oklab, var(--accent) 25%, transparent); }
+  .kpi-label { font-size: 11px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+  .kpi.accent .kpi-label { color: var(--accent); opacity: 0.8; }
+  .kpi-value { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; font-family: 'Geist Mono', monospace; color: var(--fg); }
+  .kpi.accent .kpi-value { color: var(--accent); }
+  .kpi-sub { font-size: 11px; color: var(--fg-faint); margin-top: 2px; }
+
+  /* Breakdown */
+  .breakdown { display: flex; flex-direction: column; gap: 2px; margin-bottom: 16px; }
+  .breakdown-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-radius: var(--radius-sm); transition: background 0.15s; }
+  .breakdown-row:hover { background: var(--bg-elev); }
+  .breakdown-row.total { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent); margin-top: 8px; }
+  .b-label { font-size: 13px; color: var(--fg-muted); }
+  .b-val { font-size: 13px; font-weight: 600; font-family: 'Geist Mono', monospace; color: var(--fg); }
+  .breakdown-row.total .b-label { color: var(--accent); font-weight: 500; }
+  .breakdown-row.total .b-val { color: var(--accent); font-size: 14px; }
+
+  /* Taux endettement */
+  .endettement-bar { margin-top: 16px; }
+  .endettement-label { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--fg-muted); margin-bottom: 6px; }
+  .endettement-pct { font-weight: 700; font-family: 'Geist Mono', monospace; }
+  .endettement-pct.ok { color: var(--accent); }
+  .endettement-pct.warn { color: #F5A623; }
+  .endettement-pct.danger { color: #E05252; }
+  .bar-track { height: 8px; background: var(--border); border-radius: 999px; overflow: visible; position: relative; }
+  .bar-fill { height: 100%; border-radius: 999px; transition: width 0.4s ease, background 0.3s; }
+  .bar-limit { position: absolute; top: -4px; width: 2px; height: 16px; background: #F5A623; border-radius: 1px; left: 35%; }
+  .bar-limit-label { position: absolute; top: -20px; left: 35%; transform: translateX(-50%); font-size: 10px; color: #F5A623; font-family: 'Geist Mono', monospace; white-space: nowrap; }
+
+  /* Tableau amortissement */
+  .amort-section { margin-top: 32px; }
+  .amort-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .amort-title { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+  .amort-toggle { font-size: 12px; color: var(--accent); cursor: pointer; font-family: 'Geist Mono', monospace; background: none; border: none; padding: 4px 8px; }
+  .amort-table-wrap { overflow-x: auto; border-radius: var(--radius-md); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  thead th { padding: 10px 14px; text-align: right; font-size: 11px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; background: var(--bg-elev); border-bottom: 1px solid var(--border); }
+  thead th:first-child { text-align: left; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg-elev); }
+  tbody td { padding: 9px 14px; text-align: right; font-family: 'Geist Mono', monospace; color: var(--fg-muted); }
+  tbody td:first-child { text-align: left; color: var(--fg-faint); }
+  tbody td.capital { color: var(--accent); }
+  .amort-more { text-align: center; padding: 12px; font-size: 12px; color: var(--fg-faint); border-top: 1px solid var(--border); cursor: pointer; transition: color 0.15s; }
+  .amort-more:hover { color: var(--accent); }
+
+  /* EXPLAINER */
+  .explainer { margin: 48px 0; }
+  .explainer h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .explainer p { font-size: 15px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 12px; }
+  .explainer h3 { font-size: 17px; font-weight: 600; margin: 24px 0 10px; }
+
+  /* RELATED */
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+
+  /* FOOTER */
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+</style>
+</head>
+<body>
+
+<div class="backdrop-glow"></div>
+
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+      <div class="header-right">
+        <div class="lang-switcher">
+          <button class="active" data-lang="fr">FR</button>
+          <button data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="/">Accueil</a>
+      <span>›</span>
+      <span>Prêt immobilier</span>
+    </div>
+
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Taux du marché 2026</div>
+      <h1 class="page-title">Simulateur <em>prêt immobilier</em></h1>
+      <p class="page-sub">Calculez vos mensualités, votre capacité d'emprunt et le coût total de votre crédit. Tableau d'amortissement inclus.</p>
+    </div>
+
+    <div class="calc-layout">
+
+      <!-- INPUTS -->
+      <div class="card">
+        <div class="card-title">Paramètres du prêt</div>
+
+        <div class="field">
+          <label>Prix du bien</label>
+          <div class="input-wrap">
+            <input type="number" id="prix" value="300000" min="0" step="5000" />
+            <span class="input-unit">€</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Apport personnel</label>
+          <div class="input-wrap">
+            <input type="number" id="apport" value="60000" min="0" step="5000" />
+            <span class="input-unit">€</span>
+          </div>
+          <div class="field-hint" id="apport-pct">— % du prix</div>
+        </div>
+
+        <div class="field">
+          <label>Durée du prêt</label>
+          <div class="input-wrap">
+            <input type="number" id="duree" value="20" min="5" max="30" step="1" />
+            <span class="input-unit">ans</span>
+          </div>
+          <div class="range-wrap">
+            <input type="range" id="duree-range" min="5" max="30" step="1" value="20" />
+            <div class="range-labels"><span>5 ans</span><span>30 ans</span></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Taux d'intérêt annuel</label>
+          <div class="input-wrap">
+            <input type="number" id="taux" value="3.50" min="0.1" max="10" step="0.05" />
+            <span class="input-unit">%</span>
+          </div>
+          <div class="range-wrap">
+            <input type="range" id="taux-range" min="0.5" max="7" step="0.05" value="3.50" />
+            <div class="range-labels"><span>0,5 %</span><span>7 %</span></div>
+          </div>
+          <div class="field-hint">Taux moyen marché 2026 : 3,2 % – 3,8 % sur 20 ans</div>
+        </div>
+
+        <div class="field">
+          <label>Assurance emprunteur (annuelle)</label>
+          <div class="input-wrap">
+            <input type="number" id="assurance" value="0.30" min="0" max="2" step="0.05" />
+            <span class="input-unit">%</span>
+          </div>
+          <div class="field-hint">En général entre 0,20 % et 0,40 % du capital emprunté</div>
+        </div>
+
+        <div class="field">
+          <label>Type de bien</label>
+          <div class="seg-control">
+            <button class="active" data-bien="ancien">Ancien</button>
+            <button data-bien="neuf">Neuf</button>
+            <button data-bien="terrain">Terrain</button>
+          </div>
+          <div class="field-hint" id="notaire-hint">Frais de notaire ~7-8 % pour l'ancien</div>
+        </div>
+
+        <div class="field">
+          <label>Revenus nets mensuels du foyer</label>
+          <div class="input-wrap">
+            <input type="number" id="revenus" value="5000" min="0" step="100" />
+            <span class="input-unit">€</span>
+          </div>
+          <div class="field-hint">Pour calculer votre taux d'endettement</div>
+        </div>
+
+      </div>
+
+      <!-- RESULTS -->
+      <div>
+        <div class="card">
+          <div class="card-title">Résultats</div>
+
+          <div class="kpi-grid">
+            <div class="kpi accent">
+              <div class="kpi-label">Mensualité</div>
+              <div class="kpi-value" id="kpi-mensualite">—</div>
+              <div class="kpi-sub">hors assurance</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Mensualité totale</div>
+              <div class="kpi-value" id="kpi-mensualite-totale">—</div>
+              <div class="kpi-sub">assurance incluse</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Coût total crédit</div>
+              <div class="kpi-value" id="kpi-cout">—</div>
+              <div class="kpi-sub">intérêts + assurance</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Frais de notaire</div>
+              <div class="kpi-value" id="kpi-notaire">—</div>
+              <div class="kpi-sub" id="kpi-notaire-sub">estimés</div>
+            </div>
+          </div>
+
+          <div class="breakdown">
+            <div class="breakdown-row">
+              <span class="b-label">Prix du bien</span>
+              <span class="b-val" id="b-prix">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Apport personnel</span>
+              <span class="b-val" id="b-apport">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Capital emprunté</span>
+              <span class="b-val" id="b-capital">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Total intérêts</span>
+              <span class="b-val" id="b-interets">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Total assurance</span>
+              <span class="b-val" id="b-assurance">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Frais de notaire</span>
+              <span class="b-val" id="b-notaire">—</span>
+            </div>
+            <div class="breakdown-row total">
+              <span class="b-label">Coût total opération</span>
+              <span class="b-val" id="b-total">—</span>
+            </div>
+          </div>
+
+          <!-- Taux d'endettement -->
+          <div class="endettement-bar" id="endettement-section">
+            <div class="endettement-label">
+              <span>Taux d'endettement</span>
+              <span class="endettement-pct" id="endettement-pct">—</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill" id="endettement-fill"></div>
+              <div class="bar-limit"></div>
+              <div class="bar-limit-label">35 %</div>
+            </div>
+            <div class="field-hint" style="margin-top:8px" id="endettement-msg">—</div>
+          </div>
+
+        </div>
+
+        <!-- Tableau d'amortissement -->
+        <div class="amort-section">
+          <div class="amort-header">
+            <div class="amort-title">Tableau d'amortissement</div>
+            <button class="amort-toggle" id="amort-toggle-btn">Tout afficher</button>
+          </div>
+          <div class="amort-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Année</th>
+                  <th>Mensualité</th>
+                  <th>Capital</th>
+                  <th>Intérêts</th>
+                  <th>Capital restant</th>
+                </tr>
+              </thead>
+              <tbody id="amort-body"></tbody>
+            </table>
+            <div class="amort-more" id="amort-more" style="display:none">▼ Afficher toutes les années</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPLAINER -->
+    <div class="explainer">
+      <h2>Comment fonctionne un prêt immobilier ?</h2>
+      <p>Un prêt immobilier est un crédit amortissable à taux fixe dans la grande majorité des cas. Chaque mensualité rembourse une part de capital et une part d'intérêts, calculée sur le capital restant dû.</p>
+      <h3>La formule de la mensualité</h3>
+      <p>La mensualité se calcule avec la formule d'annuité constante : <strong>M = C × (t/12) / (1 − (1 + t/12)^−n)</strong> où C est le capital emprunté, t le taux annuel et n la durée en mois.</p>
+      <h3>Le taux d'endettement</h3>
+      <p>Les banques appliquent en France un taux d'endettement maximal de <strong>35 %</strong> des revenus nets (recommandation HCSF). Au-delà, l'obtention du prêt devient très difficile.</p>
+      <h3>Les frais de notaire</h3>
+      <p>Dans l'ancien, ils représentent environ 7 à 8 % du prix. Dans le neuf, ils sont réduits à 2 à 3 %. Ils comprennent les droits de mutation, les émoluments du notaire et les frais d'acte.</p>
+      <h3>L'assurance emprunteur</h3>
+      <p>Obligatoire, elle couvre le décès et l'invalidité. Le taux varie selon l'âge et l'état de santé, typiquement entre 0,20 % et 0,40 % du capital emprunté par an. Depuis la loi Lemoine (2022), vous pouvez changer d'assureur à tout moment.</p>
+    </div>
+
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Vérifiez votre capacité de remboursement</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Tranches 2026, quotient familial</div>
+        </a>
+        <a href="/fr/salaire-net-brut/" class="related-card">
+          <div class="related-card-title">Salaire net → brut</div>
+          <div class="related-card-desc">Négociez votre salaire</div>
+        </a>
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Allocation journalière</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Simulation indicative. Les taux et frais réels varient selon les établissements bancaires et votre profil. Consultez un courtier ou conseiller bancaire pour une offre personnalisée.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== FRAIS DE NOTAIRE =====
+const NOTAIRE = { ancien: 0.075, neuf: 0.025, terrain: 0.075 };
+const NOTAIRE_LABEL = { ancien: '~7,5 % (ancien)', neuf: '~2,5 % (neuf)', terrain: '~7,5 % (terrain)' };
+
+let typeBien = 'ancien';
+let showAllAmort = false;
+let amortData = [];
+
+function fmt(v, decimals = 0) {
+  return v.toLocaleString('fr-FR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + ' €';
+}
+function fmtPct(v) { return v.toFixed(1) + ' %'; }
+
+// ===== CALCUL MENSUALITE =====
+function calcMensualite(capital, tauxAnnuel, dureeAns) {
+  const tm = tauxAnnuel / 100 / 12;
+  const n = dureeAns * 12;
+  if (tm === 0) return capital / n;
+  return capital * tm / (1 - Math.pow(1 + tm, -n));
+}
+
+// ===== TABLEAU AMORTISSEMENT =====
+function calcAmort(capital, tauxAnnuel, dureeAns) {
+  const tm = tauxAnnuel / 100 / 12;
+  const mensualite = calcMensualite(capital, tauxAnnuel, dureeAns);
+  const rows = [];
+  let restant = capital;
+
+  for (let annee = 1; annee <= dureeAns; annee++) {
+    let capitalAnnee = 0, interetsAnnee = 0;
+    for (let m = 0; m < 12; m++) {
+      const interets = restant * tm;
+      const cap = mensualite - interets;
+      capitalAnnee += cap;
+      interetsAnnee += interets;
+      restant -= cap;
+    }
+    rows.push({
+      annee,
+      mensualite,
+      capital: capitalAnnee,
+      interets: interetsAnnee,
+      restant: Math.max(0, restant)
+    });
+  }
+  return rows;
+}
+
+// ===== RENDER =====
+function render() {
+  const prix     = parseFloat(document.getElementById('prix').value) || 0;
+  const apport   = parseFloat(document.getElementById('apport').value) || 0;
+  const duree    = parseFloat(document.getElementById('duree').value) || 20;
+  const tauxVal  = parseFloat(document.getElementById('taux').value) || 3.5;
+  const assurPct = parseFloat(document.getElementById('assurance').value) || 0.3;
+  const revenus  = parseFloat(document.getElementById('revenus').value) || 0;
+
+  const capital      = Math.max(0, prix - apport);
+  const apportPct    = prix > 0 ? (apport / prix * 100) : 0;
+  const mensualite   = calcMensualite(capital, tauxVal, duree);
+  const assurMensuel = capital * assurPct / 100 / 12;
+  const mensualiteTotale = mensualite + assurMensuel;
+  const totalInterets = mensualite * duree * 12 - capital;
+  const totalAssurance = assurMensuel * duree * 12;
+  const fraisNotaire  = prix * NOTAIRE[typeBien];
+  const coutTotal     = prix + totalInterets + totalAssurance + fraisNotaire;
+  const endettement   = revenus > 0 ? mensualiteTotale / revenus * 100 : 0;
+
+  // Apport %
+  document.getElementById('apport-pct').textContent = `${apportPct.toFixed(1)} % du prix`;
+
+  // KPIs
+  document.getElementById('kpi-mensualite').textContent       = fmt(mensualite, 0);
+  document.getElementById('kpi-mensualite-totale').textContent = fmt(mensualiteTotale, 0);
+  document.getElementById('kpi-cout').textContent             = fmt(totalInterets + totalAssurance, 0);
+  document.getElementById('kpi-notaire').textContent          = fmt(fraisNotaire, 0);
+  document.getElementById('kpi-notaire-sub').textContent      = NOTAIRE_LABEL[typeBien];
+
+  // Breakdown
+  document.getElementById('b-prix').textContent      = fmt(prix);
+  document.getElementById('b-apport').textContent    = fmt(-apport);
+  document.getElementById('b-capital').textContent   = fmt(capital);
+  document.getElementById('b-interets').textContent  = fmt(totalInterets);
+  document.getElementById('b-assurance').textContent = fmt(totalAssurance);
+  document.getElementById('b-notaire').textContent   = fmt(fraisNotaire);
+  document.getElementById('b-total').textContent     = fmt(coutTotal);
+
+  // Endettement
+  const pctEl = document.getElementById('endettement-pct');
+  const fillEl = document.getElementById('endettement-fill');
+  const msgEl  = document.getElementById('endettement-msg');
+  if (revenus > 0) {
+    pctEl.textContent = fmtPct(endettement);
+    pctEl.className = 'endettement-pct ' + (endettement <= 35 ? 'ok' : endettement <= 40 ? 'warn' : 'danger');
+    fillEl.style.width = Math.min(endettement, 100) + '%';
+    fillEl.style.background = endettement <= 35 ? 'var(--accent)' : endettement <= 40 ? '#F5A623' : '#E05252';
+    msgEl.textContent = endettement <= 35
+      ? '✅ Taux d\'endettement acceptable (< 35 %)'
+      : endettement <= 40
+      ? '⚠️ Taux élevé — certaines banques peuvent refuser'
+      : '❌ Taux trop élevé — prêt difficile à obtenir (> 40 %)';
+  } else {
+    pctEl.textContent = '—';
+    fillEl.style.width = '0%';
+    msgEl.textContent = 'Saisissez vos revenus pour calculer le taux d\'endettement';
+  }
+
+  // Tableau d'amortissement
+  amortData = calcAmort(capital, tauxVal, duree);
+  renderAmort();
+}
+
+function renderAmort() {
+  const tbody = document.getElementById('amort-body');
+  const data = showAllAmort ? amortData : amortData.slice(0, 5);
+  tbody.innerHTML = data.map(r => `
+    <tr>
+      <td>Année ${r.annee}</td>
+      <td>${fmt(r.mensualite, 2)}</td>
+      <td class="capital">${fmt(r.capital, 0)}</td>
+      <td>${fmt(r.interets, 0)}</td>
+      <td>${fmt(r.restant, 0)}</td>
+    </tr>
+  `).join('');
+
+  const moreEl = document.getElementById('amort-more');
+  if (amortData.length > 5) {
+    moreEl.style.display = 'block';
+    moreEl.textContent = showAllAmort ? '▲ Réduire' : `▼ Afficher toutes les ${amortData.length} années`;
+  } else {
+    moreEl.style.display = 'none';
+  }
+}
+
+// ===== SYNC RANGE <-> INPUT =====
+function syncRange(inputId, rangeId) {
+  const input = document.getElementById(inputId);
+  const range = document.getElementById(rangeId);
+  input.addEventListener('input', () => { range.value = input.value; render(); });
+  range.addEventListener('input', () => { input.value = range.value; render(); });
+}
+syncRange('duree', 'duree-range');
+syncRange('taux', 'taux-range');
+
+// Other inputs
+['prix', 'apport', 'assurance', 'revenus'].forEach(id => {
+  document.getElementById(id).addEventListener('input', render);
+});
+
+// Type bien
+document.querySelectorAll('[data-bien]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    typeBien = btn.dataset.bien;
+    document.querySelectorAll('[data-bien]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const hints = { ancien: 'Frais de notaire ~7-8 % pour l\'ancien', neuf: 'Frais de notaire ~2-3 % pour le neuf', terrain: 'Frais de notaire ~7-8 % pour un terrain' };
+    document.getElementById('notaire-hint').textContent = hints[typeBien];
+    render();
+  });
+});
+
+// Amort toggle
+document.getElementById('amort-more').addEventListener('click', () => {
+  showAllAmort = true;
+  renderAmort();
+});
+
+document.querySelectorAll('.lang-switcher button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.lang-switcher button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+render();
+</script>
+
+</body>
+</html>
