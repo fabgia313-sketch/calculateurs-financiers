@@ -160,6 +160,16 @@
   @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
   .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
   .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+
+  /* TOOLS NAV */
+  .tools-nav{border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
+  .tools-nav::-webkit-scrollbar{display:none;}
+  .tools-nav-inner{display:flex;padding:0;min-width:max-content;}
+  .tools-nav a{display:inline-flex;align-items:center;padding:10px 14px;font-size:12px;color:var(--fg-faint);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color 0.15s,border-color 0.15s;font-family:'Geist Mono',monospace;}
+  .tools-nav a:hover{color:var(--fg-muted);}
+  .tools-nav a.active{color:var(--accent);border-bottom-color:var(--accent);}
+  .page-switch-pill{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:5px 14px;border-radius:999px;border:1px solid var(--border);color:var(--fg-muted);font-size:12px;text-decoration:none;transition:border-color 0.15s,color 0.15s;font-family:'Geist Mono',monospace;}
+  .page-switch-pill:hover{border-color:var(--accent);color:var(--accent);}
 </style>
 </head>
 <body>
@@ -185,6 +195,21 @@
   </div>
 </header>
 
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/" class="active">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+
 <main>
   <div class="container">
 
@@ -201,6 +226,7 @@
       </div>
       <h1 class="page-title">Salaire <em>net → brut</em></h1>
       <p class="page-sub">Connaissez votre brut à négocier pour obtenir le net souhaité. Cadre ou non-cadre, barèmes 2026.</p>
+      <div style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:8px 16px;background:var(--bg-elev);border:1px solid var(--border);border-radius:999px;font-size:13px;color:var(--fg-muted);">Vous cherchez l'inverse ? <a href="/fr/salaire-brut-net/" style="color:var(--accent);text-decoration:none;font-weight:500;">← Brut → Net</a></div>
     </div>
 
     <div class="calc-layout">
@@ -246,6 +272,7 @@
           <div class="period-switch">
             <button class="active" data-period="mensuel">Mensuel</button>
             <button data-period="annuel">Annuel</button>
+            <button data-period="jour">Journalier</button>
           </div>
 
           <div class="result-main">
@@ -401,6 +428,7 @@ function render() {
   let mult = 1;
   let periodLabel = 'par mois';
   if (period === 'annuel') { mult = 12; periodLabel = 'par an'; }
+  if (period === 'jour')   { mult = 12/218; periodLabel = 'par jour (218 jours travaillés)'; }
 
   document.getElementById('result-brut').textContent    = fmt(r.brut * mult);
   document.getElementById('result-period').textContent  = periodLabel;
