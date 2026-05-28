@@ -798,7 +798,7 @@
   // ===== Render tool cards =====
   const grid = document.getElementById('tools-grid');
   grid.innerHTML = TOOLS.map(t => `
-    <a href="#" class="tool-card" data-tool="${t.id}">
+    <a href="${t.id === 'brut-net' ? '/fr/salaire-brut-net/' : '#'}" class="tool-card" data-tool="${t.id}">
       <div class="tool-card-top">
         <div class="tool-icon">${svg(t.icon)}</div>
         <div class="tool-arrow">${svg('arrow-up-right')}</div>

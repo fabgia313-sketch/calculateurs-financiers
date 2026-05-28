@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Calculateur Salaire Brut → Net 2026 — CalcFin</title>
+<meta name="description" content="Convertissez votre salaire brut en net instantanément. Barèmes URSSAF 2026 à jour, cadre et non-cadre, secteur privé." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  .mono { font-family: 'Geist Mono', monospace; }
+
+  .backdrop-glow {
+    position: fixed;
+    top: -300px; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+
+  .container {
+    width: 100%; max-width: 1240px;
+    margin: 0 auto; padding: 0 24px;
+    position: relative; z-index: 1;
+  }
+
+  /* ===== HEADER ===== */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    display: flex; align-items: center;
+    justify-content: space-between; height: 64px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 600; font-size: 16px; letter-spacing: -0.01em;
+    color: var(--fg); text-decoration: none;
+  }
+  .logo-mark {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: var(--accent); display: grid; place-items: center;
+    color: #001A12; font-weight: 700; font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+  }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a {
+    color: var(--fg-muted); text-decoration: none;
+    font-size: 14px; font-weight: 450;
+    transition: color 0.15s ease;
+  }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .lang-switcher {
+    display: inline-flex; align-items: center;
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 999px; padding: 3px;
+    font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.06em;
+  }
+  .lang-switcher button {
+    background: transparent; border: none; color: var(--fg-muted);
+    padding: 5px 10px; border-radius: 999px; cursor: pointer;
+    font-family: inherit; font-size: inherit; transition: all 0.18s ease;
+  }
+  .lang-switcher button.active { background: var(--fg); color: var(--bg); }
+
+  /* ===== BREADCRUMB ===== */
+  .breadcrumb {
+    display: flex; align-items: center; gap: 8px;
+    padding: 20px 0 0; font-size: 13px; color: var(--fg-faint);
+  }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+
+  /* ===== PAGE HEADER ===== */
+  .page-header { padding: 28px 0 40px; }
+  .page-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; background: var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+    border-radius: 999px; font-size: 11px; color: var(--accent);
+    font-family: 'Geist Mono', monospace; letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+  .page-badge-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent); animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); }
+    50% { box-shadow: 0 0 0 5px transparent; }
+  }
+  .page-title {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 520px; }
+
+  /* ===== MAIN LAYOUT ===== */
+  .calc-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-bottom: 80px;
+  }
+  @media (min-width: 900px) {
+    .calc-layout { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  /* ===== CARD ===== */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+  }
+  .card-title {
+    font-size: 13px; font-weight: 500;
+    color: var(--fg-faint); letter-spacing: 0.06em;
+    text-transform: uppercase; font-family: 'Geist Mono', monospace;
+    margin-bottom: 24px;
+  }
+
+  /* ===== FORM ===== */
+  .field { margin-bottom: 20px; }
+  .field label {
+    display: block; font-size: 13px; font-weight: 500;
+    color: var(--fg-muted); margin-bottom: 8px;
+  }
+  .input-wrap { position: relative; }
+  .input-wrap input {
+    width: 100%; height: 48px; padding: 0 48px 0 16px;
+    background: var(--bg-elev); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); color: var(--fg);
+    font-size: 16px; font-family: 'Geist Mono', monospace;
+    font-weight: 500; outline: none;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    -moz-appearance: textfield;
+  }
+  .input-wrap input::-webkit-inner-spin-button,
+  .input-wrap input::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .input-wrap input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .input-unit {
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+    font-size: 13px; color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace; pointer-events: none;
+  }
+
+  /* Segmented control */
+  .seg-control {
+    display: flex; gap: 4px;
+    background: var(--bg-elev); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 4px;
+  }
+  .seg-control button {
+    flex: 1; height: 36px; border: none; border-radius: 7px;
+    background: transparent; color: var(--fg-muted);
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    transition: all 0.18s ease; font-family: 'Geist', sans-serif;
+  }
+  .seg-control button.active {
+    background: var(--fg); color: var(--bg); font-weight: 600;
+  }
+
+  /* Toggle */
+  .toggle-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .toggle-row:last-child { border-bottom: none; }
+  .toggle-label { font-size: 14px; color: var(--fg-muted); }
+  .toggle {
+    width: 36px; height: 20px; border-radius: 999px;
+    background: var(--border); position: relative; transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .toggle.on { background: var(--accent); }
+  .toggle::after {
+    content: ''; position: absolute; top: 3px; left: 3px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: #fff; transition: transform 0.2s ease;
+  }
+  .toggle.on::after { transform: translateX(16px); }
+
+  /* ===== RESULTS ===== */
+  .result-main {
+    text-align: center; padding: 32px 0 24px;
+    border-bottom: 1px solid var(--border); margin-bottom: 24px;
+  }
+  .result-label {
+    font-size: 12px; color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .result-value {
+    font-size: clamp(36px, 8vw, 56px);
+    font-weight: 700; letter-spacing: -0.04em;
+    color: var(--accent); line-height: 1;
+    font-family: 'Geist Mono', monospace;
+    transition: all 0.25s ease;
+  }
+  .result-period {
+    font-size: 14px; color: var(--fg-faint);
+    margin-top: 6px;
+  }
+
+  /* Breakdown rows */
+  .breakdown { display: flex; flex-direction: column; gap: 2px; }
+  .breakdown-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 12px; border-radius: var(--radius-sm);
+    transition: background 0.15s;
+  }
+  .breakdown-row:hover { background: var(--bg-elev); }
+  .breakdown-row.total {
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent);
+    margin-top: 8px;
+  }
+  .breakdown-row .b-label { font-size: 13px; color: var(--fg-muted); }
+  .breakdown-row .b-val {
+    font-size: 13px; font-weight: 600;
+    font-family: 'Geist Mono', monospace; color: var(--fg);
+  }
+  .breakdown-row.total .b-label { color: var(--accent); font-weight: 500; }
+  .breakdown-row.total .b-val { color: var(--accent); font-size: 15px; }
+
+  /* Period switcher */
+  .period-switch {
+    display: flex; gap: 4px; margin-bottom: 24px;
+    background: var(--bg-elev); border: 1px solid var(--border);
+    border-radius: 10px; padding: 4px;
+  }
+  .period-switch button {
+    flex: 1; height: 32px; border: none; border-radius: 7px;
+    background: transparent; color: var(--fg-muted);
+    font-size: 12px; font-weight: 500; cursor: pointer;
+    transition: all 0.18s ease; font-family: 'Geist Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+  .period-switch button.active { background: var(--fg); color: var(--bg); }
+
+  /* Taux effectif badge */
+  .taux-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px; margin-top: 16px;
+    background: var(--bg-elev); border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+  .taux-label { font-size: 13px; color: var(--fg-muted); }
+  .taux-val {
+    font-size: 18px; font-weight: 700;
+    font-family: 'Geist Mono', monospace; color: var(--fg);
+  }
+
+  /* Progress bar */
+  .progress-bar-wrap { margin-top: 16px; }
+  .progress-bar-label {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace; margin-bottom: 6px;
+  }
+  .progress-bar {
+    height: 6px; background: var(--border); border-radius: 999px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%; background: var(--accent); border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+
+  /* ===== EXPLAINER ===== */
+  .explainer { margin: 48px 0; }
+  .explainer h2 {
+    font-size: 24px; font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .explainer p { font-size: 15px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 12px; }
+  .explainer h3 { font-size: 17px; font-weight: 600; margin: 24px 0 10px; }
+
+  /* ===== RELATED ===== */
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card {
+    display: block; padding: 16px 20px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-md); text-decoration: none; color: var(--fg);
+    transition: border-color 0.18s, transform 0.18s;
+  }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+
+  /* ===== FOOTER ===== */
+  footer.site {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+  }
+  .footer-inner {
+    display: flex; flex-direction: column; gap: 12px;
+    align-items: center; text-align: center;
+  }
+  @media (min-width: 768px) {
+    .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; }
+  }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+</style>
+</head>
+<body>
+
+<div class="backdrop-glow"></div>
+
+<!-- HEADER -->
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark">CF</div>
+        CalcFin
+      </a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+      <div class="header-right">
+        <div class="lang-switcher">
+          <button class="active" data-lang="fr">FR</button>
+          <button data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENT -->
+<main>
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/">Accueil</a>
+      <span>›</span>
+      <span>Salaire brut → net</span>
+    </div>
+
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-badge">
+        <div class="page-badge-dot"></div>
+        Barèmes URSSAF 2026 à jour
+      </div>
+      <h1 class="page-title">Salaire <em>brut → net</em></h1>
+      <p class="page-sub">Convertissez votre salaire brut en net instantanément. Cadre ou non-cadre, secteur privé, barèmes 2026.</p>
+    </div>
+
+    <!-- Calculator layout -->
+    <div class="calc-layout">
+
+      <!-- Left: inputs -->
+      <div class="card">
+        <div class="card-title">Paramètres</div>
+
+        <div class="field">
+          <label>Salaire brut mensuel</label>
+          <div class="input-wrap">
+            <input type="number" id="brut" value="3000" min="0" step="100" />
+            <span class="input-unit">€</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Statut</label>
+          <div class="seg-control">
+            <button class="active" data-statut="non-cadre">Non-cadre</button>
+            <button data-statut="cadre">Cadre</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Type de contrat</label>
+          <div class="seg-control">
+            <button class="active" data-contrat="cdi">CDI / CDD</button>
+            <button data-contrat="alternant">Alternant</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Options</label>
+          <div class="toggle-row" id="toggle-mutuelle">
+            <span class="toggle-label">Déduire mutuelle d'entreprise</span>
+            <div class="toggle" id="toggle-mutuelle-el"></div>
+          </div>
+          <div class="toggle-row" id="toggle-teletravail">
+            <span class="toggle-label">Frais de télétravail inclus</span>
+            <div class="toggle" id="toggle-teletravail-el"></div>
+          </div>
+        </div>
+
+        <div class="field" id="mutuelle-field" style="display:none">
+          <label>Cotisation mutuelle (part salariale)</label>
+          <div class="input-wrap">
+            <input type="number" id="mutuelle" value="30" min="0" step="5" />
+            <span class="input-unit">€/mois</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: results -->
+      <div>
+        <div class="card">
+          <div class="card-title">Résultat</div>
+
+          <!-- Period switch -->
+          <div class="period-switch">
+            <button class="active" data-period="mensuel">Mensuel</button>
+            <button data-period="annuel">Annuel</button>
+            <button data-period="jour">Journalier</button>
+          </div>
+
+          <!-- Main result -->
+          <div class="result-main">
+            <div class="result-label">Salaire net</div>
+            <div class="result-value" id="result-net">—</div>
+            <div class="result-period" id="result-period">par mois</div>
+          </div>
+
+          <!-- Breakdown -->
+          <div class="breakdown">
+            <div class="breakdown-row">
+              <span class="b-label">Salaire brut</span>
+              <span class="b-val" id="b-brut">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Cotisations salariales</span>
+              <span class="b-val" id="b-cotisations">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Assurance maladie (0,40%)</span>
+              <span class="b-val" id="b-maladie">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Retraite de base (6,90%)</span>
+              <span class="b-val" id="b-retraite-base">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Retraite complémentaire</span>
+              <span class="b-val" id="b-retraite-comp">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Chômage (2,40%)</span>
+              <span class="b-val" id="b-chomage">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">CSG / CRDS (9,70%)</span>
+              <span class="b-val" id="b-csg">—</span>
+            </div>
+            <div class="breakdown-row total">
+              <span class="b-label">Net à payer</span>
+              <span class="b-val" id="b-total">—</span>
+            </div>
+          </div>
+
+          <!-- Taux effectif -->
+          <div class="taux-row">
+            <span class="taux-label">Taux de prélèvement effectif</span>
+            <span class="taux-val" id="taux">—</span>
+          </div>
+
+          <!-- Progress bar -->
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-label">
+              <span>Net conservé</span>
+              <span id="progress-pct">—</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Explainer -->
+    <div class="explainer">
+      <h2>Comment passer du brut au net ?</h2>
+      <p>En France, le salaire net correspond au salaire brut diminué des cotisations sociales salariales. Ces cotisations financent la retraite, l'assurance maladie, le chômage et la CSG/CRDS.</p>
+      <h3>Le taux global de cotisations salariales</h3>
+      <p>Pour un <strong>non-cadre</strong>, le taux global de cotisations salariales est d'environ <strong>22 à 23 %</strong> du brut. Pour un <strong>cadre</strong>, il est légèrement supérieur en raison de la retraite complémentaire Agirc-Arrco, autour de <strong>24 à 25 %</strong>.</p>
+      <h3>La CSG et la CRDS</h3>
+      <p>La Contribution Sociale Généralisée (CSG) et la Contribution au Remboursement de la Dette Sociale (CRDS) représentent ensemble 9,70 % du salaire brut abattu (après abattement de 1,75 % pour frais professionnels). Une partie de la CSG est déductible du revenu imposable.</p>
+      <h3>Barèmes 2026</h3>
+      <p>Les taux utilisés par ce calculateur sont ceux en vigueur au 1er janvier 2026, conformément aux circulaires URSSAF et aux textes publiés au Journal Officiel.</p>
+    </div>
+
+    <!-- Related tools -->
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/salaire-net-brut/" class="related-card">
+          <div class="related-card-title">Salaire net → brut</div>
+          <div class="related-card-desc">Le calcul inverse, pour négocier</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Tranches 2026, quotient familial</div>
+        </a>
+        <a href="/fr/rupture-conventionnelle/" class="related-card">
+          <div class="related-card-title">Rupture conventionnelle</div>
+          <div class="related-card-desc">Indemnité légale et fiscalité</div>
+        </a>
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Allocation journalière</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les résultats sont fournis à titre indicatif sur la base des barèmes 2026. Ils ne se substituent pas à un conseil d'expert-comptable ou d'un professionnel RH.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== TAUX DE COTISATIONS 2026 =====
+const TAUX = {
+  'non-cadre': {
+    maladie: 0.0040,
+    retraiteBase: 0.0690,
+    retraiteComp: 0.0315,  // Agirc-Arrco tranche 1
+    chomage: 0.0240,
+    csgCrds: 0.0970,
+    abattementFrais: 0.0175
+  },
+  'cadre': {
+    maladie: 0.0040,
+    retraiteBase: 0.0690,
+    retraiteComp: 0.0430,  // Agirc-Arrco cadre (T1+T2)
+    chomage: 0.0240,
+    csgCrds: 0.0970,
+    abattementFrais: 0.0175
+  }
+};
+
+// ===== STATE =====
+let statut = 'non-cadre';
+let period = 'mensuel';
+let mutuellOn = false;
+let teletravailOn = false;
+
+// ===== CALCUL =====
+function calcul(brut, statut) {
+  const t = TAUX[statut];
+  const brutAbattu = brut * (1 - t.abattementFrais);
+
+  const maladie      = brut * t.maladie;
+  const retraiteBase = brut * t.retraiteBase;
+  const retraiteComp = brut * t.retraiteComp;
+  const chomage      = brut * t.chomage;
+  const csgCrds      = brutAbattu * t.csgCrds;
+  const totalCot     = maladie + retraiteBase + retraiteComp + chomage + csgCrds;
+  const net          = brut - totalCot;
+
+  return { brut, maladie, retraiteBase, retraiteComp, chomage, csgCrds, totalCot, net };
+}
+
+// ===== FORMAT =====
+function fmt(val) {
+  return val.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+}
+function fmtPct(val) {
+  return (val * 100).toFixed(1) + ' %';
+}
+
+// ===== RENDER =====
+function render() {
+  const brutInput = parseFloat(document.getElementById('brut').value) || 0;
+  const mutuelle  = mutuellOn ? (parseFloat(document.getElementById('mutuelle')?.value) || 0) : 0;
+
+  const r = calcul(brutInput, statut);
+  const netFinal = r.net - mutuelle;
+
+  let mult = 1;
+  let periodLabel = 'par mois';
+  if (period === 'annuel') { mult = 12; periodLabel = 'par an'; }
+  if (period === 'jour')   { mult = 12/218; periodLabel = 'par jour (218 jours travaillés)'; }
+
+  const taux = brutInput > 0 ? (r.totalCot + mutuelle) / brutInput : 0;
+  const conserve = 1 - taux;
+
+  document.getElementById('result-net').textContent   = fmt(netFinal * mult);
+  document.getElementById('result-period').textContent = periodLabel;
+  document.getElementById('b-brut').textContent        = fmt(r.brut * mult);
+  document.getElementById('b-cotisations').textContent = fmt(-(r.totalCot * mult));
+  document.getElementById('b-maladie').textContent     = fmt(-(r.maladie * mult));
+  document.getElementById('b-retraite-base').textContent = fmt(-(r.retraiteBase * mult));
+  document.getElementById('b-retraite-comp').textContent = fmt(-(r.retraiteComp * mult));
+  document.getElementById('b-chomage').textContent     = fmt(-(r.chomage * mult));
+  document.getElementById('b-csg').textContent         = fmt(-(r.csgCrds * mult));
+  document.getElementById('b-total').textContent       = fmt(netFinal * mult);
+  document.getElementById('taux').textContent          = fmtPct(taux);
+  document.getElementById('progress-pct').textContent  = fmtPct(conserve);
+  document.getElementById('progress-fill').style.width = (conserve * 100).toFixed(1) + '%';
+}
+
+// ===== EVENTS =====
+document.getElementById('brut').addEventListener('input', render);
+
+document.querySelectorAll('[data-statut]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    statut = btn.dataset.statut;
+    document.querySelectorAll('[data-statut]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  });
+});
+
+document.querySelectorAll('[data-period]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    period = btn.dataset.period;
+    document.querySelectorAll('[data-period]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  });
+});
+
+document.getElementById('toggle-mutuelle').addEventListener('click', () => {
+  mutuellOn = !mutuellOn;
+  document.getElementById('toggle-mutuelle-el').classList.toggle('on', mutuellOn);
+  document.getElementById('mutuelle-field').style.display = mutuellOn ? 'block' : 'none';
+  render();
+});
+
+document.getElementById('toggle-teletravail').addEventListener('click', () => {
+  teletravailOn = !teletravailOn;
+  document.getElementById('toggle-teletravail-el').classList.toggle('on', teletravailOn);
+  render();
+});
+
+if (document.getElementById('mutuelle')) {
+  document.getElementById('mutuelle').addEventListener('input', render);
+}
+
+document.querySelectorAll('.lang-switcher button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.lang-switcher button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Init
+render();
+</script>
+
+</body>
+</html>
