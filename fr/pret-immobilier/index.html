@@ -624,12 +624,15 @@ function renderAmort() {
     </tr>
   `).join('');
 
-  const moreEl = document.getElementById('amort-more');
+  const moreEl   = document.getElementById('amort-more');
+  const toggleBtn = document.getElementById('amort-toggle-btn');
   if (amortData.length > 5) {
     moreEl.style.display = 'block';
-    moreEl.textContent = showAllAmort ? '▲ Réduire' : `▼ Afficher toutes les ${amortData.length} années`;
+    moreEl.textContent   = showAllAmort ? '▲ Réduire' : `▼ Afficher toutes les ${amortData.length} années`;
+    toggleBtn.textContent = showAllAmort ? 'Réduire' : 'Tout afficher';
   } else {
     moreEl.style.display = 'none';
+    toggleBtn.textContent = 'Tout afficher';
   }
 }
 
@@ -661,10 +664,12 @@ document.querySelectorAll('[data-bien]').forEach(btn => {
 });
 
 // Amort toggle
-document.getElementById('amort-more').addEventListener('click', () => {
-  showAllAmort = true;
+function toggleAmort() {
+  showAllAmort = !showAllAmort;
   renderAmort();
-});
+}
+document.getElementById('amort-toggle-btn').addEventListener('click', toggleAmort);
+document.getElementById('amort-more').addEventListener('click', toggleAmort);
 
 document.querySelectorAll('.lang-switcher button').forEach(btn => {
   btn.addEventListener('click', () => {
