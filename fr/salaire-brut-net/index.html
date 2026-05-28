@@ -453,7 +453,7 @@
         <div class="card-title">Paramètres</div>
 
         <div class="field">
-          <label>Salaire brut mensuel</label>
+          <label id="brut-label">Salaire brut mensuel</label>
           <div class="input-wrap">
             <input type="number" id="brut" value="3000" min="0" step="100" />
             <span class="input-unit">€</span>
@@ -473,6 +473,14 @@
           <div class="seg-control">
             <button class="active" data-contrat="cdi">CDI / CDD</button>
             <button data-contrat="alternant">Alternant</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Périodicité</label>
+          <div class="seg-control">
+            <button class="active" data-input-period="mensuel">Mensuel</button>
+            <button data-input-period="annuel">Annuel</button>
           </div>
         </div>
 
@@ -646,6 +654,7 @@ const TAUX = {
 // ===== STATE =====
 let statut = 'non-cadre';
 let period = 'mensuel';
+let inputPeriod = 'mensuel';
 let mutuellOn = false;
 let teletravailOn = false;
 
@@ -675,7 +684,8 @@ function fmtPct(val) {
 
 // ===== RENDER =====
 function render() {
-  const brutInput = parseFloat(document.getElementById('brut').value) || 0;
+  let brutInput = parseFloat(document.getElementById('brut').value) || 0;
+  if (inputPeriod === 'annuel') brutInput = brutInput / 12;
   const mutuelle  = mutuellOn ? (parseFloat(document.getElementById('mutuelle')?.value) || 0) : 0;
 
   const r = calcul(brutInput, statut);
@@ -741,6 +751,28 @@ document.getElementById('toggle-teletravail').addEventListener('click', () => {
 if (document.getElementById('mutuelle')) {
   document.getElementById('mutuelle').addEventListener('input', render);
 }
+
+document.querySelectorAll('[data-input-period]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const prev = inputPeriod;
+    inputPeriod = btn.dataset.inputPeriod;
+    document.querySelectorAll('[data-input-period]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const input = document.getElementById('brut');
+    const label = document.getElementById('brut-label');
+    const val = parseFloat(input.value) || 0;
+    if (inputPeriod === 'annuel' && prev === 'mensuel') {
+      input.value = Math.round(val * 12);
+      input.step = 1000;
+      label.textContent = 'Salaire brut annuel';
+    } else if (inputPeriod === 'mensuel' && prev === 'annuel') {
+      input.value = Math.round(val / 12);
+      input.step = 100;
+      label.textContent = 'Salaire brut mensuel';
+    }
+    render();
+  });
+});
 
 document.querySelectorAll('.lang-switcher button').forEach(btn => {
   btn.addEventListener('click', () => {
