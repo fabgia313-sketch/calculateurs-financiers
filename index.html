@@ -547,6 +547,14 @@
       transition-duration: 0.01ms !important;
     }
   }
+
+  /* TOOLS NAV */
+  .tools-nav{border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
+  .tools-nav::-webkit-scrollbar{display:none;}
+  .tools-nav-inner{display:flex;padding:0;min-width:max-content;}
+  .tools-nav a{display:inline-flex;align-items:center;padding:10px 14px;font-size:12px;color:var(--fg-faint);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color 0.15s,border-color 0.15s;font-family:'Geist Mono',monospace;}
+  .tools-nav a:hover{color:var(--fg-muted);}
+  .tools-nav a.active{color:var(--accent);border-bottom-color:var(--accent);}
 </style>
 </head>
 <body>
@@ -579,6 +587,21 @@
     </div>
   </div>
 </header>
+
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
 
 <main>
   <section class="hero">
