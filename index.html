@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CalcFin — Calculateurs financiers gratuits 2026</title>
+<meta name="description" content="Calculateurs financiers gratuits pour la France : salaire brut-net, impôt sur le revenu, prêt immobilier, chômage ARE. Barèmes 2026 à jour, résultats instantanés." />
+<link rel="canonical" href="https://calculateurs-financiers-v2.pages.dev/" />
+<meta name="robots" content="index, follow" />
+<meta property="og:title" content="CalcFin — Calculateurs financiers gratuits 2026" />
+<meta property="og:description" content="Calculateurs financiers gratuits pour la France : salaire brut-net, impôt sur le revenu, prêt immobilier, chômage ARE. Barèmes 2026 à jour, résultats instantanés." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://calculateurs-financiers-v2.pages.dev/" />
+<meta property="og:locale" content="fr_FR" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="CalcFin — Calculateurs financiers gratuits 2026" />
+<meta name="twitter:description" content="Calculateurs financiers gratuits pour la France. Barèmes 2026 à jour, résultats instantanés." />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CalcFin",
+  "url": "https://calculateurs-financiers-v2.pages.dev/",
+  "description": "Calculateurs financiers gratuits pour la France : salaire brut-net, impôt sur le revenu, prêt immobilier, chômage ARE. Barèmes 2026 à jour.",
+  "inLanguage": "fr-FR",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://calculateurs-financiers-v2.pages.dev/guides/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  .mono { font-family: 'Geist Mono', monospace; }
+
+  .backdrop-glow {
+    position: fixed;
+    top: -300px; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+
+  .container {
+    width: 100%; max-width: 1240px;
+    margin: 0 auto; padding: 0 24px;
+    position: relative; z-index: 1;
+  }
+
+  /* ===== HEADER ===== */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    display: flex; align-items: center;
+    justify-content: space-between; height: 64px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 600; font-size: 16px; letter-spacing: -0.01em;
+    color: var(--fg); text-decoration: none;
+  }
+  .logo-mark {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: var(--accent); display: grid; place-items: center;
+    color: #001A12; font-weight: 700; font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+  }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a {
+    color: var(--fg-muted); text-decoration: none;
+    font-size: 14px; font-weight: 450;
+    transition: color 0.15s ease;
+  }
+  nav.primary a:hover { color: var(--fg); }
+  nav.primary a.active { color: var(--fg); font-weight: 500; }
+
+  /* ===== TOOLS NAV ===== */
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a {
+    display: inline-flex; align-items: center; padding: 10px 14px;
+    font-size: 12px; color: var(--fg-faint); text-decoration: none;
+    border-bottom: 2px solid transparent; white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+    font-family: 'Geist Mono', monospace;
+  }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 72px 0 64px;
+    text-align: center;
+  }
+  .page-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; background: var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+    border-radius: 999px; font-size: 11px; color: var(--accent);
+    font-family: 'Geist Mono', monospace; letter-spacing: 0.04em;
+    margin-bottom: 24px;
+  }
+  .page-badge-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent); animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); }
+    50% { box-shadow: 0 0 0 5px transparent; }
+  }
+  .hero-title {
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 700; letter-spacing: -0.04em; line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .hero-title em { color: var(--accent); font-style: normal; }
+  .hero-sub {
+    font-size: clamp(15px, 2vw, 18px);
+    color: var(--fg-muted); max-width: 540px;
+    margin: 0 auto 28px; line-height: 1.65;
+  }
+  .hero-badges {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    justify-content: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px;
+    background: var(--bg-elev); border: 1px solid var(--border);
+    border-radius: 999px; font-size: 12px; color: var(--fg-muted);
+    font-family: 'Geist Mono', monospace;
+  }
+  .hero-badge::before {
+    content: '✓'; color: var(--accent); font-size: 11px; font-weight: 700;
+  }
+
+  /* ===== SECTION HEADER ===== */
+  .section-header {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 22px; font-weight: 700; letter-spacing: -0.02em;
+  }
+
+  /* ===== STATS STRIP ===== */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  @media (min-width: 640px) {
+    .stats-strip { grid-template-columns: repeat(4, 1fr); }
+  }
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 28px; font-weight: 700; letter-spacing: -0.03em;
+    color: var(--accent); font-family: 'Geist Mono', monospace;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px; color: var(--fg-faint); margin-top: 6px;
+    font-family: 'Geist Mono', monospace; letter-spacing: 0.04em;
+  }
+
+  /* ===== TOOLS GRID ===== */
+  .tools-section { padding-bottom: 80px; }
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .tool-card {
+    display: flex; flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    text-decoration: none; color: var(--fg);
+    transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+    position: relative;
+  }
+  .tool-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,229,160,0.07);
+  }
+  .tool-card-icon {
+    width: 40px; height: 40px; border-radius: var(--radius-sm);
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent);
+    display: grid; place-items: center;
+    font-size: 18px; margin-bottom: 16px;
+  }
+  .tool-card-title {
+    font-size: 16px; font-weight: 600; letter-spacing: -0.01em;
+    margin-bottom: 8px; line-height: 1.3;
+  }
+  .tool-card-desc {
+    font-size: 13px; color: var(--fg-faint); line-height: 1.6;
+    flex: 1;
+  }
+  .tool-card-arrow {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 20px; font-size: 12px; color: var(--accent);
+    font-family: 'Geist Mono', monospace;
+    opacity: 0; transition: opacity 0.15s;
+  }
+  .tool-card:hover .tool-card-arrow { opacity: 1; }
+
+  /* ===== GUIDES PROMO ===== */
+  .guides-promo {
+    border-top: 1px solid var(--border);
+    padding: 56px 0;
+  }
+  .guides-promo-inner {
+    display: flex; flex-direction: column; gap: 32px;
+  }
+  @media (min-width: 768px) {
+    .guides-promo-inner { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .guides-promo-text h2 {
+    font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px;
+  }
+  .guides-promo-text p {
+    font-size: 15px; color: var(--fg-muted); max-width: 480px; line-height: 1.65;
+  }
+  .guides-promo-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px; background: var(--accent);
+    color: #001A12; font-weight: 600; font-size: 14px;
+    border-radius: 999px; text-decoration: none;
+    transition: opacity 0.15s; white-space: nowrap; flex-shrink: 0;
+  }
+  .guides-promo-cta:hover { opacity: 0.85; }
+
+  /* ===== FOOTER ===== */
+  footer.site {
+    border-top: 1px solid var(--border);
+    padding: 48px 0 28px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  @media (min-width: 640px) {
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
+  }
+  .footer-brand-col .logo { margin-bottom: 12px; }
+  .footer-brand-desc {
+    font-size: 13px; color: var(--fg-faint); line-height: 1.65; max-width: 260px;
+  }
+  .footer-col-title {
+    font-size: 11px; font-weight: 600; color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 8px; }
+  .footer-links a {
+    font-size: 13px; color: var(--fg-faint); text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover { color: var(--fg-muted); }
+  .footer-bottom {
+    display: flex; flex-direction: column; gap: 8px;
+    padding-top: 24px; border-top: 1px solid var(--border);
+    align-items: center; text-align: center;
+  }
+  @media (min-width: 768px) {
+    .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+  }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-copy { font-size: 12px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; white-space: nowrap; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .header-inner { height: 56px; }
+    .hero { padding: 48px 0 40px; }
+    .hero-title { font-size: 32px; }
+    .tools-grid { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .tools-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="backdrop-glow"></div>
+
+<!-- HEADER -->
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark">CF</div>
+        CalcFin
+      </a>
+      <nav class="primary">
+        <a href="/#tools" class="active">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- TOOLS NAV -->
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container">
+      <div class="page-badge">
+        <div class="page-badge-dot"></div>
+        Barèmes 2026 à jour
+      </div>
+      <h1 class="hero-title">Vos finances, <em>calculées</em><br>en 3 secondes.</h1>
+      <p class="hero-sub">Huit calculateurs précis pour vos décisions financières. Sans formulaire interminable, sans inscription, sans publicité.</p>
+      <div class="hero-badges">
+        <span class="hero-badge">Sans inscription</span>
+        <span class="hero-badge">Résultats instantanés</span>
+        <span class="hero-badge">Conforme légalement</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOOLS SECTION ===== -->
+  <section id="tools" class="tools-section">
+    <div class="container">
+
+      <!-- Section header + stats -->
+      <div class="section-header">
+        <h2 class="section-title">Calculateurs</h2>
+      </div>
+
+      <!-- Métriques -->
+      <div class="stats-strip">
+        <div class="stat-card">
+          <div class="stat-value">08/08</div>
+          <div class="stat-label">Outils disponibles</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">2026</div>
+          <div class="stat-label">Barèmes officiels</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~3s</div>
+          <div class="stat-label">Temps moyen</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">0 €</div>
+          <div class="stat-label">Coût</div>
+        </div>
+      </div>
+
+      <!-- Cards outils -->
+      <div class="tools-grid">
+
+        <a href="/fr/salaire-brut-net/" class="tool-card">
+          <div class="tool-card-icon">💶</div>
+          <div class="tool-card-title">Salaire brut → net</div>
+          <div class="tool-card-desc">Convertir un brut en net, cotisations salariales détaillées. Cadre et non-cadre, barèmes URSSAF 2026.</div>
+          <span class="tool-card-arrow">Calculer →</span>
+        </a>
+
+        <a href="/fr/salaire-net-brut/" class="tool-card">
+          <div class="tool-card-icon">🔄</div>
+          <div class="tool-card-title">Salaire net → brut</div>
+          <div class="tool-card-desc">Trouver le brut correspondant à un net souhaité. Utile pour négocier ou établir une offre.</div>
+          <span class="tool-card-arrow">Calculer →</span>
+        </a>
+
+        <a href="/fr/pret-immobilier/" class="tool-card">
+          <div class="tool-card-icon">🏠</div>
+          <div class="tool-card-title">Prêt immobilier</div>
+          <div class="tool-card-desc">Mensualité, coût total, tableau d'amortissement. Taux fixe, assurance et frais de notaire.</div>
+          <span class="tool-card-arrow">Calculer →</span>
+        </a>
+
+        <a href="/fr/impot/" class="tool-card">
+          <div class="tool-card-icon">📊</div>
+          <div class="tool-card-title">Impôt sur le revenu</div>
+          <div class="tool-card-desc">Tranches 2026, quotient familial, décote. Estimation précise de votre IR avant déclaration.</div>
+          <span class="tool-card-arrow">Calculer →</span>
+        </a>
+
+        <a href="/fr/rupture-conventionnelle/" class="tool-card">
+          <div class="tool-card-icon">📋</div>
+          <div class="tool-card-title">Rupture conventionnelle</div>
+          <div class="tool-card-desc">Indemnité légale minimale, fiscalité applicable et délai de carence ARE.</div>
+          <span class="tool-card-arrow">Calculer →</span>
+        </a>
+
+        <a href="/fr/retraite/" class="tool-card">
+          <div class="tool-card-icon">🎯</div>
+          <div class="tool-card-title">Retraite</div>
+          <div class="tool-card-desc">Estimation de pension selon votre carrière. Retraite de base et complémentaire Agirc-Arrco.</div>
+          <span class="tool-card-arrow">Calculer →</span>
+        </a>
+
+        <a href="/fr/tva/" class="tool-card">
+          <div class="tool-card-icon">🧾</div>
+          <div class="tool-card-title">TVA</div>
+          <div class="tool-card-desc">Calcul HT ↔ TTC pour tous les taux : 20 %, 10 %, 5,5 % et 2,1 %.</div>
+          <span class="tool-card-arrow">Calculer →</span>
+        </a>
+
+        <a href="/fr/are/" class="tool-card">
+          <div class="tool-card-icon">🛡️</div>
+          <div class="tool-card-title">Chômage ARE</div>
+          <div class="tool-card-desc">Allocation journalière et durée d'indemnisation selon votre dernier salaire.</div>
+          <span class="tool-card-arrow">Calculer →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GUIDES PROMO ===== -->
+  <section class="guides-promo">
+    <div class="container">
+      <div class="guides-promo-inner">
+        <div class="guides-promo-text">
+          <h2>Des guides pour comprendre</h2>
+          <p>Prélèvement à la source, quotient familial, frais réels, CSG… Plus de 30 guides rédigés à partir des sources officielles pour comprendre vos droits et optimiser vos finances.</p>
+        </div>
+        <a href="/guides" class="guides-promo-cta">Voir tous les guides →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Brand -->
+      <div class="footer-brand-col">
+        <a href="/" class="logo">
+          <div class="logo-mark">CF</div>
+          CalcFin
+        </a>
+        <p class="footer-brand-desc" style="margin-top:12px;">Calculateurs financiers de référence pour la France. Mis à jour à chaque loi de finances.</p>
+      </div>
+
+      <!-- Calculateurs -->
+      <div>
+        <div class="footer-col-title">Calculateurs</div>
+        <div class="footer-links">
+          <a href="/fr/salaire-brut-net/">Salaire brut → net</a>
+          <a href="/fr/salaire-net-brut/">Salaire net → brut</a>
+          <a href="/fr/impot/">Impôt sur le revenu</a>
+          <a href="/fr/pret-immobilier/">Prêt immobilier</a>
+          <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+          <a href="/fr/retraite/">Retraite</a>
+          <a href="/fr/tva/">TVA</a>
+          <a href="/fr/are/">Chômage ARE</a>
+        </div>
+      </div>
+
+      <!-- Ressources -->
+      <div>
+        <div class="footer-col-title">Ressources</div>
+        <div class="footer-links">
+          <a href="/guides">Guides fiscaux</a>
+          <a href="/guides/smic-2026/">Barèmes 2026</a>
+          <a href="/guides/comment-lire-sa-fiche-de-paie/">Lexique</a>
+          <a href="/a-propos">Changelog</a>
+        </div>
+      </div>
+
+      <!-- Légal -->
+      <div>
+        <div class="footer-col-title">Légal</div>
+        <div class="footer-links">
+          <a href="/mentions-legales">Mentions légales</a>
+          <a href="/confidentialite">Confidentialité</a>
+          <a href="/conditions">Conditions</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">Les résultats sont fournis à titre indicatif sur la base des barèmes officiels 2026. Ils ne se substituent pas à un conseil d'expert-comptable ou d'un professionnel qualifié. Aucune donnée saisie ne transite par nos serveurs.</p>
+      <div class="footer-copy">© 2026 — CALCFIN</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
