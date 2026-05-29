@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simulateur Retraite 2026 — Estimation pension en 30 secondes</title>
+<meta name="description" content="Estimez votre pension de retraite en temps réel. Taux de remplacement, trimestres, âge de départ. Barèmes 2026, sans inscription." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  .mono { font-family: 'Geist Mono', monospace; }
+
+  .backdrop-glow {
+    position: fixed;
+    top: -300px; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+
+  .container {
+    width: 100%; max-width: 1240px;
+    margin: 0 auto; padding: 0 24px;
+    position: relative; z-index: 1;
+  }
+
+  /* ===== HEADER ===== */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    display: flex; align-items: center;
+    justify-content: space-between; height: 64px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 600; font-size: 16px; letter-spacing: -0.01em;
+    color: var(--fg); text-decoration: none;
+  }
+  .logo-mark {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: var(--accent); display: grid; place-items: center;
+    color: #001A12; font-weight: 700; font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+  }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a {
+    color: var(--fg-muted); text-decoration: none;
+    font-size: 14px; font-weight: 450;
+    transition: color 0.15s ease;
+  }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .lang-switcher {
+    display: inline-flex; align-items: center;
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 999px; padding: 3px;
+    font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.06em;
+  }
+  .lang-switcher button {
+    background: transparent; border: none; color: var(--fg-muted);
+    padding: 5px 10px; border-radius: 999px; cursor: pointer;
+    font-family: inherit; font-size: inherit; transition: all 0.18s ease;
+  }
+  .lang-switcher button.active { background: var(--fg); color: var(--bg); }
+
+  /* ===== BREADCRUMB ===== */
+  .breadcrumb {
+    display: flex; align-items: center; gap: 8px;
+    padding: 20px 0 0; font-size: 13px; color: var(--fg-faint);
+  }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+
+  /* ===== PAGE HEADER ===== */
+  .page-header { padding: 28px 0 40px; }
+  .page-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; background: var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+    border-radius: 999px; font-size: 11px; color: var(--accent);
+    font-family: 'Geist Mono', monospace; letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+  .page-badge-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent); animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); }
+    50% { box-shadow: 0 0 0 5px transparent; }
+  }
+  .page-title {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 520px; }
+
+  /* ===== MAIN LAYOUT ===== */
+  .calc-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-bottom: 80px;
+  }
+  @media (min-width: 900px) {
+    .calc-layout { grid-template-columns: 1fr 1fr; align-items: start; }
+  }
+
+  /* ===== CARD ===== */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+  }
+  .card-title {
+    font-size: 13px; font-weight: 500;
+    color: var(--fg-faint); letter-spacing: 0.06em;
+    text-transform: uppercase; font-family: 'Geist Mono', monospace;
+    margin-bottom: 24px;
+  }
+
+  /* ===== FORM ===== */
+  .field { margin-bottom: 20px; }
+  .field label {
+    display: block; font-size: 13px; font-weight: 500;
+    color: var(--fg-muted); margin-bottom: 8px;
+  }
+  .input-wrap { position: relative; }
+  .input-wrap input {
+    width: 100%; height: 48px; padding: 0 48px 0 16px;
+    background: var(--bg-elev); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); color: var(--fg);
+    font-size: 16px; font-family: 'Geist Mono', monospace;
+    font-weight: 500; outline: none;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    -moz-appearance: textfield;
+  }
+  .input-wrap input::-webkit-inner-spin-button,
+  .input-wrap input::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .input-wrap input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .input-unit {
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+    font-size: 13px; color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace; pointer-events: none;
+  }
+
+  /* Segmented control */
+  .seg-control {
+    display: flex; gap: 4px;
+    background: var(--bg-elev); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 4px;
+  }
+  .seg-control button {
+    flex: 1; height: 36px; border: none; border-radius: 7px;
+    background: transparent; color: var(--fg-muted);
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    transition: all 0.18s ease; font-family: 'Geist', sans-serif;
+  }
+  .seg-control button.active { background: var(--fg); color: var(--bg); font-weight: 600; }
+
+  /* ===== RESULTS ===== */
+  .result-main {
+    text-align: center; padding: 32px 0 24px;
+    border-bottom: 1px solid var(--border); margin-bottom: 24px;
+  }
+  .result-label {
+    font-size: 12px; color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .result-value {
+    font-size: clamp(36px, 8vw, 56px);
+    font-weight: 700; letter-spacing: -0.04em;
+    color: var(--accent); line-height: 1;
+    font-family: 'Geist Mono', monospace;
+    transition: all 0.25s ease;
+  }
+  .result-period { font-size: 14px; color: var(--fg-faint); margin-top: 6px; }
+
+  /* Breakdown rows */
+  .breakdown { display: flex; flex-direction: column; gap: 2px; }
+  .breakdown-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 12px; border-radius: var(--radius-sm);
+    transition: background 0.15s;
+  }
+  .breakdown-row:hover { background: var(--bg-elev); }
+  .breakdown-row.total {
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent);
+    margin-top: 8px;
+  }
+  .breakdown-row .b-label { font-size: 13px; color: var(--fg-muted); }
+  .breakdown-row .b-val {
+    font-size: 13px; font-weight: 600;
+    font-family: 'Geist Mono', monospace; color: var(--fg);
+  }
+  .breakdown-row.total .b-label { color: var(--accent); font-weight: 500; }
+  .breakdown-row.total .b-val { color: var(--accent); font-size: 15px; }
+
+  /* Progress bar */
+  .progress-bar-wrap { margin-top: 16px; }
+  .progress-bar-label {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace; margin-bottom: 6px;
+  }
+  .progress-bar {
+    height: 6px; background: var(--border); border-radius: 999px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%; background: var(--accent); border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+
+  /* Taux row */
+  .taux-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px; margin-top: 16px;
+    background: var(--bg-elev); border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+  .taux-label { font-size: 13px; color: var(--fg-muted); }
+  .taux-val {
+    font-size: 18px; font-weight: 700;
+    font-family: 'Geist Mono', monospace; color: var(--fg);
+  }
+
+  /* ===== EXPLAINER ===== */
+  .explainer { margin: 48px 0; }
+  .explainer h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .explainer p { font-size: 15px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 12px; }
+  .explainer h3 { font-size: 17px; font-weight: 600; margin: 24px 0 10px; }
+
+  /* Stats grid */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; margin-bottom: 48px;
+  }
+  .stat-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 20px;
+  }
+  .stat-number {
+    font-size: 2rem; font-weight: 700; color: var(--accent);
+    font-family: 'Geist Mono', monospace; line-height: 1; margin-bottom: 8px;
+  }
+  .stat-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .stat-card p { font-size: 13px; color: var(--fg-muted); line-height: 1.6; }
+
+  /* FAQ */
+  .faq-wrap { margin: 48px 0; }
+  .faq-wrap h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 20px; }
+  .faq-list { display: flex; flex-direction: column; gap: 4px; }
+  .faq-item {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); overflow: hidden;
+  }
+  .faq-q {
+    width: 100%; text-align: left; background: none; border: none;
+    color: var(--fg); font-family: 'Geist', sans-serif;
+    font-size: 14px; font-weight: 600;
+    padding: 16px 20px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    transition: color 0.15s;
+  }
+  .faq-q:hover { color: var(--accent); }
+  .faq-q svg { flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q svg { transform: rotate(180deg); }
+  .faq-a { display: none; padding: 0 20px 16px; font-size: 14px; color: var(--fg-muted); line-height: 1.7; }
+  .faq-item.open .faq-a { display: block; }
+
+  /* ===== RELATED ===== */
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card {
+    display: block; padding: 16px 20px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-md); text-decoration: none; color: var(--fg);
+    transition: border-color 0.18s, transform 0.18s;
+  }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+
+  /* ===== FOOTER ===== */
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner {
+    display: flex; flex-direction: column; gap: 12px;
+    align-items: center; text-align: center;
+  }
+  @media (min-width: 768px) {
+    .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .card { padding: 18px; }
+    .page-header { padding: 16px 0 20px; }
+    .header-inner { height: 56px; }
+    .result-value { font-size: 36px; }
+  }
+  @media (min-width: 1024px) { .calc-layout { gap: 32px; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+
+  /* TOOLS NAV */
+  .tools-nav{border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
+  .tools-nav::-webkit-scrollbar{display:none;}
+  .tools-nav-inner{display:flex;padding:0;min-width:max-content;}
+  .tools-nav a{display:inline-flex;align-items:center;padding:10px 14px;font-size:12px;color:var(--fg-faint);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color 0.15s,border-color 0.15s;font-family:'Geist Mono',monospace;}
+  .tools-nav a:hover{color:var(--fg-muted);}
+  .tools-nav a.active{color:var(--accent);border-bottom-color:var(--accent);}
+</style>
+</head>
+<body>
+
+<div class="backdrop-glow"></div>
+
+<!-- HEADER -->
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark">CF</div>
+        CalcFin
+      </a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+      <div class="header-right">
+        <div class="lang-switcher">
+          <button class="active" data-lang="fr">FR</button>
+          <button data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TOOLS NAV -->
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/" class="active">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<main>
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="/">Accueil</a>
+      <span>›</span>
+      <span>Simulateur retraite</span>
+    </div>
+
+    <div class="page-header">
+      <div class="page-badge">
+        <div class="page-badge-dot"></div>
+        Barèmes retraite 2026 à jour
+      </div>
+      <h1 class="page-title">Simulateur <em>retraite</em></h1>
+      <p class="page-sub">Estimez votre pension et votre taux de remplacement en quelques secondes. Salarié du secteur privé, barèmes 2026.</p>
+    </div>
+
+    <div class="calc-layout">
+
+      <!-- Gauche : inputs -->
+      <div class="card">
+        <div class="card-title">Paramètres</div>
+
+        <div class="field">
+          <label for="age-actuel">Âge actuel</label>
+          <div class="input-wrap">
+            <input type="number" id="age-actuel" value="40" min="18" max="70" step="1" oninput="render()" />
+            <span class="input-unit">ans</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="age-debut">Début de carrière</label>
+          <div class="input-wrap">
+            <input type="number" id="age-debut" value="22" min="14" max="40" step="1" oninput="render()" />
+            <span class="input-unit">ans</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="salaire">Salaire brut mensuel actuel</label>
+          <div class="input-wrap">
+            <input type="number" id="salaire" value="3000" min="0" step="100" oninput="render()" />
+            <span class="input-unit">€</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Âge de départ souhaité</label>
+          <div class="seg-control">
+            <button class="active" data-depart="64" onclick="setDepart(this)">64 ans</button>
+            <button data-depart="65" onclick="setDepart(this)">65 ans</button>
+            <button data-depart="67" onclick="setDepart(this)">67 ans</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Droite : résultat -->
+      <div>
+        <div class="card">
+          <div class="card-title">Estimation</div>
+
+          <div class="result-main">
+            <div class="result-label">Pension brute estimée</div>
+            <div class="result-value" id="result-pension">—</div>
+            <div class="result-period">par mois</div>
+          </div>
+
+          <div class="breakdown">
+            <div class="breakdown-row">
+              <span class="b-label">Retraite de base (Sécu)</span>
+              <span class="b-val" id="b-base">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Retraite complémentaire (Agirc-Arrco)</span>
+              <span class="b-val" id="b-comp">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Trimestres estimés à la retraite</span>
+              <span class="b-val" id="b-trimestres">—</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="b-label">Trimestres requis (taux plein)</span>
+              <span class="b-val" id="b-requis">—</span>
+            </div>
+            <div class="breakdown-row total">
+              <span class="b-label">Taux de remplacement</span>
+              <span class="b-val" id="b-taux">—</span>
+            </div>
+          </div>
+
+          <div class="taux-row">
+            <span class="taux-label">Âge d'accès au taux plein automatique</span>
+            <span class="taux-val" id="age-plein">—</span>
+          </div>
+
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-label">
+              <span>Trimestres validés</span>
+              <span id="progress-label">—</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /calc-layout -->
+
+    <!-- Explainer -->
+    <div class="explainer">
+      <h2>Comment est estimée votre pension ?</h2>
+      <p>Ce simulateur utilise les règles en vigueur au 1er janvier 2026 pour les salariés du secteur privé. Le calcul est une estimation indicative basée sur votre salaire actuel et votre ancienneté projetée.</p>
+      <h3>La retraite de base (Sécurité sociale)</h3>
+      <p>Elle est calculée selon la formule : <strong>SAM × Taux × (trimestres validés / trimestres requis)</strong>. Le SAM (Salaire Annuel Moyen) correspond à la moyenne des 25 meilleures années de salaire, plafonné au plafond de la Sécurité sociale. Le taux plein est de <strong>50 %</strong>, atteint à 64 ans avec le bon nombre de trimestres, ou automatiquement à <strong>67 ans</strong> sans condition de trimestres.</p>
+      <h3>La retraite complémentaire (Agirc-Arrco)</h3>
+      <p>Elle fonctionne par points. Chaque année, vos cotisations achètent des points dont la valeur de service est revalorisée chaque novembre. Ce simulateur applique un taux de remplacement complémentaire moyen de <strong>20 à 25 %</strong> du salaire brut selon l'ancienneté, conforme aux statistiques Agirc-Arrco 2026.</p>
+      <h3>Le taux de remplacement global</h3>
+      <p>En France, le taux de remplacement moyen pour un salarié du privé partant au taux plein est d'environ <strong>60 à 75 %</strong> du dernier salaire brut. Il est plus élevé pour les bas salaires (proches du SMIC) et plus faible pour les hauts salaires.</p>
+    </div>
+
+    <!-- Chiffres clés -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">64 ans</div>
+        <h3>Âge légal de départ</h3>
+        <p>Depuis la réforme 2023, l'âge légal minimum de départ à la retraite est fixé à 64 ans.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">172</div>
+        <h3>Trimestres pour le taux plein</h3>
+        <p>43 annuités requises pour les générations nées à partir de 1965 (soit 172 trimestres).</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">50 %</div>
+        <h3>Taux plein retraite de base</h3>
+        <p>Le taux maximum de la retraite de base est de 50 % du Salaire Annuel Moyen (SAM).</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">67 ans</div>
+        <h3>Taux plein automatique</h3>
+        <p>À 67 ans, le taux plein est accordé automatiquement, quels que soient les trimestres validés.</p>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-wrap">
+      <h2>Questions fréquentes</h2>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Qu'est-ce que le taux plein ?<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="faq-a">Le taux plein signifie que vous bénéficiez du taux maximum de 50 % pour votre retraite de base, sans décote. Il est atteint soit en ayant validé le nombre de trimestres requis (172 pour les générations 1965+), soit automatiquement à 67 ans.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Que se passe-t-il si je pars avant le taux plein ?<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="faq-a">Une décote de 1,25 % par trimestre manquant est appliquée sur votre retraite de base, dans la limite de 20 trimestres (soit -25 % maximum). La retraite complémentaire Agirc-Arrco applique également un coefficient de minoration temporaire si vous partez avant 67 ans sans le taux plein.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Les périodes de chômage comptent-elles pour les trimestres ?<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="faq-a">Oui. Les périodes de chômage indemnisé (ARE) sont assimilées à des périodes d'assurance et génèrent des trimestres pour la retraite de base, à raison de 50 jours d'indemnisation pour un trimestre, dans la limite de 4 trimestres par an.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Comment connaître mon relevé de carrière exact ?<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="faq-a">Votre relevé de carrière officiel est disponible sur info-retraite.fr, le portail commun des régimes de retraite. Vous pouvez y consulter vos trimestres validés, vos points Agirc-Arrco, et lancer une estimation personnalisée via le simulateur M@rel.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Peut-on racheter des trimestres manquants ?<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="faq-a">Oui, dans deux cas : les années d'études supérieures (dans la limite de 12 trimestres) et les années incomplètes (moins de 4 trimestres validés dans une année). Le coût du rachat dépend de votre âge et de votre salaire au moment de la demande.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Related -->
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Cotisations salariales 2026</div>
+        </a>
+        <a href="/fr/rupture-conventionnelle/" class="related-card">
+          <div class="related-card-title">Rupture conventionnelle</div>
+          <div class="related-card-desc">Indemnité légale et fiscalité</div>
+        </a>
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Allocation journalière</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Tranches 2026, quotient familial</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Estimation indicative basée sur les barèmes 2026. Ce simulateur ne tient pas compte des situations particulières (carrière hachée, multi-régimes, départ anticipé pour carrière longue…). Consultez info-retraite.fr pour une estimation personnalisée officielle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== CONSTANTES 2026 =====
+const AGE_LEGAL        = 64;
+const AGE_TAUX_PLEIN   = 67;
+const TAUX_PLEIN       = 0.50;
+const DECOTE_PAR_TRIM  = 0.0125;
+const MAX_DECOTE_TRIM  = 20;
+const PLAFOND_SS_MENS  = 3925; // PASS mensuel 2026 / 12
+// Trimestres requis par génération (simplifiés)
+const TRIM_REQUIS_DEFAULT = 172; // générations 1965+
+
+// ===== STATE =====
+let ageDepart = 64;
+
+// ===== HELPERS =====
+function fmt(val) {
+  return val.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+}
+function fmtPct(val) {
+  return (val * 100).toFixed(1) + ' %';
+}
+
+// ===== UI =====
+function setDepart(btn) {
+  ageDepart = parseInt(btn.dataset.depart);
+  document.querySelectorAll('[data-depart]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function toggleFaq(btn) {
+  btn.closest('.faq-item').classList.toggle('open');
+}
+
+// ===== CALCUL =====
+function render() {
+  const ageActuel = parseInt(document.getElementById('age-actuel').value) || 0;
+  const ageDebut  = parseInt(document.getElementById('age-debut').value)  || 0;
+  const salaire   = parseFloat(document.getElementById('salaire').value)  || 0;
+
+  if (!ageActuel || !ageDebut || !salaire || ageDebut >= ageActuel) {
+    document.getElementById('result-pension').textContent = '—';
+    document.getElementById('b-base').textContent         = '—';
+    document.getElementById('b-comp').textContent         = '—';
+    document.getElementById('b-trimestres').textContent   = '—';
+    document.getElementById('b-requis').textContent       = '—';
+    document.getElementById('b-taux').textContent         = '—';
+    document.getElementById('age-plein').textContent      = '—';
+    document.getElementById('progress-label').textContent = '—';
+    document.getElementById('progress-fill').style.width  = '0%';
+    return;
+  }
+
+  // Trimestres déjà validés
+  const anneesCarriereActuelle = ageActuel - ageDebut;
+  const trimActuels = Math.min(anneesCarriereActuelle * 4, TRIM_REQUIS_DEFAULT);
+
+  // Trimestres à la retraite
+  const anneesSupp    = Math.max(0, ageDepart - ageActuel);
+  const trimRetraite  = Math.min(trimActuels + anneesSupp * 4, TRIM_REQUIS_DEFAULT);
+  const trimRequis    = TRIM_REQUIS_DEFAULT;
+
+  // Âge taux plein
+  const trimManquants     = Math.max(0, trimRequis - trimActuels);
+  const anneesAvantPlein  = Math.ceil(trimManquants / 4);
+  const ageTauxPlein      = Math.min(ageActuel + anneesAvantPlein, AGE_TAUX_PLEIN);
+
+  // SAM simplifié : on prend le salaire actuel comme proxy, plafonné au plafond SS
+  const samMensuel = Math.min(salaire, PLAFOND_SS_MENS);
+
+  // Taux applicable (avec décote si trimestres insuffisants ET départ avant 67 ans)
+  let tauxApplique = TAUX_PLEIN;
+  if (ageDepart < AGE_TAUX_PLEIN && trimRetraite < trimRequis) {
+    const trimManquantsDepart = trimRequis - trimRetraite;
+    const decote = Math.min(trimManquantsDepart, MAX_DECOTE_TRIM) * DECOTE_PAR_TRIM;
+    tauxApplique = TAUX_PLEIN * (1 - decote);
+  }
+
+  // Retraite de base
+  const baseProrata = trimRetraite / trimRequis;
+  const retraiteBase = samMensuel * tauxApplique * Math.min(baseProrata, 1);
+
+  // Retraite complémentaire Agirc-Arrco (estimation ~25% du brut plafonné)
+  const tauxComp = 0.22 + Math.min(anneesCarriereActuelle + anneesSupp, 43) / 43 * 0.06;
+  const retraiteComp = salaire * tauxComp * (trimRetraite / trimRequis);
+
+  // Total
+  const pensionTotale = retraiteBase + retraiteComp;
+  const tauxRemplacement = pensionTotale / salaire;
+
+  // Affichage
+  document.getElementById('result-pension').textContent = fmt(pensionTotale);
+  document.getElementById('b-base').textContent         = fmt(retraiteBase);
+  document.getElementById('b-comp').textContent         = fmt(retraiteComp);
+  document.getElementById('b-trimestres').textContent   = trimRetraite + ' trim.';
+  document.getElementById('b-requis').textContent       = trimRequis + ' trim.';
+  document.getElementById('b-taux').textContent         = fmtPct(tauxRemplacement);
+  document.getElementById('age-plein').textContent      = ageTauxPlein + ' ans';
+
+  const pct = Math.min(trimRetraite / trimRequis * 100, 100);
+  document.getElementById('progress-label').textContent = trimRetraite + ' / ' + trimRequis + ' trimestres';
+  document.getElementById('progress-fill').style.width  = pct.toFixed(1) + '%';
+}
+
+// Lang switcher
+document.querySelectorAll('.lang-switcher button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.lang-switcher button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Init
+render();
+</script>
+
+</body>
+</html>
