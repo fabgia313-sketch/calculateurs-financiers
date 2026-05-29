@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Avantages en nature 2026 — Valorisation et cotisations — CalcFin</title>
+<meta name="description" content="Voiture de fonction, logement, repas, téléphone : comment sont valorisés les avantages en nature en 2026 ? Évaluation forfaitaire ou réelle, impact sur cotisations et impôt." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  /* GUIDE LAYOUT */
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  /* ARTICLE */
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  /* RELATED */
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  /* FOOTER */
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Avantages en nature</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Fiche de paie</div>
+      <h1 class="page-title">Les <em>avantages en nature</em> : valorisation 2026</h1>
+      <p class="page-sub">Voiture, logement, repas, nouvelles technologies : règles d'évaluation et impact sur vos cotisations et votre imposition.</p>
+    </div>
+    <div class="guide-layout">
+      <!-- ARTICLE -->
+      <article class="article">
+        <p>Un avantage en nature est une prestation fournie par l'employeur au salarié permettant à ce dernier de bénéficier d'un bien ou d'un service gratuitement ou à un tarif inférieur au marché. Ces avantages sont <strong>intégrés dans le salaire brut</strong>, soumis aux cotisations sociales et à l'impôt sur le revenu, selon une valeur établie selon des règles URSSAF précises.</p>
+
+        <h2 id="definition">Qu'est-ce qu'un avantage en nature ?</h2>
+        <p>L'avantage en nature diffère du <strong>remboursement de frais professionnels</strong> : le frais professionnel couvre une dépense engagée pour l'entreprise (déplacement, repas client), tandis que l'avantage en nature profite au salarié à titre personnel. L'URSSAF distingue notamment : la nourriture, le logement, le véhicule, les outils NTIC (téléphone, ordinateur), et les autres prestations.</p>
+        <p>La valorisation peut se faire selon la méthode <strong>forfaitaire</strong> (barème URSSAF) ou selon la <strong>valeur réelle</strong> — au choix de l'employeur, mais avec cohérence pour l'ensemble des salariés.</p>
+
+        <h2 id="voiture">Voiture de fonction</h2>
+        <p>C'est l'avantage en nature le plus courant. Deux méthodes de calcul coexistent :</p>
+        <ul>
+          <li><strong>Méthode 1 — Achat</strong> : 9 % du coût d'achat TTC + carburant à usage privé (ou 12 % coût d'achat TTC tout compris). Valeur minimale si le véhicule a plus de 5 ans : calculée sur 70 % du coût d'achat.</li>
+          <li><strong>Méthode 2 — Location / LLD</strong> : 30 % du coût global de la location + carburant privé (ou 40 % tout compris).</li>
+        </ul>
+        <p>Pour les <strong>véhicules électriques</strong>, l'avantage en nature est calculé sur 50 % de la valeur (méthode achat) jusqu'au 31 décembre 2027, avec un plafond de l'avantage spécifique. Les bornes de recharge au domicile du salarié bénéficient également d'un régime de faveur.</p>
+
+        <h2 id="logement">Logement de fonction</h2>
+        <p>L'avantage en nature logement est évalué <strong>forfaitairement</strong> selon une grille URSSAF tenant compte de la rémunération brute mensuelle et du nombre de pièces principales. Par exemple, pour une rémunération brute entre 1 801,80 € et 2 162,15 € (soit 1 à 1,2 SMIC), l'avantage forfaitaire est de <strong>74,30 €</strong> par pièce principale et par mois.</p>
+        <p>L'employeur peut opter pour la <strong>valeur locative réelle</strong> (valeur du loyer du marché local), généralement plus avantageuse pour le salarié si l'employeur prend en charge un loyer élevé. Les avantages accessoires au logement (eau, électricité, gaz, gardiennage) font l'objet d'une évaluation complémentaire.</p>
+
+        <h2 id="autres">Repas, téléphone et autres</h2>
+        <p>La <strong>nourriture</strong> est évaluée à un forfait par repas, fixé à la valeur du repas au minimum garanti (MG). En 2024, ce forfait était de <strong>4,15 €</strong> par repas. Si le repas est pris en cantine d'entreprise à un tarif inférieur à cette valeur, la différence constitue l'avantage.</p>
+        <p>Les <strong>outils NTIC</strong> (téléphone, ordinateur, tablette) utilisés à titre privé sont évalués à <strong>10 %</strong> de leur coût d'achat annuel ou de leur abonnement annuel. Si ces outils sont exclusivement utilisés à des fins professionnelles et que cet usage privé est formellement interdit, aucun avantage en nature n'est à déclarer. Les <strong>chèques-déjeuner</strong> sont exonérés jusqu'à 7,18 € / titre (valeur 2024), au-delà ils sont soumis à cotisations.</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>Les avantages en nature sont intégrés dans le <strong>salaire brut</strong> et soumis aux cotisations sociales et à l'impôt.</li>
+            <li>Pour une voiture de fonction : <strong>9 % du coût d'achat TTC + carburant</strong>, ou 12 % tout compris (méthode achat).</li>
+            <li>Pour les véhicules <strong>électriques</strong>, l'avantage est réduit de <strong>50 %</strong> jusqu'en 2027.</li>
+            <li>Le <strong>logement</strong> est évalué forfaitairement selon la rémunération et le nombre de pièces.</li>
+            <li>Les chèques-déjeuner sont exonérés jusqu'à <strong>7,18 €</strong> par titre (valeur 2024).</li>
+          </ul>
+        </div>
+        <!-- CTA -->
+        <div class="cta-box">
+          <p>Intégrez la valeur de vos avantages en nature dans votre brut pour calculer votre net réel.</p>
+          <a href="/fr/salaire-brut-net/" class="cta-btn">Calculer mon salaire net →</a>
+        </div>
+        <!-- FAQ -->
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">L'employeur est-il obligé de me fournir des avantages en nature ?</div>
+        <div class="faq-a">Non, sauf si la convention collective ou votre contrat de travail le prévoit expressément. L'employeur peut décider unilatéralement d'accorder ou de supprimer un avantage en nature (sous réserve du respect des procédures si c'est un usage établi). La voiture de fonction, par exemple, peut être retirée ou remplacée lors d'un changement de poste.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Les avantages en nature entrent-ils dans le calcul du SMIC ?</div>
+        <div class="faq-a">Oui, dans certaines limites. Pour le calcul du respect du SMIC, les avantages en nature nourriture et logement peuvent être intégrés dans la rémunération, mais seulement jusqu'à un plafond fixé par décret (généralement 1/15 et 2/3 du SMIC mensuel respectivement). Les autres avantages en nature ne peuvent pas être déduits du SMIC.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Comment sont traités les avantages en nature en cas de chômage ?</div>
+        <div class="faq-a">Les avantages en nature sont inclus dans la rémunération brute servant au calcul du Salaire Journalier de Référence (SJR) pour l'ARE, à condition qu'ils aient été régulièrement inclus dans les déclarations de l'employeur. Lors de la perte d'emploi, l'avantage cesse et n'est plus perçu, mais son inclusion dans le SJR améliore l'allocation calculée.</div>
+      </div>
+        </div>
+        <!-- SOURCES -->
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.urssaf.fr/portail/home/employeur/calculer-et-declarer/les-bases-de-cotisations/les-avantages-en-nature.html">URSSAF — Avantages en nature 2026</a></li>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F1559">Service-Public.fr — Avantages en nature</a></li>
+        <li><a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000413168">Légifrance — Arrêté du 10 décembre 2002 (évaluation avantages en nature)</a></li>
+          </ul>
+        </div>
+      </article>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#definition">Qu'est-ce qu'un avantage en nature ?</a></li>
+      <li><a href="#voiture">Voiture de fonction</a></li>
+      <li><a href="#logement">Logement de fonction</a></li>
+      <li><a href="#autres">Repas, téléphone et autres</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/comment-lire-sa-fiche-de-paie/" class="similar-link">Lire sa fiche de paie</a>
+      <a href="/guides/cotisations-salariales/" class="similar-link">Cotisations salariales</a>
+      <a href="/guides/interessement-participation/" class="similar-link">Intéressement et participation</a>
+      <a href="/guides/prime-treizieme-mois/" class="similar-link">Prime de 13e mois</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <!-- RELATED TOOLS -->
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Calculer son net réel</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Tranches 2026</div>
+        </a>
+        <a href="/fr/rupture-conventionnelle/" class="related-card">
+          <div class="related-card-title">Rupture conv.</div>
+          <div class="related-card-desc">Impact sur l'indemnité</div>
+        </a>
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Avantages inclus dans le SJR</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif sur la base des textes officiels en vigueur en 2026. Elles ne constituent pas un conseil juridique ou fiscal. Consultez un professionnel pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

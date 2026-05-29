@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prime de 13e mois 2026 — Obligations et calcul — CalcFin</title>
+<meta name="description" content="La prime de 13e mois est-elle obligatoire ? Comment est-elle calculée, imposée et versée ? Guide complet 2026 basé sur le Code du travail et les conventions collectives." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  /* GUIDE LAYOUT */
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  /* ARTICLE */
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  /* RELATED */
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  /* FOOTER */
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Prime de 13e mois</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Fiche de paie</div>
+      <h1 class="page-title">Prime de <em>13e mois</em> : règles et calcul</h1>
+      <p class="page-sub">Obligatoire ou facultative ? Calcul au prorata, imposition et traitement social de cette prime versée en fin d'année.</p>
+    </div>
+    <div class="guide-layout">
+      <!-- ARTICLE -->
+      <article class="article">
+        <p>La prime de 13e mois est une rémunération supplémentaire correspondant généralement à un mois de salaire brut, versée en une ou plusieurs fois au cours de l'année. Contrairement à une idée reçue, elle n'est <strong>pas imposée par la loi</strong> de manière générale : son versement est conditionné à l'existence d'un accord collectif, d'un usage d'entreprise ou d'une clause contractuelle.</p>
+
+        <h2 id="obligation">Est-elle obligatoire ?</h2>
+        <p>La prime de 13e mois est obligatoire uniquement si elle est prévue par l'une des sources suivantes : la <strong>convention collective</strong> de branche (ex : métallurgie, bâtiment), un <strong>accord d'entreprise</strong>, le <strong>contrat de travail individuel</strong>, ou un <strong>usage d'entreprise</strong> (pratique constante, générale et fixe, établie depuis au moins trois exercices consécutifs).</p>
+        <p>En l'absence de ces sources, l'employeur est libre de la supprimer, de la modifier ou de ne pas la verser. Si elle constitue un usage, sa suppression exige une <strong>dénonciation de l'usage</strong> avec information des représentants du personnel et délai raisonnable.</p>
+
+        <h2 id="calcul">Comment est-elle calculée ?</h2>
+        <p>Dans la grande majorité des cas, la prime de 13e mois est égale à <strong>un mois de salaire brut de base</strong>, hors primes variables, heures supplémentaires et avantages en nature. Certains accords intègrent cependant ces éléments dans la base de calcul. La référence est généralement le salaire du mois de versement ou la moyenne des 12 derniers mois.</p>
+        <p>Elle est versée en totalité ou en plusieurs fractions (souvent moitié en juin, moitié en novembre ou décembre). Certaines conventions prévoient un versement unique en novembre ou décembre, d'autres le lissent sur l'année (1/12 chaque mois, versé en solde en fin d'année).</p>
+
+        <h2 id="fiscal">Traitement fiscal et social</h2>
+        <p>La prime de 13e mois est <strong>soumise aux cotisations sociales</strong> (comme tout salaire brut) et est <strong>imposable à l'impôt sur le revenu</strong>. Elle supporte donc le prélèvement à la source au même titre que le salaire mensuel. Elle n'est pas assimilée à une prime exceptionnelle (qui peut bénéficier d'exonérations dans certains cas) et ne peut pas être exclue de la base de cotisations.</p>
+        <p>À noter : le versement en une seule fois peut créer un effet de "saut de tranche" ou augmenter ponctuellement le taux de prélèvement à la source du mois concerné. Ce phénomène est automatiquement régularisé lors de la déclaration annuelle.</p>
+
+        <h2 id="prorata">Cas particuliers et prorata</h2>
+        <p>En cas d'<strong>arrivée ou de départ en cours d'année</strong>, la prime est généralement proratisée au temps de présence, sauf accord plus favorable. Un salarié entré en juillet et dont l'accord prévoit une prime en décembre percevra en principe 6/12 de la prime annuelle.</p>
+        <p>Les absences (maladie, congé maternité, etc.) peuvent également réduire la prime si l'accord le prévoit. Toutefois, l'arrêt maladie lié à la grossesse ne peut pas entraîner une réduction selon les règles de non-discrimination. Les congés payés légaux (5 semaines) sont toujours considérés comme du temps de présence.</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>La prime de 13e mois n'est <strong>pas légalement obligatoire</strong> : son versement dépend de la convention collective, de l'accord d'entreprise ou du contrat.</li>
+            <li>Si elle constitue un <strong>usage d'entreprise</strong> (pratique constante &ge; 3 ans), l'employeur ne peut la supprimer qu'après dénonciation formelle.</li>
+            <li>Elle est soumise aux <strong>cotisations sociales et à l'impôt</strong> au même titre que le salaire mensuel.</li>
+            <li>En cas de départ en cours d'année, elle est généralement <strong>proratisée</strong> au temps de présence.</li>
+            <li>Son montant correspond habituellement à <strong>un mois de salaire de base brut</strong>.</li>
+          </ul>
+        </div>
+        <!-- CTA -->
+        <div class="cta-box">
+          <p>Simulez l'impact de votre prime de 13e mois sur votre net à payer et votre net imposable.</p>
+          <a href="/fr/salaire-brut-net/" class="cta-btn">Calculer mon net avec la prime →</a>
+        </div>
+        <!-- FAQ -->
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">La prime de 13e mois est-elle incluse dans le calcul de l'indemnité de licenciement ?</div>
+        <div class="faq-a">Oui, si elle est versée régulièrement, elle entre dans la rémunération brute de référence utilisée pour calculer l'indemnité légale ou conventionnelle de licenciement (et de rupture conventionnelle). La base de calcul est le 1/12 de la rémunération des 12 derniers mois ou le 1/3 des 3 derniers mois, selon la formule la plus avantageuse.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Peut-on verser la prime en plusieurs fois ?</div>
+        <div class="faq-a">Oui, l'employeur peut fractionner le versement si l'accord ou l'usage le prévoit. Certaines entreprises versent 50 % en juin et 50 % en novembre, ou 1/12 chaque mois avec solde en fin d'année. En l'absence de règle précise, le versement en une seule fois en décembre est la pratique la plus répandue.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">La prime de 13e mois est-elle prise en compte pour l'ARE ?</div>
+        <div class="faq-a">Oui. Le salaire journalier de référence (SJR) servant au calcul de l'ARE est calculé à partir de l'ensemble des rémunérations brutes perçues au cours des 12 mois précédant le dernier jour travaillé, incluant la prime de 13e mois. Cela peut donc augmenter sensiblement votre allocation journalière.</div>
+      </div>
+        </div>
+        <!-- SOURCES -->
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F1571">Service-Public.fr — Primes et gratifications</a></li>
+        <li><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006900998">Légifrance — Art. L3221-1 Code du travail</a></li>
+        <li><a href="https://www.urssaf.fr/portail/home/employeur/calculer-et-declarer/les-cotisations/les-primes-et-indemnites.html">URSSAF — Primes soumises à cotisations</a></li>
+          </ul>
+        </div>
+      </article>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#obligation">Est-elle obligatoire ?</a></li>
+      <li><a href="#calcul">Comment est-elle calculée ?</a></li>
+      <li><a href="#fiscal">Traitement fiscal et social</a></li>
+      <li><a href="#prorata">Cas particuliers et prorata</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/negocier-son-salaire/" class="similar-link">Négocier son salaire</a>
+      <a href="/guides/interessement-participation/" class="similar-link">Intéressement et participation</a>
+      <a href="/guides/avantages-en-nature/" class="similar-link">Avantages en nature</a>
+      <a href="/guides/comment-lire-sa-fiche-de-paie/" class="similar-link">Lire sa fiche de paie</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <!-- RELATED TOOLS -->
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Impact sur le net mensuel</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Tranches IR 2026</div>
+        </a>
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Prime incluse dans le SJR</div>
+        </a>
+        <a href="/fr/rupture-conventionnelle/" class="related-card">
+          <div class="related-card-title">Rupture conv.</div>
+          <div class="related-card-desc">Indemnité de rupture</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif sur la base des textes officiels en vigueur en 2026. Elles ne constituent pas un conseil juridique ou fiscal. Consultez un professionnel pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

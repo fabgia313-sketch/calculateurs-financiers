@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brut, Net et Net imposable — Différences 2026 — CalcFin</title>
+<meta name="description" content="Quelle est la différence entre salaire brut, net et net imposable ? Comprendre les trois notions clés de la fiche de paie avec des exemples chiffrés 2026." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  /* GUIDE LAYOUT */
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  /* ARTICLE */
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  /* RELATED */
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  /* FOOTER */
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Brut, net et net imposable</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Fiche de paie</div>
+      <h1 class="page-title">Brut, net et <em>net imposable</em> : les différences</h1>
+      <p class="page-sub">Trois notions souvent confondues, mais aux implications très différentes pour votre salaire et votre impôt.</p>
+    </div>
+    <div class="guide-layout">
+      <!-- ARTICLE -->
+      <article class="article">
+        <p>Sur votre bulletin de paie, trois montants se succèdent sans que leur relation ne soit toujours claire : le <strong>brut</strong>, le <strong>net</strong> et le <strong>net imposable</strong>. Ces trois notions jouent des rôles distincts : le brut est la base de négociation et de calcul des droits sociaux ; le net est ce que vous percevez ; et le net imposable est la base de calcul de votre impôt sur le revenu.</p>
+
+        <h2 id="brut">Le salaire brut</h2>
+        <p>Le <strong>salaire brut</strong> est la rémunération totale prévue au contrat de travail, incluant le salaire de base, les primes, les heures supplémentaires majorées et les avantages en nature valorisés. C'est la référence pour calculer les cotisations sociales, l'indemnité de rupture conventionnelle, le salaire journalier de référence (SJR) pour l'ARE et la plupart des éléments de droit du travail.</p>
+
+        <h2 id="net">Le salaire net</h2>
+        <p>Le <strong>salaire net</strong> (ou net social) est obtenu en déduisant du brut l'ensemble des <strong>cotisations salariales</strong> : maladie, retraite, chômage, CSG/CRDS. En 2026, ces cotisations représentent environ 22 % du brut pour un non-cadre. Le salaire net correspond à ce que perçoit le salarié avant impôt sur le revenu. C'est aussi la notion utilisée dans les annonces d'emploi.</p>
+        <p>À noter : le net social est différent du <strong>net à payer</strong> figurant en bas de bulletin. Le net à payer est le net social diminué du prélèvement à la source (PAS).</p>
+
+        <h2 id="net-imposable">Le net imposable</h2>
+        <p>Le <strong>net imposable</strong> est la base sur laquelle l'administration fiscale calcule votre impôt sur le revenu. Il est supérieur au net (avant PAS) car on y réintègre la <strong>CSG non déductible (2,40 %)</strong> et la <strong>CRDS (0,50 %)</strong>, soit 2,90 % du brut × 98,25 %. Ces contributions ne sont pas déductibles du revenu imposable.</p>
+        <p>En pratique, le net imposable ≈ brut × (1 − cotisations déductibles). Il figure obligatoirement sur le bulletin de paie depuis 2019 et est transmis à l'administration fiscale par votre employeur via la DSN chaque mois, permettant le pré-remplissage de votre déclaration de revenus.</p>
+
+        <h2 id="exemple">Exemple chiffré 2026</h2>
+        <p>Pour un salarié non-cadre avec un brut mensuel de <strong>3 000 €</strong> :</p>
+        <table>
+          <tr><th>Étape</th><th>Montant</th><th>Calcul</th></tr>
+          <tr><td>Salaire brut</td><td>3 000,00 €</td><td>—</td></tr>
+          <tr><td>Cotisations salariales (hors CSG/CRDS)</td><td>−388,50 €</td><td>~12,95 % × brut</td></tr>
+          <tr><td>CSG déductible</td><td>−200,33 €</td><td>6,80 % × 98,25 % × brut</td></tr>
+          <tr><td>CSG non déduct. + CRDS</td><td>−85,50 €</td><td>2,90 % × 98,25 % × brut</td></tr>
+          <tr><td><strong>Salaire net (avant PAS)</strong></td><td><strong>2 325,67 €</strong></td><td>brut − toutes cotisations</td></tr>
+          <tr><td>Réintégration CSG n.d. + CRDS</td><td>+85,50 €</td><td></td></tr>
+          <tr><td><strong>Net imposable</strong></td><td><strong>2 411,17 €</strong></td><td>net + 85,50 €</td></tr>
+          <tr><td>Prélèvement à la source (ex. 10 %)</td><td>−241,12 €</td><td>10 % × net imposable</td></tr>
+          <tr><td><strong>Net à payer</strong></td><td><strong>2 084,55 €</strong></td><td>net − PAS</td></tr>
+        </table>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li><strong>Brut</strong> = salaire de base + primes + heures sup + avantages en nature.</li>
+            <li><strong>Net</strong> = brut − toutes cotisations salariales (≈ 22 % non-cadre).</li>
+            <li><strong>Net imposable</strong> = net + CSG non déductible (2,40 %) + CRDS (0,50 %) ; toujours &gt; net.</li>
+            <li><strong>Net à payer</strong> = net imposable − prélèvement à la source (PAS).</li>
+            <li>Le net imposable est pré-rempli sur votre déclaration fiscale : vérifiez-le en cumulant les 12 bulletins.</li>
+          </ul>
+        </div>
+        <!-- CTA -->
+        <div class="cta-box">
+          <p>Calculez votre salaire net et net imposable en temps réel avec les barèmes URSSAF 2026.</p>
+          <a href="/fr/salaire-brut-net/" class="cta-btn">Simuler brut → net →</a>
+        </div>
+        <!-- FAQ -->
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">Le net imposable annuel doit-il correspondre à 12 × net imposable mensuel ?</div>
+        <div class="faq-a">Pas nécessairement, car certains éléments peuvent varier en cours d'année : prime de 13e mois, heures supplémentaires, avantages en nature ponctuels, ou changement de situation. Il faut additionner les nets imposables de chacun des 12 bulletins de l'année pour obtenir le montant annuel à déclarer.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Pourquoi mon net imposable est-il différent de ce que je déclare aux impôts ?</div>
+        <div class="faq-a">Si vous avez des frais réels à déclarer, ou si votre employeur a appliqué une déduction spécifique (ex : chèques-déjeuner au-delà du plafond d'exonération), le montant pré-rempli peut différer du net imposable brut de bulletin. L'administration fiscale effectue ensuite l'abattement de 10 % pour frais professionnels sur la base déclarée.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Comment est calculé le taux de prélèvement à la source sur mon bulletin ?</div>
+        <div class="faq-a">Le taux est calculé par l'administration fiscale en fonction de votre revenu net imposable des deux dernières années connues. Il est transmis chaque mois à votre employeur. Vous pouvez modifier ce taux (option taux neutre, taux individualisé) depuis votre espace "Gérer mon prélèvement à la source" sur impots.gouv.fr.</div>
+      </div>
+        </div>
+        <!-- SOURCES -->
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/N31477">Service-Public.fr — Bulletin de salaire</a></li>
+        <li><a href="https://www.impots.gouv.fr/particulier/le-prelevement-la-source">impots.gouv.fr — Prélèvement à la source</a></li>
+        <li><a href="https://www.urssaf.fr/portail/home/employeur/calculer-et-declarer/les-cotisations/la-csg-et-la-crds.html">URSSAF — CSG et CRDS</a></li>
+          </ul>
+        </div>
+      </article>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#brut">Le salaire brut</a></li>
+      <li><a href="#net">Le salaire net</a></li>
+      <li><a href="#net-imposable">Le net imposable</a></li>
+      <li><a href="#exemple">Exemple chiffré 2026</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/comment-lire-sa-fiche-de-paie/" class="similar-link">Lire sa fiche de paie</a>
+      <a href="/guides/cotisations-salariales/" class="similar-link">Cotisations salariales 2026</a>
+      <a href="/guides/prelevement-a-la-source/" class="similar-link">Prélèvement à la source</a>
+      <a href="/guides/frais-reels-vs-abattement/" class="similar-link">Frais réels vs abattement 10 %</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <!-- RELATED TOOLS -->
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Barèmes URSSAF 2026</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Tranches IR 2026</div>
+        </a>
+        <a href="/fr/salaire-net-brut/" class="related-card">
+          <div class="related-card-title">Salaire net → brut</div>
+          <div class="related-card-desc">Retrouver le brut</div>
+        </a>
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Calcul allocation</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif sur la base des textes officiels en vigueur en 2026. Elles ne constituent pas un conseil juridique ou fiscal. Consultez un professionnel pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

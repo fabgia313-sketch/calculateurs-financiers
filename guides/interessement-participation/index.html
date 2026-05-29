@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Intéressement et participation 2026 — Règles et fiscalité — CalcFin</title>
+<meta name="description" content="Intéressement et participation : qui y a droit, comment ça se calcule, quelles exonérations fiscales et sociales en 2026 ? Guide complet basé sur le Code du travail." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  /* GUIDE LAYOUT */
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  /* ARTICLE */
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  /* RELATED */
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  /* FOOTER */
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Intéressement et participation</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Fiche de paie</div>
+      <h1 class="page-title"><em>Intéressement et participation</em> des salariés</h1>
+      <p class="page-sub">Deux dispositifs de partage de la valeur avec des règles et des exonérations distinctes. Ce qui change en 2026.</p>
+    </div>
+    <div class="guide-layout">
+      <!-- ARTICLE -->
+      <article class="article">
+        <p>L'intéressement et la participation sont deux dispositifs permettant aux salariés de bénéficier des résultats ou des performances de leur entreprise. Ils s'inscrivent dans la politique de <strong>partage de la valeur</strong>, renforcée par la loi du 29 novembre 2023 (loi Partage de la Valeur). Bien que souvent confondus, ils ont des origines légales et des mécanismes distincts.</p>
+
+        <h2 id="participation">La participation : un droit légal</h2>
+        <p>La <strong>participation aux bénéfices</strong> est obligatoire pour toutes les entreprises employant au moins <strong>50 salariés</strong> pendant 12 mois consécutifs ou non au cours des 3 dernières années. Elle repose sur une <strong>Réserve Spéciale de Participation (RSP)</strong> calculée selon une formule légale : RSP = ½ × (Bénéfice net – 5 % × Capitaux propres) × (Salaires / Valeur ajoutée).</p>
+        <p>La RSP est répartie entre les salariés selon des critères définis par accord (répartition uniforme, proportionnelle au salaire ou au temps de présence, ou combinaison). Le montant individuel est plafonné à <strong>75 % du PASS annuel</strong> (soit 35 325 € en 2026 si le PASS est de 47 100 €). Les sommes sont versées dans un délai de 5 mois après la clôture de l'exercice.</p>
+
+        <h2 id="interessement">L'intéressement : un accord facultatif</h2>
+        <p>L'<strong>intéressement</strong> est un mécanisme facultatif dont les modalités sont définies par accord (accord d'entreprise, accord de branche, ratification par référendum ou décision unilatérale dans les TPE). Il est lié à des objectifs de <strong>performance de l'entreprise</strong> (financiers ou opérationnels), contrairement à la participation qui dépend du bénéfice fiscal.</p>
+        <p>Depuis la loi Partage de la Valeur (2023), les entreprises de <strong>11 à 49 salariés</strong> bénéficiaires depuis 3 ans sont tenues de mettre en place un dispositif de partage de la valeur (participation, intéressement, ou prime de partage de la valeur) à compter du 1er janvier 2025. Le plafond individuel d'intéressement est de <strong>75 % du PASS annuel</strong> par an.</p>
+
+        <h2 id="exonerations">Exonérations fiscales et sociales</h2>
+        <p>Les sommes versées au titre de la participation et de l'intéressement bénéficient d'exonérations significatives :</p>
+        <table>
+          <tr><th>Dispositif</th><th>Cotisations sociales</th><th>Impôt sur le revenu</th></tr>
+          <tr><td>Participation (bloquée 5 ans)</td><td>Exonérée (sauf CSG/CRDS)</td><td>Exonérée</td></tr>
+          <tr><td>Participation (débloquée)</td><td>Exonérée (sauf CSG/CRDS)</td><td>Imposable</td></tr>
+          <tr><td>Intéressement (placé PEE ≤ 15 j)</td><td>Exonérée (sauf CSG/CRDS)</td><td>Exonérée</td></tr>
+          <tr><td>Intéressement (versé directement)</td><td>Exonérée (sauf CSG/CRDS)</td><td>Imposable</td></tr>
+        </table>
+        <p>La CSG/CRDS reste due à 9,70 % (sur 98,25 % des sommes). Pour optimiser fiscalement, il est généralement conseillé de <strong>placer l'intéressement sur un PEE ou PERCO dans les 15 jours</strong> suivant la notification du montant.</p>
+
+        <h2 id="deblocage">Déblocage anticipé et placement</h2>
+        <p>La participation est bloquée pendant <strong>5 ans</strong> sauf cas de déblocage anticipé prévus par la loi (mariage/PACS, naissance d'un 3e enfant, achat ou agrandissement de la résidence principale, divorce, invalidité, décès, rupture du contrat de travail, surendettement, création d'entreprise). Le déblocage anticipé maintient l'exonération d'impôt.</p>
+        <p>Les fonds peuvent être placés sur un <strong>PEE (Plan d'Épargne Entreprise)</strong>, un <strong>PERCO</strong> ou un <strong>PER d'entreprise collectif (PERCOL)</strong>. L'abondement de l'employeur sur ces plans bénéficie lui aussi d'exonérations sociales et fiscales (dans la limite de 8 % du PASS pour le PEE, 16 % pour le PERCO/PERCOL).</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>La <strong>participation est obligatoire</strong> dès 50 salariés ; l'<strong>intéressement est facultatif</strong> mais soumis à accord.</li>
+            <li>Depuis 2025, les entreprises de <strong>11 à 49 salariés</strong> bénéficiaires depuis 3 ans doivent mettre en place un dispositif de partage de la valeur.</li>
+            <li>Plafond individuel : <strong>75 % du PASS</strong> (35 325 € en 2026) pour participation et intéressement cumulés.</li>
+            <li>Exonération d'IR si l'intéressement est placé sur un PEE dans les <strong>15 jours</strong> après notification.</li>
+            <li>La CSG/CRDS (9,70 %) reste due sur ces sommes malgré les exonérations.</li>
+          </ul>
+        </div>
+        <!-- CTA -->
+        <div class="cta-box">
+          <p>Estimez l'impact de votre participation ou intéressement sur votre rémunération annuelle nette.</p>
+          <a href="/fr/salaire-brut-net/" class="cta-btn">Calculer mon salaire net →</a>
+        </div>
+        <!-- FAQ -->
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">La participation et l'intéressement entrent-ils dans le calcul de l'ARE ?</div>
+        <div class="faq-a">Non. La participation et l'intéressement, lorsqu'ils sont exonérés de cotisations sociales, ne sont pas pris en compte dans le calcul du Salaire Journalier de Référence (SJR) servant de base à l'ARE. Seules les rémunérations soumises à cotisations chômage sont incluses dans ce calcul.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Puis-je refuser de percevoir ma participation ou mon intéressement ?</div>
+        <div class="faq-a">Vous ne pouvez pas refuser la participation ni l'intéressement, mais vous pouvez choisir de ne pas les débloquer immédiatement et de les laisser bloqués sur les plans d'épargne. Concernant l'intéressement, si votre entreprise propose le placement sur un PEE, c'est l'option par défaut sauf demande explicite de versement direct dans les 15 jours.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Qu'est-ce que la prime de partage de la valeur (ex-PPV) ?</div>
+        <div class="faq-a">La prime de partage de la valeur (PPV, anciennement "prime Macron" ou "prime de pouvoir d'achat") est un dispositif distinct de l'intéressement et de la participation. Elle peut être versée jusqu'à 3 000 € (ou 6 000 € avec accord d'intéressement), avec exonération de cotisations sociales. Pour les salariés gagnant moins de 3 SMIC, elle est également exonérée d'IR jusqu'au 31 décembre 2026 (loi Partage de la Valeur 2023).</div>
+      </div>
+        </div>
+        <!-- SOURCES -->
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F24615">Service-Public.fr — Participation aux bénéfices</a></li>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F24612">Service-Public.fr — Intéressement</a></li>
+        <li><a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000048222861">Légifrance — Loi n° 2023-1107 du 29 novembre 2023 (Partage de la Valeur)</a></li>
+        <li><a href="https://www.urssaf.fr/portail/home/employeur/calculer-et-declarer/les-cotisations/interessement-participation-epargn.html">URSSAF — Intéressement, participation et épargne salariale</a></li>
+          </ul>
+        </div>
+      </article>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#participation">La participation : un droit légal</a></li>
+      <li><a href="#interessement">L'intéressement : un accord facultatif</a></li>
+      <li><a href="#exonerations">Exonérations fiscales et sociales</a></li>
+      <li><a href="#deblocage">Déblocage anticipé et placement</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/prime-treizieme-mois/" class="similar-link">Prime de 13e mois</a>
+      <a href="/guides/negocier-son-salaire/" class="similar-link">Négocier son salaire</a>
+      <a href="/guides/avantages-en-nature/" class="similar-link">Avantages en nature</a>
+      <a href="/guides/cotisations-salariales/" class="similar-link">Cotisations salariales</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <!-- RELATED TOOLS -->
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Calculer son net</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Impact fiscal des primes</div>
+        </a>
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Calcul de l'allocation</div>
+        </a>
+        <a href="/fr/rupture-conventionnelle/" class="related-card">
+          <div class="related-card-title">Rupture conv.</div>
+          <div class="related-card-desc">Indemnité légale</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif sur la base des textes officiels en vigueur en 2026. Elles ne constituent pas un conseil juridique ou fiscal. Consultez un professionnel pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

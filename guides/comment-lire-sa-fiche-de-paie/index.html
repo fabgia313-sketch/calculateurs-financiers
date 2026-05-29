@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Comment lire sa fiche de paie — Guide complet 2026 — CalcFin</title>
+<meta name="description" content="Décryptez chaque ligne de votre bulletin de salaire : mentions obligatoires, cotisations, net imposable, prélèvement à la source. Guide 2026 basé sur les textes officiels." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  /* GUIDE LAYOUT */
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  /* ARTICLE */
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  /* RELATED */
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  /* FOOTER */
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Lire sa fiche de paie</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Fiche de paie</div>
+      <h1 class="page-title">Comment lire sa <em>fiche de paie</em></h1>
+      <p class="page-sub">Décryptez chaque bloc de votre bulletin de salaire : brut, cotisations, net imposable et prélèvement à la source.</p>
+    </div>
+    <div class="guide-layout">
+      <!-- ARTICLE -->
+      <article class="article">
+        <p>Le bulletin de paie est un document obligatoire que tout employeur doit remettre à chaque salarié lors du versement du salaire. Depuis 2017, il existe en version <strong>simplifiée</strong> (grandes rubriques) et la version détaillée reste disponible sur demande. Savoir lire son bulletin de paie permet de vérifier que ses droits sont correctement appliqués et d'anticiper son imposition.</p>
+
+        <h2 id="mentions">Les mentions obligatoires</h2>
+        <p>Le Code du travail (article R3243-1) impose plusieurs informations sur le bulletin de paie. Côté <strong>employeur</strong> : raison sociale, adresse, numéro SIRET, code NAF, convention collective applicable, numéro URSSAF. Côté <strong>salarié</strong> : nom, prénom, emploi occupé, niveau ou coefficient hiérarchique, période et nombre d'heures de travail.</p>
+        <p>Le bulletin doit également mentionner la date de paiement, le montant de la cotisation versée par le salarié à chaque organisme, le net à payer avant prélèvement à la source et le net versé. Depuis 2019, le <strong>net imposable</strong> (à reporter sur la déclaration de revenus) doit figurer en évidence.</p>
+
+        <h2 id="brut">Le salaire brut</h2>
+        <p>Le <strong>salaire brut</strong> constitue la rémunération totale négociée avant tout prélèvement. Il comprend : le salaire de base fixé par le contrat ou la convention collective, les majorations pour heures supplémentaires (25 % pour les 8 premières, 50 % au-delà par semaine), les primes (ancienneté, performance, 13e mois), les avantages en nature valorisés et les indemnités soumises à cotisations.</p>
+        <p>C'est le salaire brut qui sert de base au calcul de toutes les cotisations sociales, à la détermination de l'indemnité ARE en cas de chômage et à l'indemnité de licenciement ou de rupture conventionnelle.</p>
+        <table>
+          <tr><th>Élément</th><th>Inclus dans le brut ?</th></tr>
+          <tr><td>Salaire de base</td><td>Oui</td></tr>
+          <tr><td>Heures supplémentaires</td><td>Oui (majorées)</td></tr>
+          <tr><td>Prime de 13e mois</td><td>Oui</td></tr>
+          <tr><td>Avantage en nature voiture</td><td>Oui (valorisé)</td></tr>
+          <tr><td>Remboursement frais réels</td><td>Non</td></tr>
+          <tr><td>Participation / intéressement</td><td>Non (exonéré)</td></tr>
+        </table>
+
+        <h2 id="cotisations">Les cotisations salariales</h2>
+        <p>Les <strong>cotisations salariales</strong> sont prélevées sur le salaire brut et reversées aux organismes de protection sociale. En 2026, le taux global est d'environ <strong>22 %</strong> pour un non-cadre et <strong>24–25 %</strong> pour un cadre. Les principales rubriques sont : assurance maladie (0,40 %), retraite de base (6,90 %), retraite complémentaire Agirc-Arrco (3,15 % non-cadre / 4,30 % cadre), assurance chômage (2,40 %) et CSG/CRDS (9,70 % sur 98,25 % du brut).</p>
+        <p>La <strong>CSG</strong> se décompose en une part déductible (6,80 %) et une part non déductible (2,40 %), à laquelle s'ajoute la CRDS (0,50 %). Seule la part déductible réduit le revenu imposable.</p>
+
+        <h2 id="net">Du net imposable au net à payer</h2>
+        <p>Le <strong>net imposable</strong> correspond au salaire net auquel on réintègre la CSG non déductible et la CRDS (soit environ 2,90 % du brut). C'est ce montant que vous reportez sur votre déclaration de revenus — il est pré-rempli par l'administration fiscale grâce aux données transmises par votre employeur.</p>
+        <p>Le <strong>net à payer</strong> est le montant effectivement crédité sur votre compte bancaire. Il est égal au net imposable diminué du <strong>prélèvement à la source (PAS)</strong>, calculé en appliquant votre taux personnalisé (ou le taux neutre) au net imposable. Ce taux figure sur votre bulletin de paie depuis 2019.</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>Le bulletin de paie est <strong>obligatoire</strong> à chaque versement, sous format papier ou électronique.</li>
+            <li>Le <strong>salaire brut</strong> est la base de calcul des cotisations, de l'ARE et des indemnités de fin de contrat.</li>
+            <li>Les cotisations salariales représentent environ <strong>22–25 %</strong> du brut selon le statut cadre ou non-cadre.</li>
+            <li>Le <strong>net imposable &ne; net à payer</strong> : le prélèvement à la source est déduit du net à payer.</li>
+            <li>Le net imposable est pré-rempli sur votre déclaration de revenus via la DSN transmise par l'employeur.</li>
+          </ul>
+        </div>
+        <!-- CTA -->
+        <div class="cta-box">
+          <p>Estimez précisément votre salaire net à partir de votre brut, avec les barèmes URSSAF 2026.</p>
+          <a href="/fr/salaire-brut-net/" class="cta-btn">Calculer mon salaire brut → net →</a>
+        </div>
+        <!-- FAQ -->
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">L'employeur peut-il supprimer le bulletin de paie papier ?</div>
+        <div class="faq-a">Oui, depuis 2017, l'employeur peut mettre le bulletin de paie à disposition sous forme électronique, sauf opposition du salarié. Le salarié doit être informé et peut s'y opposer sans justification. L'employeur doit garantir l'accessibilité du document pendant 50 ans ou jusqu'aux 75 ans du salarié.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Comment vérifier que les cotisations sont correctement calculées ?</div>
+        <div class="faq-a">Vous pouvez vérifier en appliquant les taux de cotisations en vigueur (disponibles sur urssaf.fr) à votre salaire brut. Si vous constatez une anomalie, rapprochez-vous de votre service RH ou d'un conseiller URSSAF. En cas de litige persistant, le Conseil de prud'hommes est compétent.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Le net imposable doit-il être reporté manuellement sur la déclaration ?</div>
+        <div class="faq-a">En principe, non. Votre employeur transmet chaque mois les données de paie à l'administration fiscale via la Déclaration Sociale Nominative (DSN). Votre déclaration de revenus est ainsi pré-remplie avec le net imposable annuel. Il est cependant recommandé de vérifier ce montant en le comparant à la somme des nets imposables figurant sur vos 12 bulletins de l'année.</div>
+      </div>
+        </div>
+        <!-- SOURCES -->
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/N31477">Service-Public.fr — Bulletin de paie</a></li>
+        <li><a href="https://www.urssaf.fr/portail/home/employeur/calculer-et-declarer/les-cotisations/les-taux-de-cotisations.html">URSSAF — Taux de cotisations 2026</a></li>
+        <li><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000033020820">Légifrance — Art. R3243-1 Code du travail (mentions obligatoires)</a></li>
+          </ul>
+        </div>
+      </article>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#mentions">Les mentions obligatoires</a></li>
+      <li><a href="#brut">Le salaire brut</a></li>
+      <li><a href="#cotisations">Les cotisations salariales</a></li>
+      <li><a href="#net">Du net imposable au net à payer</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/cotisations-salariales/" class="similar-link">Cotisations salariales détaillées</a>
+      <a href="/guides/brut-net-net-imposable/" class="similar-link">Brut, net et net imposable</a>
+      <a href="/guides/prelevement-a-la-source/" class="similar-link">Prélèvement à la source</a>
+      <a href="/guides/avantages-en-nature/" class="similar-link">Avantages en nature</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <!-- RELATED TOOLS -->
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Barèmes URSSAF 2026</div>
+        </a>
+        <a href="/fr/salaire-net-brut/" class="related-card">
+          <div class="related-card-title">Salaire net → brut</div>
+          <div class="related-card-desc">Calculer le brut équivalent</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Tranches IR 2026</div>
+        </a>
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Allocation journalière</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif sur la base des textes officiels en vigueur en 2026. Elles ne constituent pas un conseil juridique ou fiscal. Consultez un professionnel pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>
