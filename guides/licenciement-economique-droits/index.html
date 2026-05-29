@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Licenciement économique 2026 — Vos droits — CalcFin</title>
+<meta name="description" content="Licenciement économique : motifs valables, indemnités légales, CSP, PSE et priorité de réembauchage. Guide complet 2026 basé sur le Code du travail." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Licenciement économique</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Fin de contrat</div>
+      <h1 class="page-title">Licenciement économique : <em>quels sont vos droits ?</em></h1>
+      <p class="page-sub">Motifs légaux, indemnités, Contrat de Sécurisation Professionnelle et priorité de réembauchage.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>Le <strong>licenciement économique</strong> est un licenciement prononcé par l'employeur pour un ou plusieurs motifs non inhérents à la personne du salarié, résultant d'une suppression ou transformation d'emploi, ou d'une modification d'un élément essentiel du contrat de travail refusée par le salarié. Il obéit à des règles strictes encadrées par le Code du travail (articles L1233-1 et suivants).</p>
+
+        <h2 id="motifs">Les motifs légaux</h2>
+        <p>Un licenciement économique n'est légalement valide que s'il repose sur l'un des motifs suivants :</p>
+        <ul>
+          <li><strong>Difficultés économiques</strong> : baisse significative des commandes ou du chiffre d'affaires, pertes d'exploitation, dégradation de la trésorerie ou de l'excédent brut d'exploitation. La loi fixe des seuils de durée minimale selon la taille de l'entreprise (1 trimestre pour les entreprises &lt; 11 salariés, jusqu'à 4 trimestres pour celles &ge; 300).</li>
+          <li><strong>Mutations technologiques</strong> : transformation des emplois liée à une évolution technologique majeure.</li>
+          <li><strong>Réorganisation nécessaire</strong> pour sauvegarder la compétitivité de l'entreprise ou du secteur d'activité.</li>
+          <li><strong>Cessation d'activité</strong> de l'entreprise (totale et définitive, non liée à une faute de l'employeur).</li>
+        </ul>
+        <p>Un licenciement économique invoquant un motif insuffisant ou inexistant peut être requalifié en licenciement sans cause réelle et sérieuse par le Conseil de prud'hommes, donnant lieu à des indemnités complémentaires.</p>
+
+        <h2 id="procedure">La procédure</h2>
+        <p>Pour un <strong>licenciement individuel ou de moins de 10 salariés sur 30 jours</strong>, l'employeur doit : convoquer le salarié à un entretien préalable (lettre RAR ou remise en main propre), respecter un délai de 5 jours ouvrables entre la convocation et l'entretien, conduire l'entretien et notifier le licenciement par lettre RAR au plus tôt 7 jours ouvrables après l'entretien (15 jours pour un cadre).</p>
+        <p>Pour un <strong>licenciement collectif de 10 salariés et plus sur 30 jours dans une entreprise d'au moins 50 salariés</strong>, un <strong>Plan de Sauvegarde de l'Emploi (PSE)</strong> est obligatoire, incluant un plan de reclassement interne et externe, une consultation du CSE, et un accord ou une homologation par la DREETS.</p>
+
+        <h2 id="indemnites">Les indemnités</h2>
+        <p>Le salarié licencié économiquement avec au moins <strong>8 mois d'ancienneté</strong> a droit à :</p>
+        <table>
+          <tr><th>Élément</th><th>Montant / Règle</th></tr>
+          <tr><td>Indemnité légale de licenciement</td><td>1/4 mois/an ≤ 10 ans, puis 1/3 mois/an</td></tr>
+          <tr><td>Indemnité compensatrice de préavis</td><td>Si dispense de préavis (1 ou 2 mois selon ancienneté)</td></tr>
+          <tr><td>Indemnité compensatrice de congés payés</td><td>Jours acquis non pris</td></tr>
+          <tr><td>Allocations ARE</td><td>Dès 6 mois de travail sur 24 mois</td></tr>
+        </table>
+        <p>La convention collective peut prévoir des indemnités supérieures au minimum légal. L'indemnité de licenciement est <strong>exonérée d'IR et de cotisations</strong> dans la limite du montant légal ou conventionnel (plafond : 2 × PASS soit 94 200 € en 2026).</p>
+
+        <h2 id="csp-pse">CSP et PSE</h2>
+        <p>Le <strong>Contrat de Sécurisation Professionnelle (CSP)</strong> est obligatoirement proposé par l'employeur aux salariés des entreprises de moins de 1 000 salariés (et à ceux des entreprises en redressement ou liquidation judiciaire). Il permet au salarié de bénéficier d'un accompagnement renforcé par France Travail et d'une allocation de sécurisation professionnelle (ASP) équivalente à <strong>75 % du SJR brut</strong> (contre ~57-75 % pour l'ARE classique), pendant 12 mois.</p>
+        <p>En acceptant le CSP, le salarié renonce à son préavis mais perçoit une indemnité compensatrice de préavis si celle-ci est supérieure à 3 mois de salaire. La <strong>priorité de réembauchage</strong> permet au salarié licencié économiquement de se voir proposer en priorité tout poste disponible correspondant à ses qualifications dans l'entreprise pendant <strong>1 an</strong> suivant la rupture du contrat.</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>Le licenciement économique doit reposer sur un <strong>motif économique réel et sérieux</strong> : difficultés économiques, mutations techno, réorganisation ou cessation d'activité.</li>
+            <li>L'indemnité légale est de <strong>1/4 de mois par an</strong> jusqu'à 10 ans, <strong>1/3</strong> au-delà (identique à la rupture conventionnelle).</li>
+            <li>Le <strong>CSP</strong> est obligatoirement proposé dans les entreprises &lt; 1 000 salariés : acceptez-le si vous souhaitez un accompagnement renforcé.</li>
+            <li>Un <strong>PSE</strong> (Plan de Sauvegarde de l'Emploi) est obligatoire dès 10 licenciements en 30 jours dans les entreprises &ge; 50 salariés.</li>
+            <li>Priorité de réembauchage pendant <strong>1 an</strong> suivant la rupture.</li>
+          </ul>
+        </div>
+        <div class="cta-box">
+          <p>Estimez votre allocation chômage journalière suite à un licenciement économique.</p>
+          <a href="/fr/are/" class="cta-btn">Simuler mon allocation ARE →</a>
+        </div>
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">Peut-on refuser un reclassement proposé dans le cadre d'un licenciement économique ?</div>
+        <div class="faq-a">Oui, le salarié peut refuser une proposition de reclassement. Mais si le refus porte sur un poste correspondant à ses qualifications et situé en France, l'employeur peut procéder au licenciement économique. Le refus d'un poste à l'étranger ne peut pas être opposé au salarié pour fonder son licenciement.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Comment contester un licenciement économique ?</div>
+        <div class="faq-a">Le salarié dispose de 12 mois à compter de la notification du licenciement pour saisir le Conseil de prud'hommes et contester le motif économique. S'il obtient gain de cause, le licenciement est requalifié en licenciement sans cause réelle et sérieuse, et il peut prétendre aux indemnités du barème Macron (en sus des indemnités légales déjà perçues).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">L'ancienneté minimale de 8 mois est-elle toujours requise ?</div>
+        <div class="faq-a">Oui, l'indemnité légale de licenciement est due à partir de 8 mois d'ancienneté ininterrompue (article R1234-2 CT). En deçà de ce seuil, aucune indemnité légale n'est due. Toutefois, l'indemnité compensatrice de préavis reste due quel que soit le niveau d'ancienneté (à partir de la fin de la période d'essai).</div>
+      </div>
+        </div>
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F24394">Service-Public.fr — Licenciement pour motif économique</a></li>
+        <li><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000035644235">Légifrance — Art. L1233-1 Code du travail</a></li>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F13819">Service-Public.fr — Contrat de Sécurisation Professionnelle (CSP)</a></li>
+          </ul>
+        </div>
+      </article>
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#motifs">Les motifs légaux</a></li>
+      <li><a href="#procedure">La procédure</a></li>
+      <li><a href="#indemnites">Les indemnités</a></li>
+      <li><a href="#csp-pse">CSP et PSE</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/licenciement-abusif/" class="similar-link">Licenciement abusif</a>
+      <a href="/guides/rupture-conventionnelle-guide/" class="similar-link">Rupture conventionnelle</a>
+      <a href="/guides/solde-de-tout-compte/" class="similar-link">Solde de tout compte</a>
+      <a href="/guides/inscription-france-travail/" class="similar-link">S'inscrire à France Travail</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Simuler mon allocation</div>
+        </a>
+        <a href="/fr/rupture-conventionnelle/" class="related-card">
+          <div class="related-card-title">Rupture conventionnelle</div>
+          <div class="related-card-desc">Comparer les indemnités</div>
+        </a>
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Barèmes 2026</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Fiscalité des indemnités</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif sur la base des textes officiels en vigueur en 2026. Elles ne constituent pas un conseil juridique ou fiscal. Consultez un professionnel pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Licenciement abusif 2026 — Comment le reconnaître ? — CalcFin</title>
+<meta name="description" content="Comment reconnaître un licenciement abusif ou sans cause réelle et sérieuse ? Barème Macron, Conseil de prud'hommes, indemnités. Guide 2026." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Licenciement abusif</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Fin de contrat</div>
+      <h1 class="page-title">Licenciement abusif : <em>comment le reconnaître ?</em></h1>
+      <p class="page-sub">Licenciement sans cause réelle et sérieuse, barème Macron, recours prud'homal et indemnités obtenues.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>Un licenciement est dit <strong>abusif</strong> — ou plus précisément <strong>sans cause réelle et sérieuse</strong> — lorsqu'il ne repose pas sur un motif légitime, réel et suffisamment grave pour justifier la rupture du contrat. Le juge prud'homal est compétent pour apprécier la validité du motif invoqué par l'employeur et accorder des indemnités au salarié lésé.</p>
+
+        <h2 id="definition">Qu'est-ce qu'un licenciement abusif ?</h2>
+        <p>Le Code du travail exige que tout licenciement repose sur une <strong>cause réelle et sérieuse</strong> (article L1232-1 CT). "Réelle" signifie que le motif doit être exact et objectivement vérifiable. "Sérieuse" signifie qu'il doit être suffisamment grave pour justifier la rupture. Un licenciement peut être reconnu abusif notamment si :</p>
+        <ul>
+          <li>Le motif invoqué est inexistant, inventé ou insuffisamment grave (faute légère, erreur isolée).</li>
+          <li>La procédure n'a pas été respectée (absence d'entretien préalable, lettre de licenciement non envoyée).</li>
+          <li>Le licenciement est fondé sur un motif <strong>discriminatoire</strong> (grossesse, état de santé, origine, religion, activité syndicale, etc.).</li>
+          <li>Le licenciement intervient en <strong>violation d'une protection</strong> légale (salarié protégé, femme enceinte, accidents du travail, etc.).</li>
+        </ul>
+        <p>Le licenciement d'un salarié protégé (représentant du personnel, délégué syndical, etc.) sans autorisation de l'inspecteur du travail est <strong>nul de plein droit</strong>, avec droit à réintégration dans l'entreprise.</p>
+
+        <h2 id="reconnaitre">Comment le reconnaître ?</h2>
+        <p>Plusieurs signaux doivent alerter : une lettre de licenciement vague ou contradictoire, un motif qui ne correspond pas à la réalité des faits reprochés, un licenciement intervenant peu après une grossesse annoncée, un arrêt maladie, une demande de congé parental, ou une prise de parole syndicale. La lettre de licenciement est fondamentale : elle <strong>fixe les limites du débat judiciaire</strong> — le juge n'examinera que les motifs listés dans cette lettre.</p>
+        <p>Conservez tous vos bulletins de paie, évaluations, échanges par e-mail et tout document pouvant attester de votre bonne exécution du contrat ou contredire les faits reprochés. Ces éléments seront déterminants devant les prud'hommes.</p>
+
+        <h2 id="bareme">Le barème Macron d'indemnisation</h2>
+        <p>Depuis les ordonnances Macron de 2017 (article L1235-3 CT), le juge prud'homal doit appliquer un <strong>barème d'indemnisation obligatoire</strong> en cas de licenciement sans cause réelle et sérieuse. Ce barème fixe un plancher et un plafond exprimés en mois de salaire brut, selon l'ancienneté :</p>
+        <table>
+          <tr><th>Ancienneté</th><th>Plancher (mois)</th><th>Plafond (mois)</th></tr>
+          <tr><td>1 an</td><td>1</td><td>1</td></tr>
+          <tr><td>2 ans</td><td>3</td><td>3,5</td></tr>
+          <tr><td>5 ans</td><td>3</td><td>6</td></tr>
+          <tr><td>10 ans</td><td>3</td><td>10</td></tr>
+          <tr><td>15 ans</td><td>3</td><td>13</td></tr>
+          <tr><td>20 ans</td><td>3</td><td>15</td></tr>
+          <tr><td>25 ans et +</td><td>3</td><td>20</td></tr>
+        </table>
+        <p><strong>Exceptions :</strong> le barème Macron <strong>ne s'applique pas</strong> en cas de violation d'une liberté fondamentale (ex : harcèlement moral ou sexuel, discrimination), de nullité du licenciement (salarié protégé, femme enceinte), ou lorsque le salarié demande la réintégration. Dans ces cas, l'indemnité n'est pas plafonnée.</p>
+
+        <h2 id="recours">Engager un recours</h2>
+        <p>Le salarié dispose de <strong>12 mois</strong> à compter de la notification du licenciement pour saisir le Conseil de prud'hommes (CPH). La saisine est gratuite et peut se faire en ligne (justice.fr) ou en déposant un formulaire au greffe. Il est fortement conseillé de se faire assister par un avocat spécialisé en droit du travail ou par un représentant syndical, notamment si l'enjeu financier est important.</p>
+        <p>La procédure comprend une phase de <strong>conciliation</strong> (tentative de règlement amiable) puis, en cas d'échec, une audience de jugement devant le bureau de jugement. Le délai moyen d'obtention d'un jugement est de 12 à 24 mois selon les juridictions. En cas d'appel, la procédure peut se prolonger de 2 ans supplémentaires.</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>Tout licenciement doit reposer sur une <strong>cause réelle et sérieuse</strong> ; à défaut, il est "sans cause" et ouvre droit à indemnités.</li>
+            <li>La lettre de licenciement <strong>fixe les limites du débat judiciaire</strong> : elle doit être précise et motivée.</li>
+            <li>Le barème Macron plafonne les indemnités selon l'ancienneté, mais <strong>ne s'applique pas</strong> aux nullités (discrimination, harcèlement).</li>
+            <li>Délai de recours : <strong>12 mois</strong> à compter de la notification du licenciement.</li>
+            <li>Un licenciement discriminatoire peut aboutir à la <strong>réintégration</strong> et à des indemnités non plafonnées.</li>
+          </ul>
+        </div>
+        <div class="cta-box">
+          <p>Comparez votre indemnité légale de licenciement avec celle d'une rupture conventionnelle.</p>
+          <a href="/fr/rupture-conventionnelle/" class="cta-btn">Calculer l'indemnité légale →</a>
+        </div>
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">Un licenciement pour inaptitude est-il abusif ?</div>
+        <div class="faq-a">Non, s'il respecte les règles légales. L'inaptitude médicale prononcée par le médecin du travail est un motif de licenciement valable, à condition que l'employeur justifie l'impossibilité de reclassement sur un poste adapté dans l'entreprise (ou le groupe). En cas de manquement à l'obligation de reclassement, le licenciement peut être requalifié en licenciement sans cause réelle et sérieuse.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Peut-on être licencié pendant un arrêt maladie ?</div>
+        <div class="faq-a">Un arrêt maladie ordinaire ne protège pas contre le licenciement. L'employeur peut licencier pour un motif non lié à l'état de santé (licenciement économique, faute grave antérieure). En revanche, il ne peut pas licencier en raison de l'état de santé lui-même (discrimination). De plus, pendant un arrêt suite à un accident du travail ou maladie professionnelle, une protection renforcée s'applique : le licenciement est interdit sauf faute grave ou impossibilité de maintien du contrat.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Qu'est-ce que la prise d'acte de rupture ?</div>
+        <div class="faq-a">La prise d'acte de rupture est un acte par lequel le salarié prend l'initiative de rompre son contrat en raison de manquements graves de l'employeur (non-paiement de salaire, harcèlement, modification unilatérale du contrat). Si le juge reconnaît les manquements, la rupture produit les effets d'un licenciement sans cause réelle et sérieuse, avec droit à indemnités et ARE. Si le juge ne les reconnaît pas, la rupture produit les effets d'une démission (pas d'indemnité, pas d'ARE).</div>
+      </div>
+        </div>
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F2234">Service-Public.fr — Licenciement pour motif personnel</a></li>
+        <li><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000035644354">Légifrance — Art. L1235-3 CT (barème Macron)</a></li>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F1341">Service-Public.fr — Conseil de prud'hommes</a></li>
+          </ul>
+        </div>
+      </article>
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#definition">Qu'est-ce qu'un licenciement abusif ?</a></li>
+      <li><a href="#reconnaitre">Comment le reconnaître ?</a></li>
+      <li><a href="#bareme">Le barème Macron d'indemnisation</a></li>
+      <li><a href="#recours">Engager un recours</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/licenciement-economique-droits/" class="similar-link">Licenciement économique</a>
+      <a href="/guides/rupture-conventionnelle-guide/" class="similar-link">Rupture conventionnelle</a>
+      <a href="/guides/preavis-calcul/" class="similar-link">Calcul du préavis</a>
+      <a href="/guides/solde-de-tout-compte/" class="similar-link">Solde de tout compte</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/rupture-conventionnelle/" class="related-card">
+          <div class="related-card-title">Rupture conventionnelle</div>
+          <div class="related-card-desc">Calculer l'indemnité</div>
+        </a>
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Simuler l'allocation</div>
+        </a>
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Barèmes URSSAF 2026</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Fiscalité des indemnités</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif sur la base des textes officiels en vigueur en 2026. Elles ne constituent pas un conseil juridique ou fiscal. Consultez un professionnel pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>
