@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>À propos — CalcFin, calculateurs financiers gratuits 2026</title>
+<meta name="description" content="CalcFin propose 8 calculateurs financiers gratuits pour la France : salaire, impôt, prêt immobilier, chômage. Barèmes 2026, calculs 100% côté navigateur, aucune donnée collectée." />
+<link rel="canonical" href="https://calculateurs-financiers-v2.pages.dev/a-propos/" />
+<meta name="robots" content="index, follow" />
+<meta property="og:title" content="À propos — CalcFin, calculateurs financiers gratuits 2026" />
+<meta property="og:description" content="CalcFin propose 8 calculateurs financiers gratuits pour la France : salaire, impôt, prêt immobilier, chômage. Barèmes 2026, calculs 100% côté navigateur, aucune donnée collectée." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://calculateurs-financiers-v2.pages.dev/a-propos/" />
+<meta property="og:locale" content="fr_FR" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="À propos — CalcFin, calculateurs financiers gratuits 2026" />
+<meta name="twitter:description" content="8 calculateurs financiers gratuits, barèmes 2026, calculs 100% navigateur, aucune donnée collectée." />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "À propos de CalcFin",
+  "url": "https://calculateurs-financiers-v2.pages.dev/a-propos/",
+  "description": "CalcFin propose 8 calculateurs financiers gratuits pour la France : salaire brut-net, impôt sur le revenu, prêt immobilier, chômage ARE. Barèmes 2026 à jour, calculs 100% côté navigateur.",
+  "inLanguage": "fr-FR",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "CalcFin",
+    "url": "https://calculateurs-financiers-v2.pages.dev/"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  .mono { font-family: 'Geist Mono', monospace; }
+
+  .backdrop-glow {
+    position: fixed;
+    top: -300px; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+
+  .container {
+    width: 100%; max-width: 1240px;
+    margin: 0 auto; padding: 0 24px;
+    position: relative; z-index: 1;
+  }
+
+  /* ===== HEADER ===== */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    display: flex; align-items: center;
+    justify-content: space-between; height: 64px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 600; font-size: 16px; letter-spacing: -0.01em;
+    color: var(--fg); text-decoration: none;
+  }
+  .logo-mark {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: var(--accent); display: grid; place-items: center;
+    color: #001A12; font-weight: 700; font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+  }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a {
+    color: var(--fg-muted); text-decoration: none;
+    font-size: 14px; font-weight: 450;
+    transition: color 0.15s ease;
+  }
+  nav.primary a:hover { color: var(--fg); }
+  nav.primary a.active { color: var(--fg); font-weight: 500; }
+
+  /* ===== TOOLS NAV ===== */
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a {
+    display: inline-flex; align-items: center; padding: 10px 14px;
+    font-size: 12px; color: var(--fg-faint); text-decoration: none;
+    border-bottom: 2px solid transparent; white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+    font-family: 'Geist Mono', monospace;
+  }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ===== BREADCRUMB ===== */
+  .breadcrumb {
+    display: flex; align-items: center; gap: 8px;
+    padding: 20px 0 0; font-size: 13px; color: var(--fg-faint);
+  }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+
+  /* ===== PAGE HEADER ===== */
+  .page-header { padding: 28px 0 40px; }
+  .page-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; background: var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+    border-radius: 999px; font-size: 11px; color: var(--accent);
+    font-family: 'Geist Mono', monospace; letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+  .page-badge-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent); animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); }
+    50% { box-shadow: 0 0 0 5px transparent; }
+  }
+  .page-title {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+
+  /* ===== ABOUT LAYOUT ===== */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-bottom: 80px;
+  }
+  @media (min-width: 960px) {
+    .about-layout { grid-template-columns: 1fr 300px; align-items: start; }
+  }
+
+  /* ===== ARTICLE ===== */
+  .article-section {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .content-block {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .content-block:first-child { padding-top: 0; }
+  .content-block:last-child { border-bottom: none; }
+
+  .content-block h2 {
+    font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 14px; color: var(--fg);
+  }
+  .content-block p {
+    font-size: 15px; color: var(--fg-muted); line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .content-block p:last-child { margin-bottom: 0; }
+  .content-block strong { color: var(--fg); font-weight: 600; }
+
+  /* Privacy highlight */
+  .privacy-strip {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-top: 16px;
+  }
+  .privacy-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg-elev); border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+  .privacy-icon {
+    font-size: 16px; flex-shrink: 0; margin-top: 1px;
+  }
+  .privacy-text {
+    font-size: 13px; color: var(--fg-muted); line-height: 1.5;
+  }
+  .privacy-text strong { color: var(--fg); }
+
+  /* Tools mini-grid */
+  .tools-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .tool-mini-card {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-md); text-decoration: none; color: var(--fg);
+    transition: border-color 0.18s, transform 0.18s;
+  }
+  .tool-mini-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
+  .tool-mini-icon {
+    font-size: 20px; flex-shrink: 0;
+  }
+  .tool-mini-title {
+    font-size: 13px; font-weight: 600; line-height: 1.3;
+  }
+  .tool-mini-arrow {
+    margin-left: auto; font-size: 11px; color: var(--accent);
+    font-family: 'Geist Mono', monospace; flex-shrink: 0;
+    opacity: 0; transition: opacity 0.15s;
+  }
+  .tool-mini-card:hover .tool-mini-arrow { opacity: 1; }
+
+  /* Contact block */
+  .contact-block {
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-top: 16px;
+  }
+  .contact-label {
+    font-size: 11px; font-weight: 600; color: var(--accent);
+    font-family: 'Geist Mono', monospace; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .contact-email {
+    font-size: 15px; font-weight: 600; color: var(--fg);
+    font-family: 'Geist Mono', monospace;
+  }
+  .contact-hint {
+    font-size: 13px; color: var(--fg-muted); margin-top: 8px; line-height: 1.5;
+  }
+
+  /* Disclaimer */
+  .disclaimer-block {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    margin-top: 40px;
+  }
+  .disclaimer-label {
+    font-size: 10px; font-weight: 600; color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .disclaimer-block p {
+    font-size: 13px; color: var(--fg-faint); line-height: 1.65;
+  }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 20px;
+  }
+  .sidebar-card-title {
+    font-size: 11px; font-weight: 600; color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+
+  /* Stat list in sidebar */
+  .stat-list { display: flex; flex-direction: column; gap: 12px; }
+  .stat-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+  }
+  .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .stat-item-label { font-size: 13px; color: var(--fg-muted); }
+  .stat-item-val {
+    font-size: 14px; font-weight: 600;
+    font-family: 'Geist Mono', monospace; color: var(--accent);
+  }
+
+  /* Quick links in sidebar */
+  .quick-links { display: flex; flex-direction: column; gap: 2px; }
+  .quick-link {
+    display: block; padding: 8px 10px;
+    border-radius: var(--radius-sm); color: var(--fg-muted);
+    text-decoration: none; font-size: 13px; line-height: 1.4;
+    transition: background 0.15s, color 0.15s;
+  }
+  .quick-link:hover { background: var(--bg-elev); color: var(--fg); }
+
+  /* ===== FOOTER ===== */
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner {
+    display: flex; flex-direction: column; gap: 12px;
+    align-items: center; text-align: center;
+  }
+  @media (min-width: 768px) {
+    .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; }
+  }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+
+  @media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .page-header { padding: 16px 0 24px; }
+    .header-inner { height: 56px; }
+    .tools-mini-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="backdrop-glow"></div>
+
+<!-- HEADER -->
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-mark">CF</div>
+        CalcFin
+      </a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos" class="active">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- TOOLS NAV -->
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/">Accueil</a>
+      <span>›</span>
+      <span>À propos</span>
+    </div>
+
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-badge">
+        <div class="page-badge-dot"></div>
+        CalcFin
+      </div>
+      <h1 class="page-title">À propos de <em>CalcFin</em></h1>
+      <p class="page-sub">Calculateurs financiers gratuits pour la France — rapides, précis, 100 % dans votre navigateur.</p>
+    </div>
+
+    <!-- Main layout -->
+    <div class="about-layout">
+
+      <!-- Article -->
+      <div class="article-section">
+
+        <!-- Section 1 : Mission -->
+        <div class="content-block">
+          <h2>Notre mission</h2>
+          <p>CalcFin est un site de calculateurs financiers gratuits conçu pour les particuliers et indépendants en France. Notre objectif : obtenir une réponse fiable en moins de 3 secondes, sans inscription, sans formulaire interminable.</p>
+          <p>Que vous souhaitiez convertir un salaire brut en net, estimer votre impôt sur le revenu, calculer vos mensualités de prêt ou connaître vos droits au chômage — CalcFin vous donne le résultat immédiatement, avec le détail du calcul.</p>
+        </div>
+
+        <!-- Section 2 : Pourquoi -->
+        <div class="content-block">
+          <h2>Pourquoi CalcFin ?</h2>
+          <p>Les simulateurs officiels sont souvent lents, peu lisibles sur mobile, et demandent de créer un compte. CalcFin comble ce manque : des outils rapides, précis, accessibles directement depuis le navigateur.</p>
+          <p>Pas de publicité intrusive. Pas d'inscription obligatoire. Pas de redirection vers un conseiller commercial. Juste le calcul, présenté clairement avec le détail des hypothèses et des barèmes utilisés.</p>
+        </div>
+
+        <!-- Section 3 : Comment ça fonctionne -->
+        <div class="content-block">
+          <h2>Comment fonctionnent les calculs ?</h2>
+          <p>Tous les calculs sont effectués <strong>directement dans votre navigateur</strong>. Aucune donnée ne transite par un serveur. Aucune information personnelle n'est collectée.</p>
+          <p>Les barèmes utilisés (URSSAF, tranches IR, SMIC, ARE) sont mis à jour à chaque loi de finances — actuellement les <strong>barèmes 2026</strong>.</p>
+          <div class="privacy-strip">
+            <div class="privacy-item">
+              <div class="privacy-icon">🔒</div>
+              <div class="privacy-text"><strong>Calcul local</strong> — le code s'exécute dans votre navigateur. Aucune requête serveur n'est envoyée avec vos données.</div>
+            </div>
+            <div class="privacy-item">
+              <div class="privacy-icon">🚫</div>
+              <div class="privacy-text"><strong>Zéro tracking</strong> — pas de cookie publicitaire, pas de pixel de suivi, pas de revente de données.</div>
+            </div>
+            <div class="privacy-item">
+              <div class="privacy-icon">📅</div>
+              <div class="privacy-text"><strong>Barèmes à jour</strong> — URSSAF, tranches IR, plafond PASS, barème ARE mis à jour chaque 1er janvier.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4 : Les 8 outils -->
+        <div class="content-block">
+          <h2>Nos 8 outils</h2>
+          <p>Huit calculateurs couvrant les principaux besoins financiers des salariés, indépendants et emprunteurs en France.</p>
+          <div class="tools-mini-grid">
+            <a href="/fr/salaire-brut-net/" class="tool-mini-card">
+              <span class="tool-mini-icon">💶</span>
+              <span class="tool-mini-title">Salaire brut → net</span>
+              <span class="tool-mini-arrow">→</span>
+            </a>
+            <a href="/fr/salaire-net-brut/" class="tool-mini-card">
+              <span class="tool-mini-icon">🔄</span>
+              <span class="tool-mini-title">Salaire net → brut</span>
+              <span class="tool-mini-arrow">→</span>
+            </a>
+            <a href="/fr/pret-immobilier/" class="tool-mini-card">
+              <span class="tool-mini-icon">🏠</span>
+              <span class="tool-mini-title">Prêt immobilier</span>
+              <span class="tool-mini-arrow">→</span>
+            </a>
+            <a href="/fr/impot/" class="tool-mini-card">
+              <span class="tool-mini-icon">📊</span>
+              <span class="tool-mini-title">Impôt sur le revenu</span>
+              <span class="tool-mini-arrow">→</span>
+            </a>
+            <a href="/fr/rupture-conventionnelle/" class="tool-mini-card">
+              <span class="tool-mini-icon">📋</span>
+              <span class="tool-mini-title">Rupture conventionnelle</span>
+              <span class="tool-mini-arrow">→</span>
+            </a>
+            <a href="/fr/retraite/" class="tool-mini-card">
+              <span class="tool-mini-icon">🎯</span>
+              <span class="tool-mini-title">Retraite</span>
+              <span class="tool-mini-arrow">→</span>
+            </a>
+            <a href="/fr/tva/" class="tool-mini-card">
+              <span class="tool-mini-icon">🧾</span>
+              <span class="tool-mini-title">TVA</span>
+              <span class="tool-mini-arrow">→</span>
+            </a>
+            <a href="/fr/are/" class="tool-mini-card">
+              <span class="tool-mini-icon">🛡️</span>
+              <span class="tool-mini-title">Chômage ARE</span>
+              <span class="tool-mini-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Section 5 : Contact -->
+        <div class="content-block">
+          <h2>Contact</h2>
+          <p>Une question, une erreur dans un calcul, une suggestion d'amélioration ou un nouveau calculateur à proposer ? Nous lisons tous les messages.</p>
+          <div class="contact-block">
+            <div class="contact-label">Adresse e-mail</div>
+            <div class="contact-email">contactcalcfin@gmail.com</div>
+            <p class="contact-hint">Nous répondons généralement sous 48 h. Pour les signalements d'erreur de calcul, merci d'indiquer le calculateur concerné et les valeurs saisies.</p>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer-block">
+          <div class="disclaimer-label">Avertissement légal</div>
+          <p>Les résultats fournis par CalcFin sont donnés à titre indicatif sur la base des barèmes officiels en vigueur. Ils ne se substituent pas à un conseil d'expert-comptable, notaire ou avocat fiscaliste. Pour toute décision financière importante, consultez un professionnel qualifié.</p>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">En chiffres</div>
+          <div class="stat-list">
+            <div class="stat-item">
+              <span class="stat-item-label">Calculateurs</span>
+              <span class="stat-item-val">8</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-item-label">Guides disponibles</span>
+              <span class="stat-item-val">35+</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-item-label">Barèmes</span>
+              <span class="stat-item-val">2026</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-item-label">Données collectées</span>
+              <span class="stat-item-val">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-item-label">Coût</span>
+              <span class="stat-item-val">0 €</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Liens utiles</div>
+          <div class="quick-links">
+            <a href="/" class="quick-link">← Accueil</a>
+            <a href="/guides" class="quick-link">Tous les guides</a>
+            <a href="/guides/prelevement-a-la-source/" class="quick-link">Prélèvement à la source</a>
+            <a href="/guides/quotient-familial/" class="quick-link">Quotient familial</a>
+            <a href="/guides/smic-2026/" class="quick-link">SMIC 2026</a>
+            <a href="/guides/csg-crds/" class="quick-link">CSG et CRDS</a>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sources officielles</div>
+          <div class="quick-links">
+            <a href="https://www.impots.gouv.fr" class="quick-link" target="_blank" rel="noopener">impots.gouv.fr ↗</a>
+            <a href="https://www.urssaf.fr" class="quick-link" target="_blank" rel="noopener">urssaf.fr ↗</a>
+            <a href="https://www.service-public.fr" class="quick-link" target="_blank" rel="noopener">service-public.fr ↗</a>
+            <a href="https://www.legifrance.gouv.fr" class="quick-link" target="_blank" rel="noopener">legifrance.gouv.fr ↗</a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les résultats sont fournis à titre indicatif sur la base des barèmes 2026. Ils ne se substituent pas à un conseil d'expert-comptable ou d'un professionnel qualifié.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
