@@ -38,9 +38,6 @@
   nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
   nav.primary a:hover { color: var(--fg); }
   .header-right { display: flex; align-items: center; gap: 12px; }
-  .lang-switcher { display: inline-flex; align-items: center; background: transparent; border: 1px solid var(--border); border-radius: 999px; padding: 3px; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.06em; }
-  .lang-switcher button { background: transparent; border: none; color: var(--fg-muted); padding: 5px 10px; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: inherit; transition: all 0.18s ease; }
-  .lang-switcher button.active { background: var(--fg); color: var(--bg); }
 
   /* BREADCRUMB */
   .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
@@ -186,12 +183,6 @@
         <a href="/guides">Guides</a>
         <a href="/a-propos">À propos</a>
       </nav>
-      <div class="header-right">
-        <div class="lang-switcher">
-          <button class="active" data-lang="fr">FR</button>
-          <button data-lang="en">EN</button>
-        </div>
-      </div>
     </div>
   </div>
 </header>
@@ -701,12 +692,6 @@ function toggleAmort() {
 document.getElementById('amort-toggle-btn').addEventListener('click', toggleAmort);
 document.getElementById('amort-more').addEventListener('click', toggleAmort);
 
-document.querySelectorAll('.lang-switcher button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.lang-switcher button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
 
 render();
 </script>
