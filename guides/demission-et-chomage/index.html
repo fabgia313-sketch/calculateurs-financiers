@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Démissionner et toucher le chômage 2026 — Est-ce possible ? — CalcFin</title>
+<meta name="description" content="Peut-on percevoir l'ARE après une démission ? Démissions légitimes, projet de reconversion professionnelle avec 5 ans d'affiliation. Guide 2026." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Démission et chômage</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Chômage ARE</div>
+      <h1 class="page-title">Démission et <em>chômage</em> : est-ce possible ?</h1>
+      <p class="page-sub">Démissions légitimes, reconversion professionnelle et cas dans lesquels une démission ouvre droit à l'ARE.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>La règle générale est claire : une <strong>démission ne donne pas droit à l'ARE</strong>. La démission est un acte volontaire du salarié qui n'est pas assimilé à une perte involontaire d'emploi — condition de base pour accéder à l'assurance chômage. Cependant, des exceptions importantes existent, notamment les <strong>démissions légitimes</strong> et le <strong>dispositif "démission-reconversion"</strong> créé en 2019. Il est crucial de bien connaître ces cas avant de décider de quitter son emploi sans accord préalable de l'employeur.</p>
+
+        <h2 id="principe">Le principe : démission = pas d'ARE</h2>
+        <p>Le règlement d'assurance chômage (géré par l'Unédic) prévoit que l'ARE est réservée aux personnes ayant perdu leur emploi de façon <strong>involontaire</strong> : licenciement, rupture conventionnelle, fin de CDD, fin de mission, départ pour motif économique. La démission classique — prise librement par le salarié — n'entre pas dans cette catégorie.</p>
+        <p>Toutefois, même en cas de démission "sèche" (sans droit à l'ARE immédiat), le salarié doit s'inscrire à France Travail pour conserver la traçabilité de ses droits futurs et bénéficier des services d'accompagnement à l'emploi. L'inscription n'est pas réservée aux personnes indemnisées.</p>
+
+        <h2 id="demissions-legitimes">Les démissions légitimes</h2>
+        <p>Certaines démissions sont considérées comme <strong>légitimes</strong> par le règlement d'assurance chômage et ouvrent droit à l'ARE sans délai supplémentaire. En voici les principaux cas (liste exhaustive fixée par l'Unédic) :</p>
+        <ul>
+          <li><strong>Suivi d'un conjoint ou partenaire de PACS</strong> qui change de lieu de résidence pour exercer un nouvel emploi.</li>
+          <li><strong>Mariage ou PACS</strong>, entraînant un changement de résidence, si la démission intervient dans les 2 mois avant ou après l'événement.</li>
+          <li><strong>Victime de violence conjugale</strong> ayant donné lieu à un dépôt de plainte ou une ordonnance de protection.</li>
+          <li><strong>Non-paiement du salaire</strong> par l'employeur, constaté (ordonnance de référé).</li>
+          <li><strong>Acte délictueux subi</strong> dans le cadre du travail (harcèlement moral ou sexuel ayant donné lieu à une plainte).</li>
+          <li><strong>Modification d'un élément substantiel du contrat</strong> imposée par l'employeur et refusée par le salarié.</li>
+          <li><strong>Reprise d'activité ou création d'entreprise</strong> qui n'a pas perduré au-delà de 91 jours.</li>
+          <li><strong>Démission pour suivre une formation</strong> dans le cadre du compte personnel de formation.</li>
+        </ul>
+        <p>Pour invoquer une démission légitime, vous devez le signaler lors de votre inscription à France Travail et fournir les justificatifs correspondants. France Travail instruit votre dossier et valide (ou non) l'ouverture des droits.</p>
+
+        <h2 id="reconversion">Le projet de reconversion professionnelle</h2>
+        <p>Depuis le 1er novembre 2019, une nouvelle voie a été ouverte par la loi Avenir professionnel. Un salarié peut démissionner et percevoir l'ARE pour financer un <strong>projet de reconversion professionnelle</strong>, sous deux conditions cumulatives :</p>
+        <ol>
+          <li><strong>Ancienneté de 5 ans</strong> d'affiliation à l'assurance chômage de manière continue (5 ans de travail salarié sans période de chômage indemnisée intercalaire).</li>
+          <li><strong>Projet validé</strong> par un Conseil en Évolution Professionnelle (CEP) avant la démission : l'organisme CEP (APEC pour les cadres, OPCO pour les non-cadres, organismes régionaux) évalue la cohérence et la faisabilité du projet (formation qualifiante, création d'entreprise, etc.).</li>
+        </ol>
+        <p>Si ces conditions sont remplies, France Travail vous accorde l'ARE au même titre qu'un demandeur d'emploi ordinaire, avec les mêmes droits et les mêmes durées. Vous devez vous inscrire à France Travail dans les 6 mois suivant la validation du projet par le CEP. En cas d'inachèvement du projet sans motif légitime, France Travail peut demander le remboursement des allocations perçues.</p>
+
+        <h2 id="alternatives">Les alternatives à la démission</h2>
+        <p>Si vous souhaitez quitter votre emploi et percevoir l'ARE sans remplir les conditions de démission légitime ou de reconversion, les alternatives sont :</p>
+        <ul>
+          <li><strong>Rupture conventionnelle</strong> : à négocier avec l'employeur. Ouvre droit à l'ARE et à une indemnité légale, mais nécessite l'accord de l'employeur et un délai minimum de 45 jours.</li>
+          <li><strong>Prise d'acte de rupture</strong> : si l'employeur commet des manquements graves, vous pouvez rompre le contrat à ses torts. Si le juge vous donne raison, la rupture produit les effets d'un licenciement (ARE incluse). Risqué si le juge vous donne tort (démission sans ARE).</li>
+          <li><strong>Résoudre le contrat judiciairement</strong> : le salarié peut demander au CPH de prononcer la rupture aux torts de l'employeur en cas de faute grave de ce dernier. Procédure longue mais sécurisante.</li>
+        </ul>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>La démission classique <strong>n'ouvre pas droit à l'ARE</strong>, sauf cas de démission légitime ou projet de reconversion.</li>
+            <li>La liste des <strong>démissions légitimes</strong> est exhaustive et fixée par le règlement d'assurance chômage (Unédic).</li>
+            <li>Le dispositif "démission-reconversion" (depuis 2019) nécessite <strong>5 ans d'affiliation continue</strong> et la validation préalable du projet par un CEP.</li>
+            <li>La <strong>rupture conventionnelle</strong> reste l'alternative la plus sûre pour quitter son emploi tout en accédant à l'ARE et à une indemnité.</li>
+            <li>Inscrivez-vous à France Travail même sans droits immédiats : cela conserve la traçabilité de votre situation et vous donne accès aux services d'accompagnement.</li>
+          </ul>
+        </div>
+        <div class="cta-box">
+          <p>Si vous remplissez les conditions, estimez votre allocation journalière avec le simulateur CalcFin.</p>
+          <a href="/fr/are/" class="cta-btn">Simuler mon allocation ARE →</a>
+        </div>
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">Si je démissionne et ne perçois pas l'ARE, puis-je quand même m'inscrire à France Travail ?</div>
+        <div class="faq-a">Oui, absolument. L'inscription à France Travail n'est pas réservée aux personnes indemnisées. En vous inscrivant, vous bénéficiez des services d'accompagnement à l'emploi (conseiller dédié, formations, aides à la mobilité) et vous maintenez votre affiliation au dispositif de retraite complémentaire Agirc-Arrco pendant une période limitée.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Combien de temps faut-il attendre après une démission pour prétendre à l'ARE si on retrouve et reperd un emploi ?</div>
+        <div class="faq-a">Si vous démissionnez, retrouvez un emploi, puis perdez ce nouvel emploi de façon involontaire (licenciement, fin de CDD), vous ouvrez de nouveaux droits à l'ARE basés sur cette nouvelle période d'activité, à condition d'avoir travaillé au moins 6 mois sur les 24 derniers mois. La démission initiale n'affecte plus vos droits dès lors que vous avez recotisé suffisamment.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">La prise d'acte de rupture est-elle risquée financièrement ?</div>
+        <div class="faq-a">Oui, c'est le principal risque. Si le Conseil de prud'hommes ne reconnaît pas les manquements de l'employeur, la prise d'acte est requalifiée en démission et vous perdez tout droit à l'ARE et à l'indemnité. Il est donc impératif de documenter précisément les manquements reprochés (courriels, témoignages, lettres de mise en demeure) avant d'engager cette procédure et de consulter un avocat spécialisé.</div>
+      </div>
+        </div>
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F14860">Service-Public.fr — ARE et démission</a></li>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F24400">Service-Public.fr — Démission et projet de reconversion professionnelle</a></li>
+        <li><a href="https://www.unedic.org/indemnisation/fiches-thematiques/demission">Unédic — Démission et assurance chômage</a></li>
+          </ul>
+        </div>
+      </article>
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#principe">Le principe : démission = pas d'ARE</a></li>
+      <li><a href="#demissions-legitimes">Les démissions légitimes</a></li>
+      <li><a href="#reconversion">Le projet de reconversion professionnelle</a></li>
+      <li><a href="#alternatives">Les alternatives à la démission</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/inscription-france-travail/" class="similar-link">S'inscrire à France Travail</a>
+      <a href="/guides/demission-vs-rupture-conventionnelle/" class="similar-link">Démission vs rupture conv.</a>
+      <a href="/guides/delai-carence-chomage/" class="similar-link">Délai de carence ARE</a>
+      <a href="/guides/cumul-chomage-activite/" class="similar-link">Cumul chômage et activité</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Simuler l'allocation</div>
+        </a>
+        <a href="/fr/rupture-conventionnelle/" class="related-card">
+          <div class="related-card-title">Rupture conventionnelle</div>
+          <div class="related-card-desc">Alternative à la démission</div>
+        </a>
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Barèmes 2026</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Tranches 2026</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif sur la base des textes officiels en vigueur en 2026. Elles ne constituent pas un conseil juridique ou fiscal. Consultez un professionnel pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

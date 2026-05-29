@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>S'inscrire à France Travail et ouvrir ses droits ARE 2026 — CalcFin</title>
+<meta name="description" content="Comment s'inscrire à France Travail après la perte d'un emploi ? Conditions d'éligibilité à l'ARE, démarches en ligne, délais et documents nécessaires." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Inscription France Travail</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Chômage ARE</div>
+      <h1 class="page-title">S'inscrire à <em>France Travail</em> et ouvrir ses droits ARE</h1>
+      <p class="page-sub">Conditions d'éligibilité, démarche d'inscription, documents à fournir et premiers versements de l'ARE.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>Perdre son emploi ouvre potentiellement droit à l'<strong>Allocation de Retour à l'Emploi (ARE)</strong>, versée par France Travail (anciennement Pôle emploi). Pour en bénéficier, il faut s'inscrire comme demandeur d'emploi dans les délais requis et remplir plusieurs conditions liées à l'affiliation, à la perte involontaire d'emploi et à la résidence. Voici comment procéder pas à pas.</p>
+
+        <h2 id="eligibilite">Conditions d'éligibilité à l'ARE</h2>
+        <p>Pour percevoir l'ARE, vous devez réunir <strong>simultanément</strong> les conditions suivantes :</p>
+        <ul>
+          <li><strong>Perte involontaire d'emploi</strong> : licenciement (toute forme), rupture conventionnelle homologuée, fin de CDD, fin de mission d'intérim, démission légitime, ou démission pour reconversion professionnelle validée (voir guide dédié).</li>
+          <li><strong>Durée d'affiliation minimale</strong> : avoir travaillé au moins <strong>6 mois</strong> (soit 130 jours ou 910 heures travaillées) au cours des <strong>24 derniers mois</strong> précédant la fin du contrat (36 mois pour les demandeurs d'emploi de 53 ans et plus).</li>
+          <li><strong>Résidence en France</strong> : être domicilié en France métropolitaine, dans les DOM ou dans certains pays ayant conclu un accord bilatéral avec la France.</li>
+          <li><strong>Être physiquement apte à travailler</strong> et en <strong>recherche active d'emploi</strong>.</li>
+          <li><strong>Ne pas avoir atteint l'âge de la retraite à taux plein</strong> (64 ans à partir de la génération 1968 selon la réforme de 2023, ou 67 ans en l'absence du nombre de trimestres requis).</li>
+          <li><strong>S'inscrire dans les 12 mois</strong> suivant la fin du contrat (passé ce délai, les droits théoriquement acquis sont perdus, sous réserve d'exceptions).</li>
+        </ul>
+        <p>Les travailleurs en activité réduite (moins de 110 h/mois) peuvent également être inscrits comme demandeurs d'emploi et percevoir une ARE partielle.</p>
+
+        <h2 id="demarche">La démarche d'inscription</h2>
+        <p>L'inscription se fait <strong>intégralement en ligne</strong> sur <strong>francetravail.fr</strong>, 7j/7, en environ 20 minutes. Si vous n'avez pas accès à internet, vous pouvez vous rendre dans une agence France Travail, mais l'inscription en ligne est fortement recommandée car elle permet un traitement plus rapide.</p>
+        <p>Les étapes sont les suivantes :</p>
+        <ol>
+          <li>Rendez-vous sur <strong>francetravail.fr → "M'inscrire comme demandeur d'emploi"</strong>.</li>
+          <li>Créez votre espace personnel ou connectez-vous via FranceConnect.</li>
+          <li>Renseignez votre identité, votre dernier emploi, la cause de la rupture et vos coordonnées bancaires.</li>
+          <li>Téléversez les documents justificatifs (voir liste ci-dessous).</li>
+          <li>Choisissez votre agence de rattachement (celle de votre lieu de résidence).</li>
+          <li>Prenez rendez-vous pour un entretien d'inscription et de diagnostic avec un conseiller (souvent dans les 2 à 4 semaines suivant l'inscription).</li>
+        </ol>
+        <p>La date officielle d'inscription est la date à laquelle vous terminez votre démarche en ligne. C'est cette date qui servira de point de départ au calcul des droits et des délais de carence.</p>
+
+        <h2 id="documents">Les documents nécessaires</h2>
+        <table>
+          <tr><th>Document</th><th>Pourquoi ?</th></tr>
+          <tr><td>Pièce d'identité en cours de validité</td><td>Vérification de l'identité et de la nationalité/titre de séjour</td></tr>
+          <tr><td>Attestation employeur (Cerfa 13753)</td><td>Justifie la cause et la date de rupture, sert au calcul du SJR</td></tr>
+          <tr><td>Relevé d'identité bancaire (RIB)</td><td>Pour le versement de l'ARE</td></tr>
+          <tr><td>CV à jour</td><td>Renseigné dans l'espace personnel pour la mise en relation</td></tr>
+          <tr><td>Justificatif de domicile (&lt; 3 mois)</td><td>Confirmation de la résidence en France</td></tr>
+        </table>
+        <p>L'<strong>attestation employeur</strong> est un document crucial. L'employeur est légalement tenu de vous la remettre à la fin du contrat (art. R1234-9 CT). Si votre employeur tarde, vous pouvez vous inscrire sans elle et la transmettre ultérieurement, mais le calcul de vos droits sera retardé.</p>
+
+        <h2 id="premiers-versements">Délai avant le premier versement</h2>
+        <p>Le premier versement de l'ARE n'intervient pas immédiatement après l'inscription. Plusieurs délais s'accumulent :</p>
+        <ul>
+          <li><strong>Délai de traitement du dossier</strong> : quelques jours à 3 semaines selon les agences.</li>
+          <li><strong>Délai de carence fixe de 7 jours</strong> : applicable à tous les demandeurs d'emploi.</li>
+          <li><strong>Différé congés payés</strong> : calculé en divisant l'indemnité compensatrice de congés payés reçue par le SJR, plafonné à 75 jours.</li>
+          <li><strong>Différé spécifique (supra-légal)</strong> : si vous avez perçu une indemnité de rupture supérieure au minimum légal, la fraction excédentaire est divisée par (SJR × 0,75) pour calculer un délai supplémentaire, plafonné à 150 jours.</li>
+        </ul>
+        <p>En cas de rupture conventionnelle avec une indemnité modeste (proche du minimum légal) et des congés payés pris avant la fin du contrat, le délai total peut se limiter à 3 à 4 semaines. En cas d'indemnité négociée importante, comptez 2 à 5 mois avant le premier versement.</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>Condition minimale : <strong>6 mois travaillés</strong> (130 jours ou 910 h) sur les <strong>24 derniers mois</strong> (36 mois si &ge; 53 ans).</li>
+            <li>Inscrivez-vous <strong>dès la fin de votre contrat</strong> (même si vous êtes encore en préavis) pour ne pas perdre de jours de droits.</li>
+            <li>L'attestation employeur (Cerfa 13753) est <strong>indispensable</strong> pour le calcul de vos droits.</li>
+            <li>Le premier versement intervient après le délai de carence de <strong>7 jours</strong> + différé CP + différé spécifique éventuel.</li>
+            <li>Passé <strong>12 mois</strong> sans inscription, les droits théoriques acquis sont perdus.</li>
+          </ul>
+        </div>
+        <div class="cta-box">
+          <p>Estimez votre allocation journalière et votre durée d'indemnisation avec le simulateur CalcFin.</p>
+          <a href="/fr/are/" class="cta-btn">Simuler mon allocation ARE →</a>
+        </div>
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">Peut-on s'inscrire à France Travail avant la fin du contrat ?</div>
+        <div class="faq-a">Oui, et c'est même recommandé. Vous pouvez vous pré-inscrire pendant le préavis. L'inscription sera prise en compte à compter du lendemain de la fin effective du contrat. Cela permet d'anticiper les démarches et de ne pas perdre de jours si le traitement du dossier prend du temps.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Que se passe-t-il si je retrouve un emploi rapidement après m'être inscrit ?</div>
+        <div class="faq-a">Vous devez signaler immédiatement votre reprise d'activité à France Travail via votre espace personnel. Vos droits à l'ARE sont conservés (gel des droits restants). Si vous perdez à nouveau cet emploi, vous pourrez reprendre vos droits ou ouvrir de nouveaux droits, selon la durée de la nouvelle activité et les règles en vigueur.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">L'ARE est-elle soumise à l'impôt sur le revenu ?</div>
+        <div class="faq-a">Oui. L'ARE est un revenu de remplacement imposable, soumis à l'impôt sur le revenu. Elle est également soumise à la CSG (6,2 % pour les allocataires dont les revenus dépassent le seuil d'exonération) et à la CRDS (0,5 %). Le montant brut et le montant net après prélèvements apparaissent sur votre avis de paiement mensuel.</div>
+      </div>
+        </div>
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.francetravail.fr/candidat/mes-droits-aux-aides-et-allocati/a-chaque-situation-son-allocatio/indemnisation-assurance-chomage/les-conditions-pour-beneficier-d.html">France Travail — Conditions ARE</a></li>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F14860">Service-Public.fr — Allocation chômage (ARE)</a></li>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F1636">Service-Public.fr — Inscription à France Travail</a></li>
+          </ul>
+        </div>
+      </article>
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#eligibilite">Conditions d'éligibilité à l'ARE</a></li>
+      <li><a href="#demarche">La démarche d'inscription</a></li>
+      <li><a href="#documents">Les documents nécessaires</a></li>
+      <li><a href="#premiers-versements">Délai avant le premier versement</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/delai-carence-chomage/" class="similar-link">Délai de carence ARE</a>
+      <a href="/guides/cumul-chomage-activite/" class="similar-link">Cumul chômage et activité</a>
+      <a href="/guides/demission-et-chomage/" class="similar-link">Démission et chômage</a>
+      <a href="/guides/rupture-conventionnelle-guide/" class="similar-link">Rupture conventionnelle</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Simuler l'allocation journalière</div>
+        </a>
+        <a href="/fr/rupture-conventionnelle/" class="related-card">
+          <div class="related-card-title">Rupture conventionnelle</div>
+          <div class="related-card-desc">Calculer l'indemnité</div>
+        </a>
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Calculer son net</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">ARE et imposition</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif sur la base des textes officiels en vigueur en 2026. Elles ne constituent pas un conseil juridique ou fiscal. Consultez un professionnel pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

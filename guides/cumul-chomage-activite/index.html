@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cumuler chômage et activité 2026 — Règles et calcul — CalcFin</title>
+<meta name="description" content="Peut-on cumuler l'ARE avec une activité salariée ou indépendante ? Règles 2026, calcul de l'allocation réduite, plafond et report des droits." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Cumul chômage et activité</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Chômage ARE</div>
+      <h1 class="page-title">Cumuler <em>chômage et activité</em> : mode d'emploi</h1>
+      <p class="page-sub">Activité réduite, calcul de l'ARE partielle, déclaration mensuelle et report des droits non consommés.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>Reprendre une activité professionnelle — salariée ou non salariée — tout en percevant l'ARE est tout à fait possible, dans le cadre du régime de l'<strong>activité réduite</strong>. Ce dispositif permet de cumuler partiellement l'allocation chômage avec des revenus d'activité, à condition de rester inscrit à France Travail et de respecter les règles de déclaration.</p>
+
+        <h2 id="principe">Le principe de l'activité réduite</h2>
+        <p>On parle d'activité réduite lorsque le demandeur d'emploi reprend une activité dont la durée est <strong>inférieure à 110 heures par mois</strong> (pour une activité salariée). Pour une activité non salariée (micro-entrepreneur, profession libérale, gérant), il n'y a pas de plafond d'heures : le cumul est possible quel que soit le nombre d'heures, dès lors que le revenu mensuel ne dépasse pas 70 % du salaire brut mensuel moyen ayant servi à calculer le SJR.</p>
+        <p>Cette limite de 70 % du salaire antérieur s'applique comme contrôle de cohérence, mais en pratique, France Travail calcule l'ARE réduite selon une formule propre qui peut permettre un cumul même au-delà. L'essentiel est que le <strong>cumul ARE + revenus d'activité ne dépasse pas le salaire antérieur brut</strong>.</p>
+
+        <h2 id="calcul">Comment est calculée l'ARE partielle ?</h2>
+        <p>Pour une <strong>activité salariée</strong>, France Travail calcule le nombre de jours non indemnisés du mois à partir des revenus déclarés. La formule retenue est :</p>
+        <p><strong>Jours non indemnisés = revenus bruts d'activité du mois ÷ (SJR × 0,7)</strong></p>
+        <p>Les jours restants du mois sont indemnisés au taux ARE normal. Exemple : pour un SJR de 100 € et des revenus salariés de 700 € dans le mois, les jours non indemnisés = 700 / (100 × 0,7) = 10 jours. L'ARE est versée pour les autres jours du mois.</p>
+        <p>Pour une <strong>activité non salariée</strong>, le calcul est similaire mais repose sur le chiffre d'affaires déclaré (abattu forfaitairement selon l'activité, comme pour le micro-entrepreneur). France Travail applique un abattement de 71 % pour les ventes de marchandises, 50 % pour les services et 34 % pour les activités libérales avant de calculer les jours non indemnisés.</p>
+        <table>
+          <tr><th>Type d'activité</th><th>Plafond mensuel</th><th>Base de calcul</th></tr>
+          <tr><td>Salariée</td><td>&lt; 110 h/mois</td><td>Salaire brut déclaré</td></tr>
+          <tr><td>Non salariée (ventes)</td><td>Pas de limite horaire</td><td>CA × 29 % (abattement 71 %)</td></tr>
+          <tr><td>Non salariée (services)</td><td>Pas de limite horaire</td><td>CA × 50 %</td></tr>
+          <tr><td>Non salariée (libéral)</td><td>Pas de limite horaire</td><td>CA × 66 %</td></tr>
+        </table>
+
+        <h2 id="declaration">L'obligation de déclaration mensuelle</h2>
+        <p>La déclaration de situation mensuelle (DSM) est <strong>obligatoire chaque mois</strong>, même si vous n'avez pas travaillé. Elle se fait en ligne sur francetravail.fr ou via l'application mobile, généralement entre le 1er et le 15 du mois suivant. Vous devez y indiquer :</p>
+        <ul>
+          <li>Si vous avez travaillé et le nombre d'heures effectuées (activité salariée).</li>
+          <li>Si vous avez créé ou repris une entreprise.</li>
+          <li>Les revenus bruts perçus (salaires bruts pour les salariés, CA pour les non-salariés).</li>
+          <li>Si vous étiez en arrêt maladie ou en formation.</li>
+        </ul>
+        <p>En cas d'<strong>omission ou de fausse déclaration</strong>, France Travail peut réclamer le remboursement des allocations indûment perçues et appliquer une pénalité. En cas de fraude délibérée, une procédure de radiation peut être engagée.</p>
+
+        <h2 id="report">Le report des droits non consommés</h2>
+        <p>C'est l'un des avantages majeurs de l'activité réduite : les jours non indemnisés (parce que vous avez travaillé) sont <strong>reportés à la fin de vos droits</strong>. Autrement dit, votre durée d'indemnisation est allongée d'autant de jours que vous avez travaillé sans être indemnisé.</p>
+        <p>Ce mécanisme permet de "préserver" ses droits ARE tout en reprenant progressivement une activité. En revanche, si la nouvelle activité dure suffisamment longtemps pour vous permettre d'ouvrir de <strong>nouveaux droits</strong> (6 mois au moins), vous pouvez choisir entre reprendre les droits en cours ou ouvrir de nouveaux droits — France Travail vous présentera le calcul le plus avantageux.</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>L'activité réduite salariée est possible en dessous de <strong>110 heures par mois</strong>.</li>
+            <li>Pour une activité non salariée, pas de limite horaire : le cumul est calculé sur la base du <strong>chiffre d'affaires abattu</strong>.</li>
+            <li>Le cumul ARE + revenus ne peut pas dépasser le <strong>salaire brut antérieur</strong>.</li>
+            <li>La <strong>déclaration mensuelle</strong> est obligatoire chaque mois, y compris les mois sans activité.</li>
+            <li>Les jours non indemnisés sont <strong>reportés</strong> : votre durée d'indemnisation totale est préservée.</li>
+          </ul>
+        </div>
+        <div class="cta-box">
+          <p>Estimez votre allocation journalière de base pour simuler l'impact d'une activité réduite.</p>
+          <a href="/fr/are/" class="cta-btn">Calculer mon allocation ARE →</a>
+        </div>
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">Peut-on créer une micro-entreprise tout en percevant l'ARE ?</div>
+        <div class="faq-a">Oui. La création d'une micro-entreprise est une activité non salariée compatible avec le maintien partiel de l'ARE. Vous devez déclarer votre chiffre d'affaires chaque mois à France Travail. L'ARE est calculée sur la base du CA abattu (71 % pour les ventes, 50 % pour les services, 34 % pour le libéral). Si le CA est nul certains mois, vous percevez l'ARE en totalité.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Que se passe-t-il si je dépasse 110 heures salariées dans un mois ?</div>
+        <div class="faq-a">Si vous dépassez 110 heures de travail salarié dans le mois, vous perdez le bénéfice de l'ARE pour ce mois entier. Vous restez inscrit comme demandeur d'emploi mais n'êtes pas indemnisé pour les jours du mois en question. Ces jours sont reportés et votre durée d'indemnisation est préservée. Si ce dépassement se répète régulièrement, France Travail peut réévaluer votre situation.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">L'ARE partielle est-elle imposable de la même façon que l'ARE pleine ?</div>
+        <div class="faq-a">Oui. L'ARE partielle est soumise à l'impôt sur le revenu et à la CSG/CRDS selon les mêmes règles que l'ARE pleine. Le montant net après prélèvements figure sur vos avis de paiement. Attention : si vous cumulez ARE et salaires, votre revenu imposable annuel sera plus élevé, ce qui peut impacter votre taux de prélèvement à la source.</div>
+      </div>
+        </div>
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.francetravail.fr/candidat/mes-droits-aux-aides-et-allocati/a-chaque-situation-son-allocatio/indemnisation-assurance-chomage/vous-travaillez-tout-en-percevant.html">France Travail — Activité réduite et ARE</a></li>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F1650">Service-Public.fr — Cumul ARE et activité professionnelle</a></li>
+          </ul>
+        </div>
+      </article>
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#principe">Le principe de l'activité réduite</a></li>
+      <li><a href="#calcul">Comment est calculée l'ARE partielle ?</a></li>
+      <li><a href="#declaration">L'obligation de déclaration mensuelle</a></li>
+      <li><a href="#report">Le report des droits non consommés</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/inscription-france-travail/" class="similar-link">S'inscrire à France Travail</a>
+      <a href="/guides/delai-carence-chomage/" class="similar-link">Délai de carence ARE</a>
+      <a href="/guides/demission-et-chomage/" class="similar-link">Démission et chômage</a>
+      <a href="/guides/refus-offre-emploi-france-travail/" class="similar-link">Refus d'offre d'emploi</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Calculer l'allocation</div>
+        </a>
+        <a href="/fr/tva/" class="related-card">
+          <div class="related-card-title">TVA</div>
+          <div class="related-card-desc">TVA auto-entrepreneur</div>
+        </a>
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Barèmes 2026</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">ARE et imposition</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif sur la base des textes officiels en vigueur en 2026. Elles ne constituent pas un conseil juridique ou fiscal. Consultez un professionnel pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>
