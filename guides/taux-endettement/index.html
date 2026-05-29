@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Taux d'endettement immobilier 2026 — Calcul et règles HCSF — CalcFin</title>
+<meta name="description" content="Qu'est-ce que le taux d'endettement ? Règle des 35 % du HCSF, calcul, charges incluses et exceptions. Guide 2026 pour votre projet immobilier." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Taux d'endettement</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Immobilier</div>
+      <h1 class="page-title">Le <em>taux d'endettement</em> : règle et calcul</h1>
+      <p class="page-sub">Règle du HCSF, charges prises en compte, calcul précis et dérogations possibles pour votre dossier bancaire.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>Le <strong>taux d'endettement</strong> est l'indicateur clé que les banques utilisent pour évaluer votre capacité à rembourser un crédit immobilier. Il exprime le rapport entre vos charges mensuelles de crédit et vos revenus nets mensuels. Depuis janvier 2022, le Haut Conseil de Stabilité Financière (HCSF) a rendu contraignante la limite à <strong>35 %</strong>, encadrant ainsi les pratiques de l'ensemble des établissements bancaires français.</p>
+
+        <h2 id="definition">Qu'est-ce que le taux d'endettement ?</h2>
+        <p>Le taux d'endettement (ou taux d'effort) mesure la part de vos revenus consacrée au remboursement de vos crédits. Il se distingue du <strong>reste à vivre</strong>, qui mesure ce qu'il vous reste après déduction des charges de crédit. Une banque examine les deux indicateurs, mais le taux d'endettement est celui qui fait l'objet d'une norme réglementaire.</p>
+        <p>La formule est simple : <strong>Taux d'endettement = (Charges mensuelles totales de crédit / Revenus nets mensuels) × 100</strong></p>
+
+        <h2 id="calcul">Comment le calculer ?</h2>
+        <p>Exemple avec un couple co-emprunteur :</p>
+        <table>
+          <tr><th>Élément</th><th>Montant</th></tr>
+          <tr><td>Revenu net mensuel (personne 1)</td><td>2 800 €</td></tr>
+          <tr><td>Revenu net mensuel (personne 2)</td><td>2 200 €</td></tr>
+          <tr><td><strong>Total revenus nets</strong></td><td><strong>5 000 €</strong></td></tr>
+          <tr><td>Crédit auto en cours</td><td>250 €/mois</td></tr>
+          <tr><td>Futur prêt immobilier (simulé)</td><td>1 000 €/mois</td></tr>
+          <tr><td><strong>Total charges</strong></td><td><strong>1 250 €/mois</strong></td></tr>
+          <tr><td><strong>Taux d'endettement</strong></td><td><strong>25 % (1 250 / 5 000)</strong></td></tr>
+        </table>
+        <p>Dans cet exemple, le taux est de 25 %, bien en dessous du plafond de 35 %. La mensualité maximale théorique du prêt immobilier serait : (5 000 × 35 %) − 250 = 1 750 − 250 = <strong>1 500 €/mois</strong>.</p>
+
+        <h2 id="hcsf">La règle HCSF des 35 %</h2>
+        <p>Depuis le 1er janvier 2022, la décision du HCSF n°2021-7 impose que le taux d'endettement ne dépasse pas <strong>35 % des revenus nets</strong> (assurance emprunteur incluse dans les charges). Cette règle est désormais <strong>contraignante</strong> pour toutes les banques, et non plus seulement recommandée.</p>
+        <p>Les banques disposent d'une marge de dérogation de <strong>20 % de leur production trimestrielle</strong> de crédits immobiliers, réservée en priorité aux primo-accédants achetant leur résidence principale. Cette dérogation peut permettre un taux d'endettement allant jusqu'à 37-38 % dans les dossiers les plus solides (reste à vivre élevé, épargne résiduelle importante).</p>
+        <p>Avant janvier 2022, la règle des 33 % était une recommandation non contraignante, et les banques pouvaient librement s'en écarter. La réforme a uniformisé les pratiques et restreint l'accès au crédit pour certains profils.</p>
+
+        <h2 id="charges">Quelles charges entrent dans le calcul ?</h2>
+        <p>Toutes les mensualités de crédit sont incluses dans le calcul du taux d'endettement :</p>
+        <ul>
+          <li>Le <strong>futur prêt immobilier</strong> (capital + intérêts + assurance emprunteur)</li>
+          <li>Les <strong>crédits à la consommation</strong> en cours (auto, travaux, revolving utilisé)</li>
+          <li>Les <strong>autres prêts immobiliers</strong> en cours (résidence secondaire, investissement locatif)</li>
+          <li>Le <strong>crédit-bail ou LOA</strong> pour les véhicules</li>
+        </ul>
+        <p>En revanche, les charges suivantes <strong>ne sont pas incluses</strong> dans le calcul réglementaire du taux d'endettement : loyer actuel (si vous êtes locataire et que vous achetez une résidence principale pour y vivre), charges courantes (eau, électricité, téléphone), impôts, pensions alimentaires versées (selon les banques).</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>Taux d'endettement = <strong>(charges crédit / revenus nets) × 100</strong>, plafonné à <strong>35 %</strong> (HCSF).</li>
+            <li>L'<strong>assurance emprunteur</strong> est incluse dans les charges de crédit pour ce calcul.</li>
+            <li>Les banques ont une marge de dérogation de <strong>20 %</strong> de leur production, prioritairement pour les primo-accédants.</li>
+            <li>Rembourser vos crédits à la consommation <strong>avant</strong> la demande est le levier le plus rapide pour réduire votre taux d'endettement.</li>
+            <li>Le <strong>reste à vivre</strong> est aussi examiné par les banques, même si la règle principale est le plafond de 35 %.</li>
+          </ul>
+        </div>
+        <div class="cta-box">
+          <p>Calculez vos mensualités et vérifiez votre taux d'endettement avec le simulateur CalcFin.</p>
+          <a href="/fr/pret-immobilier/" class="cta-btn">Simuler mon prêt immobilier →</a>
+        </div>
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">L'assurance emprunteur est-elle comptée dans les 35 % ?</div>
+        <div class="faq-a">Oui. Depuis la décision HCSF de 2021, l'assurance emprunteur est explicitement incluse dans le calcul du taux d'endettement. Cela représente généralement 0,20 à 0,40 % du capital emprunté par an, soit quelques dizaines d'euros par mois — une somme à ne pas négliger dans le calcul de votre capacité d'emprunt.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Les revenus locatifs d'un investissement réduisent-ils le taux d'endettement ?</div>
+        <div class="faq-a">Partiellement. Les revenus locatifs sont intégrés à hauteur de 70 % pour tenir compte du risque de vacance et des charges. Par exemple, si vous percevez 800 €/mois de loyers, la banque intègre 560 € dans vos revenus. Cela améliore votre taux d'endettement, mais les mensualités du prêt locatif en cours restent dans les charges.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Mon taux d'endettement actuel dépasse 35 % : que faire ?</div>
+        <div class="faq-a">Plusieurs options : rembourser les crédits à la consommation existants (le plus efficace), augmenter l'apport pour réduire le capital emprunté et donc la mensualité, allonger la durée du prêt (réduit la mensualité mais augmente le coût total), ou chercher un co-emprunteur pour augmenter la base de revenus. Vous pouvez aussi vous adresser à un courtier en crédit, qui connaît les banques les plus flexibles dans l'utilisation de la marge de dérogation.</div>
+      </div>
+        </div>
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.banque-france.fr/fr/publications-et-statistiques/publications/recommandation-du-hcsf-relative-aux-credits-immobiliers-aux-particuliers">Banque de France — Décision HCSF n°2021-7</a></li>
+        <li><a href="https://www.anil.org/votre-projet/vous-achetez/emprunter-pour-acquerir/votre-capacite-demprunt/">ANIL — Capacité d'emprunt et taux d'endettement</a></li>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F699">Service-Public.fr — Crédit immobilier</a></li>
+          </ul>
+        </div>
+      </article>
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#definition">Qu'est-ce que le taux d'endettement ?</a></li>
+      <li><a href="#calcul">Comment le calculer ?</a></li>
+      <li><a href="#hcsf">La règle HCSF des 35 %</a></li>
+      <li><a href="#charges">Quelles charges entrent dans le calcul ?</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/capacite-emprunt/" class="similar-link">Capacité d'emprunt</a>
+      <a href="/guides/apport-personnel-immobilier/" class="similar-link">Apport personnel</a>
+      <a href="/guides/taux-fixe-vs-taux-variable/" class="similar-link">Taux fixe vs variable</a>
+      <a href="/guides/assurance-emprunteur/" class="similar-link">Assurance emprunteur</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/pret-immobilier/" class="related-card">
+          <div class="related-card-title">Prêt immobilier</div>
+          <div class="related-card-desc">Simuler mensualités</div>
+        </a>
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Calculer ses revenus nets</div>
+        </a>
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Revenus de remplacement</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Tranches 2026</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif. Elles ne constituent pas un conseil en investissement ou un conseil juridique. Consultez un professionnel (courtier, notaire, conseiller bancaire) pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

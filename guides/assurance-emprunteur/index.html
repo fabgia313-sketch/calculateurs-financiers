@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Assurance emprunteur 2026 — Fonctionnement et délégation — CalcFin</title>
+<meta name="description" content="Comment fonctionne l'assurance emprunteur ? Garanties, délégation d'assurance, loi Lemoine 2022, TAEA et conseils pour réduire son coût en 2026." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Assurance emprunteur</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Immobilier</div>
+      <h1 class="page-title">L'<em>assurance emprunteur</em> : garanties et droits</h1>
+      <p class="page-sub">Garanties obligatoires, délégation d'assurance, loi Lemoine et comment réduire le coût de votre assurance.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>L'<strong>assurance emprunteur</strong> est une assurance souscrite lors de la mise en place d'un prêt immobilier. Elle garantit le remboursement du capital restant dû (ou des mensualités) à la banque si l'emprunteur décède, devient invalide ou est en incapacité temporaire de travail. Elle représente souvent le <strong>deuxième poste de coût</strong> après les intérêts, pouvant représenter 10 à 30 % du coût total du crédit selon le profil.</p>
+
+        <h2 id="definition">À quoi sert l'assurance emprunteur ?</h2>
+        <p>L'assurance emprunteur n'est pas légalement obligatoire, mais les banques l'exigent quasi-systématiquement pour accorder un prêt immobilier. Elle protège à la fois <strong>la banque</strong> (qui est assurée d'être remboursée en cas de sinistre) et <strong>l'emprunteur et sa famille</strong> (qui ne se retrouvent pas dans l'impossibilité de rembourser en cas d'accident de vie majeur).</p>
+        <p>Son coût est exprimé en <strong>TAEA (Taux Annuel Effectif d'Assurance)</strong>, qui doit être communiqué obligatoirement par la banque. Il varie généralement entre <strong>0,10 % et 0,60 % du capital emprunté par an</strong> selon l'âge, l'état de santé et les garanties souscrites. Sur un prêt de 200 000 € sur 20 ans, cela représente entre 4 000 € et 24 000 € sur la durée totale.</p>
+
+        <h2 id="garanties">Les garanties principales</h2>
+        <table>
+          <tr><th>Garantie</th><th>Couverture</th><th>Obligatoire ?</th></tr>
+          <tr><td>Décès (DC)</td><td>Remboursement du capital restant dû au décès</td><td>Toujours exigée</td></tr>
+          <tr><td>PTIA</td><td>Perte Totale et Irréversible d'Autonomie</td><td>Toujours exigée</td></tr>
+          <tr><td>ITT</td><td>Incapacité Temporaire de Travail (&gt; 90 j généralement)</td><td>Exigée pour résidence principale</td></tr>
+          <tr><td>IPT</td><td>Invalidité Permanente Totale (&ge; 66 %)</td><td>Souvent exigée</td></tr>
+          <tr><td>IPP</td><td>Invalidité Permanente Partielle (33–66 %)</td><td>Optionnelle (exigée parfois)</td></tr>
+          <tr><td>Perte d'emploi</td><td>Prise en charge des mensualités en cas de chômage</td><td>Optionnelle</td></tr>
+        </table>
+        <p>Les garanties <strong>DC et PTIA</strong> couvrent le capital en cas de décès ou d'invalidité totale et irréversible. La garantie <strong>ITT</strong> prend en charge les mensualités pendant une incapacité temporaire de travail (souvent après un délai de franchise de 90 jours). La <strong>perte d'emploi</strong> est une option souvent onéreuse et peu utilisée compte tenu de ses conditions de déclenchement restrictives.</p>
+
+        <h2 id="delegation">Le droit à la délégation d'assurance</h2>
+        <p>Depuis la <strong>loi Lagarde (2010)</strong>, renforcée par les lois Hamon (2014) et Bourquin (2018), vous avez le droit de choisir librement votre assureur, sans être obligé de souscrire l'assurance groupe proposée par votre banque. C'est ce qu'on appelle la <strong>délégation d'assurance</strong>.</p>
+        <p>La banque ne peut pas refuser une délégation d'assurance si le contrat alternatif présente des <strong>garanties équivalentes</strong> à celles du contrat groupe. Elle dispose de 10 jours ouvrés pour notifier son acceptation ou son refus motivé (refus devenu très rare car le contrat doit simplement respecter l'équivalence de garanties). En optant pour une assurance externe, il est courant d'économiser <strong>30 à 60 %</strong> sur le coût de l'assurance, notamment pour les profils jeunes et en bonne santé.</p>
+
+        <h2 id="lemoine">La loi Lemoine (2022)</h2>
+        <p>La loi Lemoine, entrée en vigueur en 2022, a apporté deux avancées majeures :</p>
+        <ul>
+          <li><strong>Résiliation à tout moment</strong> : depuis le 1er septembre 2022, vous pouvez changer d'assurance emprunteur à n'importe quel moment, sans frais ni pénalités, à condition de proposer un contrat aux garanties équivalentes. Plus besoin d'attendre la date anniversaire du contrat.</li>
+          <li><strong>Suppression du questionnaire médical</strong> : pour les prêts dont le capital assuré est inférieur à <strong>200 000 € par assuré</strong> (400 000 € pour un couple) et dont le remboursement se termine avant le <strong>60e anniversaire</strong> de l'emprunteur, le questionnaire de santé est supprimé. Cette mesure facilite l'accès au crédit des personnes ayant eu des problèmes de santé.</li>
+        </ul>
+        <p>Pour les prêts ne rentrant pas dans ces critères, la <strong>convention AERAS</strong> (s'Assurer et Emprunter avec un Risque Aggravé de Santé) permet aux personnes ayant ou ayant eu des problèmes de santé graves d'accéder à l'assurance emprunteur à des tarifs encadrés.</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>L'assurance emprunteur représente <strong>10 à 30 %</strong> du coût total du crédit selon votre profil.</li>
+            <li>Vous avez le droit de choisir votre assureur (<strong>délégation d'assurance</strong>) dès la souscription et de changer à tout moment (loi Lemoine 2022).</li>
+            <li>Pour les emprunts &lt; 200 000 € / assuré avec fin avant 60 ans : <strong>pas de questionnaire médical</strong>.</li>
+            <li>Les garanties DC et PTIA sont toujours exigées ; ITT et IPT le sont pour la résidence principale.</li>
+            <li>Comparez les offres d'assurance avant de signer : un jeune emprunteur peut économiser <strong>30 à 60 %</strong> hors contrat groupe bancaire.</li>
+          </ul>
+        </div>
+        <div class="cta-box">
+          <p>Calculez le coût total de votre prêt avec et sans optimisation de l'assurance emprunteur.</p>
+          <a href="/fr/pret-immobilier/" class="cta-btn">Simuler mon prêt immobilier →</a>
+        </div>
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">La banque peut-elle refuser ma délégation d'assurance ?</div>
+        <div class="faq-a">Elle peut la refuser uniquement si les garanties du contrat alternatif ne sont pas équivalentes aux garanties minimales définies par la fiche standardisée d'information (FSI) que la banque doit vous remettre. Ce refus doit être motivé par écrit. En pratique, les refus sont très rares car les assureurs alternatifs conçoivent leurs contrats pour respecter l'équivalence.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">L'assurance perte d'emploi est-elle utile ?</div>
+        <div class="faq-a">Elle peut l'être dans certains cas, mais ses conditions de déclenchement sont souvent restrictives : elle ne couvre généralement que le licenciement économique (pas la rupture conventionnelle, ni la démission), après un délai de carence de 3 à 6 mois, et pendant une durée limitée (12 à 24 mois). Le rapport garantie/coût est souvent défavorable, ce qui explique qu'elle soit peu souscrite.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Comment fonctionne la convention AERAS ?</div>
+        <div class="faq-a">La convention AERAS (s'Assurer et Emprunter avec un Risque Aggravé de Santé) permet aux personnes ayant eu un cancer, un problème cardiaque ou une autre pathologie grave d'accéder à l'assurance emprunteur. Elle prévoit notamment le "droit à l'oubli" : depuis 2022, les personnes guéries d'un cancer depuis plus de 5 ans n'ont plus à le déclarer dans leur questionnaire de santé.</div>
+      </div>
+        </div>
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F20586">Service-Public.fr — Assurance emprunteur</a></li>
+        <li><a href="https://www.anil.org/votre-projet/vous-achetez/emprunter-pour-acquerir/l-assurance-emprunteur/">ANIL — Assurance emprunteur</a></li>
+        <li><a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000045173887">Légifrance — Loi Lemoine du 28 février 2022</a></li>
+          </ul>
+        </div>
+      </article>
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#definition">À quoi sert l'assurance emprunteur ?</a></li>
+      <li><a href="#garanties">Les garanties principales</a></li>
+      <li><a href="#delegation">Le droit à la délégation d'assurance</a></li>
+      <li><a href="#lemoine">La loi Lemoine (2022)</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/taux-fixe-vs-taux-variable/" class="similar-link">Taux fixe vs variable</a>
+      <a href="/guides/capacite-emprunt/" class="similar-link">Capacité d'emprunt</a>
+      <a href="/guides/taux-endettement/" class="similar-link">Taux d'endettement</a>
+      <a href="/guides/frais-de-notaire/" class="similar-link">Frais de notaire</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/pret-immobilier/" class="related-card">
+          <div class="related-card-title">Prêt immobilier</div>
+          <div class="related-card-desc">Simuler le coût total</div>
+        </a>
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Calculer ses revenus</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Tranches 2026</div>
+        </a>
+        <a href="/fr/are/" class="related-card">
+          <div class="related-card-title">Chômage ARE</div>
+          <div class="related-card-desc">Perte d'emploi et crédit</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif. Elles ne constituent pas un conseil en investissement ou un conseil juridique. Consultez un professionnel (courtier, notaire, conseiller bancaire) pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

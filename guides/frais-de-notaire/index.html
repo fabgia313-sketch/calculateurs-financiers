@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Frais de notaire 2026 — Comment les calculer ? — CalcFin</title>
+<meta name="description" content="Frais de notaire dans l'ancien et dans le neuf en 2026 : composition, taux, droits de mutation et émoluments. Calculez précisément vos frais d'acquisition." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg-elev: #111118;
+    --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06);
+    --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2;
+    --fg-muted: rgba(245,245,242,0.56);
+    --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0;
+    --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8;
+    --bg-elev: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07);
+    --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F;
+    --fg-muted: rgba(10,10,15,0.58);
+    --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D;
+    --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5;
+  }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .backdrop-glow {
+    position: fixed; top: -300px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%);
+    pointer-events: none; z-index: 0; opacity: 0.7;
+  }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    background: color-mix(in oklab, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Frais de notaire</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Immobilier</div>
+      <h1 class="page-title">Frais de notaire : <em>comment les calculer ?</em></h1>
+      <p class="page-sub">Composition des frais d'acquisition, différence ancien / neuf, droits de mutation et émoluments du notaire.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>Les <strong>frais de notaire</strong> (ou frais d'acquisition) sont des frais incontournables lors de tout achat immobilier. Contrairement à ce que leur nom laisse entendre, la grande majorité de ces frais ne revient pas au notaire lui-même : ce sont des <strong>taxes reversées à l'État et aux collectivités territoriales</strong>. En 2026, ils représentent entre <strong>7 et 8 %</strong> du prix d'achat dans l'ancien, et seulement <strong>2 à 3 %</strong> dans le neuf.</p>
+
+        <h2 id="composition">La composition des frais de notaire</h2>
+        <p>Les frais de notaire se décomposent en trois grandes catégories :</p>
+        <ol>
+          <li><strong>Les droits de mutation (ou droits d'enregistrement)</strong> : la part la plus importante. Reversée à l'État, au département et à la commune. En vigueur dans l'immobilier ancien depuis que la TVA a été retirée de cette assiette.</li>
+          <li><strong>Les émoluments du notaire</strong> : la rémunération réglementée du notaire, calculée selon un barème dégressif fixé par décret. Environ 0,8 à 1,5 % du prix, selon le montant de la transaction.</li>
+          <li><strong>Les débours</strong> : remboursement des frais avancés par le notaire pour les formalités (état hypothécaire, documents d'urbanisme, géomètre, etc.). Environ 300 à 600 €.</li>
+        </ol>
+        <table>
+          <tr><th>Poste</th><th>Ancien</th><th>Neuf</th></tr>
+          <tr><td>Droits de mutation</td><td>5,80665 %</td><td>0,715 % (droits d'enregistrement réduits)</td></tr>
+          <tr><td>Émoluments du notaire</td><td>~0,8–1,5 %</td><td>~0,8–1,5 %</td></tr>
+          <tr><td>Contribution de sécurité immobilière</td><td>0,10 %</td><td>0,10 %</td></tr>
+          <tr><td>Débours (frais divers)</td><td>~300–600 €</td><td>~300–600 €</td></tr>
+          <tr><td><strong>Total estimé</strong></td><td><strong>7–8 %</strong></td><td><strong>2–3 %</strong></td></tr>
+        </table>
+
+        <h2 id="ancien-neuf">Ancien vs neuf : des taux très différents</h2>
+        <p>La différence majeure entre immobilier ancien et neuf tient aux <strong>droits de mutation</strong> :</p>
+        <p><strong>Dans l'ancien</strong>, les droits de mutation s'élèvent à <strong>5,80665 %</strong> dans la quasi-totalité des départements (composés de la taxe départementale à 4,50 %, de la taxe communale à 1,20 % et des frais d'assiette de 0,1065 %). Seuls 4 départements appliquent un taux réduit de 3,80 % (la liste peut varier d'une année à l'autre).</p>
+        <p><strong>Dans le neuf</strong> (logement acheté en VEFA ou maison neuve jamais habitée), la TVA (20 %) est intégrée dans le prix affiché. Les droits de mutation sont donc très réduits (seulement 0,715 %). C'est pourquoi les frais de notaire ne représentent que 2 à 3 % dans le neuf.</p>
+        <p>Exemple concret pour un bien à 250 000 € :</p>
+        <table>
+          <tr><th>Type de bien</th><th>Frais estimés</th><th>Montant</th></tr>
+          <tr><td>Immobilier ancien</td><td>~7,5 %</td><td>~18 750 €</td></tr>
+          <tr><td>Immobilier neuf (VEFA)</td><td>~2,5 %</td><td>~6 250 €</td></tr>
+        </table>
+
+        <h2 id="droits-mutation">Les droits de mutation en détail</h2>
+        <p>Les droits de mutation se décomposent précisément ainsi :</p>
+        <ul>
+          <li><strong>Taxe départementale</strong> : 4,50 % (modulable par le département entre 3,80 % et 4,50 %)</li>
+          <li><strong>Taxe communale</strong> : 1,20 % (fixe, calculée sur la base de la taxe départementale)</li>
+          <li><strong>Frais d'assiette et de recouvrement</strong> : 2,37 % × taxe départementale = environ 0,1065 %</li>
+          <li><strong>Total</strong> : 4,50 % + 1,20 % + 0,1065 % = <strong>5,80665 %</strong> dans les départements au taux plein</li>
+        </ul>
+        <p>Ces taxes sont réparties entre le département (qui en perçoit la majorité pour financer ses dépenses sociales et d'infrastructures) et la commune (qui reçoit une fraction via un prélèvement calculé par l'État).</p>
+
+        <h2 id="reduire">Peut-on réduire les frais de notaire ?</h2>
+        <p>Les marges sont limitées mais il existe quelques leviers :</p>
+        <ul>
+          <li><strong>Déduire la valeur du mobilier</strong> : si le bien est vendu avec des meubles (cuisine équipée, dressing, etc.), leur valeur peut être déduite du prix immobilier servant de base aux droits de mutation. Cette pratique est légale mais doit rester raisonnable et correspondre à la valeur réelle des meubles.</li>
+          <li><strong>Opter pour le neuf</strong> : les droits de mutation sont quasi nuls dans le neuf, compensant en partie la TVA incluse dans le prix.</li>
+          <li><strong>Négocier les émoluments de rédaction d'acte</strong> : la part de rémunération libre du notaire (environ 15-20 % de ses émoluments totaux) peut être négociée pour les transactions importantes.</li>
+          <li><strong>Achat en SCI</strong> : dans certains cas, l'achat via une SCI peut permettre de bénéficier du régime de cession de parts sociales (moins taxé que la vente immobilière directe), mais cela est réservé à des situations spécifiques et doit être validé par un notaire.</li>
+        </ul>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>Les frais de notaire représentent <strong>7–8 %</strong> dans l'ancien, <strong>2–3 %</strong> dans le neuf.</li>
+            <li>La majorité est constituée de <strong>taxes reversées à l'État et aux collectivités</strong> (droits de mutation : 5,80665 %).</li>
+            <li>Les émoluments du notaire (sa rémunération) représentent seulement <strong>0,8–1,5 %</strong> du prix.</li>
+            <li>Seuls <strong>4 départements</strong> appliquent un taux réduit de 3,80 % sur les droits de mutation.</li>
+            <li>La valeur des meubles peut être <strong>déduite</strong> de la base taxable si elle est justifiée et raisonnable.</li>
+          </ul>
+        </div>
+        <div class="cta-box">
+          <p>Intégrez les frais de notaire dans votre plan de financement et calculez votre mensualité.</p>
+          <a href="/fr/pret-immobilier/" class="cta-btn">Simuler mon prêt immobilier →</a>
+        </div>
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+      <div class="faq-item">
+        <div class="faq-q">Les frais de notaire sont-ils négociables ?</div>
+        <div class="faq-a">Partiellement. La majeure partie des frais de notaire est réglementée (droits de mutation, émoluments proportionnels) et ne peut pas être négociée. En revanche, les honoraires libres (émoluments de rédaction d'acte complexe, conseils spécifiques) représentent une fraction négociable, surtout sur les transactions importantes. Certains notaires peuvent consentir des remises allant jusqu'à 20 % sur la part d'honoraires libres.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Les frais de notaire sont-ils déductibles des impôts ?</div>
+        <div class="faq-a">Pas pour une résidence principale. En revanche, pour un investissement locatif, les frais de notaire peuvent être déduits des revenus fonciers (si vous optez pour le régime réel d'imposition) ou amortis sur plusieurs années pour les locations meublées soumises au BIC. Pour les travaux et les locaux professionnels, des règles spécifiques s'appliquent.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Combien de temps après la signature doit-on payer les frais de notaire ?</div>
+        <div class="faq-a">Les frais de notaire sont versés lors de la signature de l'acte authentique de vente (ou lors de la remise des fonds pour une VEFA). En pratique, le notaire vous demande une provision lors du compromis (souvent 5 à 10 % du prix), puis le solde et les frais définitifs lors de la signature de l'acte. Les frais provisionnés sont ajustés après la transaction une fois l'ensemble des taxes calculées précisément.</div>
+      </div>
+        </div>
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F10871">Service-Public.fr — Achat immobilier et frais de notaire</a></li>
+        <li><a href="https://www.anil.org/votre-projet/vous-achetez/les-frais-dachat/">ANIL — Les frais d'acquisition</a></li>
+        <li><a href="https://www.impots.gouv.fr/particulier/droits-denregistrement-acquisitions-immobilieres">impots.gouv.fr — Droits d'enregistrement</a></li>
+          </ul>
+        </div>
+      </article>
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+      <li><a href="#composition">La composition des frais de notaire</a></li>
+      <li><a href="#ancien-neuf">Ancien vs neuf : des taux très différents</a></li>
+      <li><a href="#droits-mutation">Les droits de mutation en détail</a></li>
+      <li><a href="#reduire">Peut-on réduire les frais de notaire ?</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+      <a href="/guides/apport-personnel-immobilier/" class="similar-link">Apport personnel</a>
+      <a href="/guides/capacite-emprunt/" class="similar-link">Capacité d'emprunt</a>
+      <a href="/guides/ptz-2026/" class="similar-link">PTZ 2026</a>
+      <a href="/guides/assurance-emprunteur/" class="similar-link">Assurance emprunteur</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/pret-immobilier/" class="related-card">
+          <div class="related-card-title">Prêt immobilier</div>
+          <div class="related-card-desc">Simuler son crédit</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Tranches 2026</div>
+        </a>
+        <a href="/fr/tva/" class="related-card">
+          <div class="related-card-title">TVA</div>
+          <div class="related-card-desc">TVA sur les travaux</div>
+        </a>
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Calculer ses revenus</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les informations de ce guide sont fournies à titre indicatif. Elles ne constituent pas un conseil en investissement ou un conseil juridique. Consultez un professionnel (courtier, notaire, conseiller bancaire) pour votre situation personnelle.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    q.closest('.faq-item').classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>
