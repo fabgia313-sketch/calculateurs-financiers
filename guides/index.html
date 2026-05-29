@@ -110,7 +110,7 @@
   .breadcrumb span { color: var(--fg-muted); }
 
   /* ===== PAGE HEADER ===== */
-  .page-header { padding: 28px 0 48px; }
+  .page-header { padding: 28px 0 32px; }
   .page-badge {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 4px 10px; background: var(--accent-soft);
@@ -135,11 +135,63 @@
   .page-title em { color: var(--accent); font-style: normal; }
   .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
 
+  /* ===== SEARCH ===== */
+  .search-wrap {
+    margin-bottom: 40px;
+  }
+  .search-inner {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .search-icon {
+    position: absolute; left: 16px; top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--fg-faint);
+    display: flex; align-items: center;
+    transition: color 0.18s;
+  }
+  .search-icon svg { width: 16px; height: 16px; }
+  .search-input {
+    width: 100%;
+    height: 48px;
+    padding: 0 48px 0 44px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--fg);
+    font-size: 14px;
+    font-family: 'Geist', sans-serif;
+    outline: none;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+  .search-input::placeholder { color: var(--fg-faint); }
+  .search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .search-input:focus + .search-icon,
+  .search-inner:focus-within .search-icon { color: var(--accent); }
+  .search-clear {
+    position: absolute; right: 14px; top: 50%;
+    transform: translateY(-50%);
+    background: none; border: none; cursor: pointer;
+    color: var(--fg-faint); padding: 4px;
+    display: none; align-items: center; justify-content: center;
+    border-radius: 4px; transition: color 0.15s;
+  }
+  .search-clear:hover { color: var(--fg); }
+  .search-clear svg { width: 14px; height: 14px; }
+  .search-clear.visible { display: flex; }
+
   /* ===== GUIDE CATEGORIES ===== */
   .guides-body { padding-bottom: 80px; }
 
   .category-section { margin-bottom: 56px; }
   .category-section:last-of-type { margin-bottom: 0; }
+  /* Hide empty sections during search */
+  .category-section.search-hidden { display: none; }
 
   .category-header {
     display: flex; align-items: center; gap: 12px;
@@ -154,6 +206,7 @@
     font-family: 'Geist Mono', monospace;
     background: var(--bg-elev); border: 1px solid var(--border);
     border-radius: 999px; padding: 2px 8px;
+    transition: opacity 0.15s;
   }
 
   /* ===== GUIDE CARDS ===== */
@@ -167,12 +220,18 @@
     padding: 20px; gap: 8px;
     background: var(--bg-card); border: 1px solid var(--border);
     border-radius: var(--radius-md); text-decoration: none; color: var(--fg);
-    transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+    transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s,
+                opacity 0.2s ease, max-height 0.25s ease;
+    overflow: hidden;
   }
   .guide-card:hover {
     border-color: var(--border-hover);
     transform: translateY(-2px);
     box-shadow: 0 8px 32px rgba(0,229,160,0.06);
+  }
+  /* Hidden state during search */
+  .guide-card.search-hidden {
+    display: none;
   }
   .guide-card-title {
     font-size: 15px; font-weight: 600; line-height: 1.3;
@@ -189,6 +248,26 @@
   }
   .guide-card:hover .guide-card-arrow { opacity: 1; }
 
+  /* ===== NO RESULTS ===== */
+  .no-results {
+    display: none;
+    text-align: center;
+    padding: 56px 24px;
+    color: var(--fg-faint);
+  }
+  .no-results.visible { display: block; }
+  .no-results-icon {
+    font-size: 36px; margin-bottom: 16px;
+    opacity: 0.5;
+  }
+  .no-results p {
+    font-size: 15px; color: var(--fg-muted); margin-bottom: 6px;
+  }
+  .no-results small {
+    font-size: 13px; color: var(--fg-faint);
+    font-family: 'Geist Mono', monospace;
+  }
+
   /* ===== COMING SOON ===== */
   .coming-soon {
     margin-top: 56px; padding: 28px 32px;
@@ -200,9 +279,7 @@
     width: 8px; height: 8px; border-radius: 50%;
     background: var(--fg-faint); flex-shrink: 0;
   }
-  .coming-soon-text {
-    font-size: 14px; color: var(--fg-muted);
-  }
+  .coming-soon-text { font-size: 14px; color: var(--fg-muted); }
   .coming-soon-text strong { color: var(--fg); }
 
   /* ===== TOOLS NAV ===== */
@@ -230,7 +307,7 @@
 
   @media (max-width: 480px) {
     .container { padding: 0 16px; }
-    .page-header { padding: 16px 0 28px; }
+    .page-header { padding: 16px 0 24px; }
     .header-inner { height: 56px; }
     .coming-soon { padding: 20px; flex-direction: column; gap: 10px; }
   }
@@ -293,60 +370,112 @@
       <p class="page-sub">Tout comprendre sur votre salaire, vos droits et votre argent. Des guides clairs, basés sur des sources officielles 2026.</p>
     </div>
 
+    <!-- Search -->
+    <div class="search-wrap">
+      <div class="search-inner">
+        <!-- Loupe (positionnée en absolu à gauche) -->
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="8.5" cy="8.5" r="5.5"/>
+            <line x1="13.5" y1="13.5" x2="18" y2="18"/>
+          </svg>
+        </span>
+        <input
+          type="search"
+          id="guides-search"
+          class="search-input"
+          placeholder="Rechercher un guide… (ex : retraite, TVA, salaire)"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Rechercher un guide"
+        />
+        <!-- Bouton effacer -->
+        <button class="search-clear" id="search-clear" aria-label="Effacer la recherche">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="5" y1="5" x2="15" y2="15"/>
+            <line x1="15" y1="5" x2="5" y2="15"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
     <!-- Guides body -->
-    <div class="guides-body">
+    <div class="guides-body" id="guides-body">
+
+      <!-- Message aucun résultat -->
+      <div class="no-results" id="no-results">
+        <div class="no-results-icon">🔍</div>
+        <p>Aucun guide trouvé pour cette recherche.</p>
+        <small>Essayez avec d'autres mots-clés.</small>
+      </div>
 
       <!-- Catégorie 1 : Fiche de paie & Salaire -->
-      <section class="category-section">
+      <section class="category-section" data-section>
         <div class="category-header">
           <h2 class="category-title">Fiche de paie &amp; Salaire</h2>
-          <span class="category-count">8 guides</span>
+          <span class="category-count" data-count>8 guides</span>
         </div>
         <div class="guides-grid">
 
-          <a href="/guides/comment-lire-sa-fiche-de-paie/" class="guide-card">
+          <a href="/guides/comment-lire-sa-fiche-de-paie/" class="guide-card"
+             data-title="Comment lire sa fiche de paie"
+             data-tags="fiche paie brut net cotisations prelevement source salaire bulletin">
             <div class="guide-card-title">Comment lire sa fiche de paie</div>
             <div class="guide-card-desc">Brut, net, cotisations, prélèvement à la source</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/cotisations-salariales/" class="guide-card">
+          <a href="/guides/cotisations-salariales/" class="guide-card"
+             data-title="Cotisations salariales"
+             data-tags="cotisations salariales charges patronales retraite maladie chomage secu securite sociale">
             <div class="guide-card-title">Cotisations salariales</div>
             <div class="guide-card-desc">À quoi servent vos cotisations ?</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/brut-net-net-imposable/" class="guide-card">
+          <a href="/guides/brut-net-net-imposable/" class="guide-card"
+             data-title="Brut, net, net imposable"
+             data-tags="brut net imposable salaire montant difference calcul">
             <div class="guide-card-title">Brut, net, net imposable</div>
             <div class="guide-card-desc">Les 3 montants clés de votre salaire</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/smic-2026/" class="guide-card">
+          <a href="/guides/smic-2026/" class="guide-card"
+             data-title="Le SMIC en 2026"
+             data-tags="smic salaire minimum 2026 horaire mensuel revenu plancher">
             <div class="guide-card-title">Le SMIC en 2026</div>
             <div class="guide-card-desc">Montant, évolution, calcul</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/negocier-son-salaire/" class="guide-card">
+          <a href="/guides/negocier-son-salaire/" class="guide-card"
+             data-title="Négocier son salaire"
+             data-tags="negocier salaire augmentation entretien arguments methode">
             <div class="guide-card-title">Négocier son salaire</div>
             <div class="guide-card-desc">Méthodes et arguments efficaces</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/prime-treizieme-mois/" class="guide-card">
+          <a href="/guides/prime-treizieme-mois/" class="guide-card"
+             data-title="Prime de 13e mois"
+             data-tags="prime treizieme mois 13e mois bonus salaire fin annee">
             <div class="guide-card-title">Prime de 13e mois</div>
             <div class="guide-card-desc">Fonctionnement et calcul</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/avantages-en-nature/" class="guide-card">
+          <a href="/guides/avantages-en-nature/" class="guide-card"
+             data-title="Avantages en nature"
+             data-tags="avantages nature voiture logement repas tickets restaurant benefices">
             <div class="guide-card-title">Avantages en nature</div>
             <div class="guide-card-desc">Voiture, logement, repas…</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/interessement-participation/" class="guide-card">
+          <a href="/guides/interessement-participation/" class="guide-card"
+             data-title="Intéressement et participation"
+             data-tags="interessement participation epargne salariale prime entreprise PEE PERCO">
             <div class="guide-card-title">Intéressement et participation</div>
             <div class="guide-card-desc">Comment ça fonctionne ?</div>
             <div class="guide-card-arrow">Lire le guide →</div>
@@ -356,50 +485,64 @@
       </section>
 
       <!-- Catégorie 2 : Fin de contrat -->
-      <section class="category-section">
+      <section class="category-section" data-section>
         <div class="category-header">
           <h2 class="category-title">Fin de contrat</h2>
-          <span class="category-count">7 guides</span>
+          <span class="category-count" data-count>7 guides</span>
         </div>
         <div class="guides-grid">
 
-          <a href="/guides/rupture-conventionnelle-guide/" class="guide-card">
+          <a href="/guides/rupture-conventionnelle-guide/" class="guide-card"
+             data-title="Rupture conventionnelle"
+             data-tags="rupture conventionnelle indemnite procedure homologation ARE chomage fin contrat">
             <div class="guide-card-title">Rupture conventionnelle</div>
             <div class="guide-card-desc">Procédure, indemnité légale et droits à l'ARE</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/demission-vs-rupture-conventionnelle/" class="guide-card">
+          <a href="/guides/demission-vs-rupture-conventionnelle/" class="guide-card"
+             data-title="Démission vs rupture conventionnelle"
+             data-tags="demission rupture conventionnelle comparatif choix indemnite chomage">
             <div class="guide-card-title">Démission vs rupture conventionnelle</div>
             <div class="guide-card-desc">Comparatif pour choisir la bonne option</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/licenciement-economique-droits/" class="guide-card">
+          <a href="/guides/licenciement-economique-droits/" class="guide-card"
+             data-title="Licenciement économique"
+             data-tags="licenciement economique droits indemnites CSP PSE plan sauvegarde">
             <div class="guide-card-title">Licenciement économique</div>
             <div class="guide-card-desc">Vos droits, indemnités, CSP et PSE</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/licenciement-abusif/" class="guide-card">
+          <a href="/guides/licenciement-abusif/" class="guide-card"
+             data-title="Licenciement abusif"
+             data-tags="licenciement abusif injustifie contestation prudhommes recours">
             <div class="guide-card-title">Licenciement abusif</div>
             <div class="guide-card-desc">Reconnaître et contester un licenciement injustifié</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/preavis-calcul/" class="guide-card">
+          <a href="/guides/preavis-calcul/" class="guide-card"
+             data-title="Le préavis"
+             data-tags="preavis duree calcul indemnite compensatrice conge fin contrat">
             <div class="guide-card-title">Le préavis</div>
             <div class="guide-card-desc">Durée, calcul et indemnité compensatrice</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/solde-de-tout-compte/" class="guide-card">
+          <a href="/guides/solde-de-tout-compte/" class="guide-card"
+             data-title="Solde de tout compte"
+             data-tags="solde tout compte recu fin contrat quitus elements conges payes">
             <div class="guide-card-title">Solde de tout compte</div>
             <div class="guide-card-desc">Ce que doit contenir ce document clé</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/clause-non-concurrence/" class="guide-card">
+          <a href="/guides/clause-non-concurrence/" class="guide-card"
+             data-title="Clause de non-concurrence"
+             data-tags="clause non concurrence validite contrepartie levee interdiction">
             <div class="guide-card-title">Clause de non-concurrence</div>
             <div class="guide-card-desc">Validité, contrepartie obligatoire et levée</div>
             <div class="guide-card-arrow">Lire le guide →</div>
@@ -409,38 +552,48 @@
       </section>
 
       <!-- Catégorie 3 : Chômage -->
-      <section class="category-section">
+      <section class="category-section" data-section>
         <div class="category-header">
           <h2 class="category-title">Chômage ARE</h2>
-          <span class="category-count">5 guides</span>
+          <span class="category-count" data-count>5 guides</span>
         </div>
         <div class="guides-grid">
 
-          <a href="/guides/inscription-france-travail/" class="guide-card">
+          <a href="/guides/inscription-france-travail/" class="guide-card"
+             data-title="S'inscrire à France Travail"
+             data-tags="france travail inscription chomage ARE allocation pole emploi dossier">
             <div class="guide-card-title">S'inscrire à France Travail</div>
             <div class="guide-card-desc">Conditions, démarche et premier versement ARE</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/cumul-chomage-activite/" class="guide-card">
+          <a href="/guides/cumul-chomage-activite/" class="guide-card"
+             data-title="Cumuler chômage et activité"
+             data-tags="cumul chomage activite reduite ARE partielle travail allocations">
             <div class="guide-card-title">Cumuler chômage et activité</div>
             <div class="guide-card-desc">Activité réduite, calcul de l'ARE partielle</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/refus-offre-emploi-france-travail/" class="guide-card">
+          <a href="/guides/refus-offre-emploi-france-travail/" class="guide-card"
+             data-title="Refuser une offre d'emploi"
+             data-tags="refus offre emploi raisonnable sanctions radiation france travail">
             <div class="guide-card-title">Refuser une offre d'emploi</div>
             <div class="guide-card-desc">Offre raisonnable, sanctions et recours</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/delai-carence-chomage/" class="guide-card">
+          <a href="/guides/delai-carence-chomage/" class="guide-card"
+             data-title="Délai de carence chômage"
+             data-tags="delai carence chomage 7 jours differe conges payes specifique attente">
             <div class="guide-card-title">Délai de carence chômage</div>
             <div class="guide-card-desc">7 jours + différé CP + différé spécifique</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/demission-et-chomage/" class="guide-card">
+          <a href="/guides/demission-et-chomage/" class="guide-card"
+             data-title="Démission et chômage"
+             data-tags="demission chomage legitime projet reconversion ARE droits allocation">
             <div class="guide-card-title">Démission et chômage</div>
             <div class="guide-card-desc">Démission légitime et projet de reconversion</div>
             <div class="guide-card-arrow">Lire le guide →</div>
@@ -450,50 +603,64 @@
       </section>
 
       <!-- Catégorie 4 : Immobilier -->
-      <section class="category-section">
+      <section class="category-section" data-section>
         <div class="category-header">
           <h2 class="category-title">Immobilier</h2>
-          <span class="category-count">7 guides</span>
+          <span class="category-count" data-count>7 guides</span>
         </div>
         <div class="guides-grid">
 
-          <a href="/guides/capacite-emprunt/" class="guide-card">
+          <a href="/guides/capacite-emprunt/" class="guide-card"
+             data-title="Capacité d'emprunt"
+             data-tags="capacite emprunt revenus 35% taux endettement pret immobilier calcul">
             <div class="guide-card-title">Capacité d'emprunt</div>
             <div class="guide-card-desc">Revenus, règle des 35 % et formule de calcul</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/taux-fixe-vs-taux-variable/" class="guide-card">
+          <a href="/guides/taux-fixe-vs-taux-variable/" class="guide-card"
+             data-title="Taux fixe vs taux variable"
+             data-tags="taux fixe variable pret immobilier comparatif emprunt credit">
             <div class="guide-card-title">Taux fixe vs taux variable</div>
             <div class="guide-card-desc">Comparatif et conseils selon votre profil</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/taux-endettement/" class="guide-card">
+          <a href="/guides/taux-endettement/" class="guide-card"
+             data-title="Taux d'endettement"
+             data-tags="taux endettement HCSF 35% pret banque calcul revenus charges">
             <div class="guide-card-title">Taux d'endettement</div>
             <div class="guide-card-desc">Règle HCSF des 35 % et calcul précis</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/apport-personnel-immobilier/" class="guide-card">
+          <a href="/guides/apport-personnel-immobilier/" class="guide-card"
+             data-title="Apport personnel"
+             data-tags="apport personnel immobilier epargne achat banque pret financement">
             <div class="guide-card-title">Apport personnel</div>
             <div class="guide-card-desc">Combien faut-il et quelles sources ?</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/ptz-2026/" class="guide-card">
+          <a href="/guides/ptz-2026/" class="guide-card"
+             data-title="PTZ 2026"
+             data-tags="PTZ pret taux zero 2026 primo accedant zones conditions montant">
             <div class="guide-card-title">PTZ 2026</div>
             <div class="guide-card-desc">Conditions, zones et montants du prêt à taux zéro</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/assurance-emprunteur/" class="guide-card">
+          <a href="/guides/assurance-emprunteur/" class="guide-card"
+             data-title="Assurance emprunteur"
+             data-tags="assurance emprunteur garanties delegation loi lemoine pret immobilier">
             <div class="guide-card-title">Assurance emprunteur</div>
             <div class="guide-card-desc">Garanties, délégation et loi Lemoine 2022</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/frais-de-notaire/" class="guide-card">
+          <a href="/guides/frais-de-notaire/" class="guide-card"
+             data-title="Frais de notaire"
+             data-tags="frais notaire ancien neuf droits mutation calcul achat immobilier">
             <div class="guide-card-title">Frais de notaire</div>
             <div class="guide-card-desc">Ancien vs neuf, droits de mutation et calcul</div>
             <div class="guide-card-arrow">Lire le guide →</div>
@@ -503,50 +670,64 @@
       </section>
 
       <!-- Catégorie 5 : Impôts -->
-      <section class="category-section">
+      <section class="category-section" data-section>
         <div class="category-header">
           <h2 class="category-title">Impôts</h2>
-          <span class="category-count">7 guides</span>
+          <span class="category-count" data-count>7 guides</span>
         </div>
         <div class="guides-grid">
 
-          <a href="/guides/prelevement-a-la-source/" class="guide-card">
+          <a href="/guides/prelevement-a-la-source/" class="guide-card"
+             data-title="Prélèvement à la source 2026"
+             data-tags="prelevement source PAS taux personnalise neutre individualise impot retenue salaire">
             <div class="guide-card-title">Prélèvement à la source 2026</div>
             <div class="guide-card-desc">Taux personnalisé, neutre et individualisé — tout comprendre</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/quotient-familial/" class="guide-card">
+          <a href="/guides/quotient-familial/" class="guide-card"
+             data-title="Quotient familial 2026"
+             data-tags="quotient familial parts fiscales enfants plafond 1791 parent isole garde alternee impot">
             <div class="guide-card-title">Quotient familial 2026</div>
             <div class="guide-card-desc">Parts fiscales, plafond 1 791 € et situations particulières</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/declarer-revenus-2026/" class="guide-card">
+          <a href="/guides/declarer-revenus-2026/" class="guide-card"
+             data-title="Déclarer ses revenus en 2026"
+             data-tags="declaration revenus 2026 calendrier cases 1AJ preremplissage dividendes plus-values impot">
             <div class="guide-card-title">Déclarer ses revenus en 2026</div>
             <div class="guide-card-desc">Calendrier, cases importantes et revenus à ne pas oublier</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/decote-fiscale/" class="guide-card">
+          <a href="/guides/decote-fiscale/" class="guide-card"
+             data-title="Décote fiscale 2026"
+             data-tags="decote fiscale 2026 impot reduit seuil celibataire couple formule calcul">
             <div class="guide-card-title">Décote fiscale 2026</div>
             <div class="guide-card-desc">Seuils, formule de calcul et exemples chiffrés</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/frais-reels-vs-abattement/" class="guide-card">
+          <a href="/guides/frais-reels-vs-abattement/" class="guide-card"
+             data-title="Frais réels vs abattement 10 %"
+             data-tags="frais reels abattement 10% deduction impot transport repas formation kilometrique">
             <div class="guide-card-title">Frais réels vs abattement 10 %</div>
             <div class="guide-card-desc">Quand les frais réels sont avantageux et quels frais déduire</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/csg-crds/" class="guide-card">
+          <a href="/guides/csg-crds/" class="guide-card"
+             data-title="CSG et CRDS 2026"
+             data-tags="CSG CRDS 2026 taux 9.2% 0.5% assiette deductible non deductible net imposable">
             <div class="guide-card-title">CSG et CRDS 2026</div>
             <div class="guide-card-desc">Taux 9,7 %, assiette et impact sur le net imposable</div>
             <div class="guide-card-arrow">Lire le guide →</div>
           </a>
 
-          <a href="/guides/tva-auto-entrepreneur/" class="guide-card">
+          <a href="/guides/tva-auto-entrepreneur/" class="guide-card"
+             data-title="TVA auto-entrepreneur 2026"
+             data-tags="TVA auto entrepreneur 2026 franchise seuil 37500 85000 facture mention">
             <div class="guide-card-title">TVA auto-entrepreneur 2026</div>
             <div class="guide-card-desc">Franchise en base, seuils et mentions obligatoires sur factures</div>
             <div class="guide-card-arrow">Lire le guide →</div>
@@ -555,8 +736,8 @@
         </div>
       </section>
 
-      <!-- Coming soon -->
-      <div class="coming-soon">
+      <!-- Coming soon (masqué pendant une recherche active) -->
+      <div class="coming-soon" id="coming-soon">
         <div class="coming-soon-dot"></div>
         <p class="coming-soon-text"><strong>D'autres guides arrivent prochainement.</strong> Retraite, famille &amp; social, épargne.</p>
       </div>
@@ -574,6 +755,96 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Normalise une chaîne : minuscules + supprime les accents
+  function norm(str) {
+    return str
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '');
+  }
+
+  const input      = document.getElementById('guides-search');
+  const clearBtn   = document.getElementById('search-clear');
+  const noResults  = document.getElementById('no-results');
+  const comingSoon = document.getElementById('coming-soon');
+  const sections   = document.querySelectorAll('[data-section]');
+
+  // Construire une fois la liste des cards avec leur texte recherchable
+  const cards = Array.from(document.querySelectorAll('.guide-card')).map(function (card) {
+    const title = norm(card.dataset.title || '');
+    const tags  = norm(card.dataset.tags  || '');
+    return { el: card, searchable: title + ' ' + tags };
+  });
+
+  function runSearch(raw) {
+    const query = norm(raw.trim());
+
+    // Bouton effacer : visible seulement si texte saisi
+    clearBtn.classList.toggle('visible', raw.length > 0);
+    // Masque le "coming soon" pendant une recherche active
+    comingSoon.style.display = query ? 'none' : '';
+
+    let totalVisible = 0;
+
+    // Filtrer chaque card
+    cards.forEach(function (c) {
+      const match = !query || c.searchable.includes(query);
+      c.el.classList.toggle('search-hidden', !match);
+      if (match) totalVisible++;
+    });
+
+    // Masquer les sections vides et mettre à jour leur compteur
+    sections.forEach(function (section) {
+      const sectionCards   = section.querySelectorAll('.guide-card');
+      const visibleInSection = Array.from(sectionCards).filter(function (c) {
+        return !c.classList.contains('search-hidden');
+      });
+      const isEmpty = visibleInSection.length === 0;
+      section.classList.toggle('search-hidden', isEmpty);
+
+      // Mise à jour du compteur
+      const counter = section.querySelector('[data-count]');
+      if (counter) {
+        if (query) {
+          const total = sectionCards.length;
+          counter.textContent = visibleInSection.length + '/' + total + ' guide' + (total > 1 ? 's' : '');
+        } else {
+          // Restaurer le compteur d'origine
+          counter.textContent = sectionCards.length + ' guide' + (sectionCards.length > 1 ? 's' : '');
+        }
+      }
+    });
+
+    // Message "aucun résultat"
+    noResults.classList.toggle('visible', query !== '' && totalVisible === 0);
+  }
+
+  // Écoute frappe en temps réel
+  input.addEventListener('input', function () {
+    runSearch(input.value);
+  });
+
+  // Bouton effacer
+  clearBtn.addEventListener('click', function () {
+    input.value = '';
+    input.focus();
+    runSearch('');
+  });
+
+  // Effacer avec Escape
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && input.value) {
+      input.value = '';
+      runSearch('');
+    }
+  });
+}());
+</script>
 
 </body>
 </html>
