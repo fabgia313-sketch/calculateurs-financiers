@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Frais réels déduction impôts 2026 : vs abattement 10% — CalcFin</title>
+<meta name="description" content="Frais réels vs abattement 10% en 2026 : min 495 €, max 14 426 €. Quand les frais réels sont avantageux, liste des frais déductibles, exemple comparatif." />
+<link rel="canonical" href="https://calculateurs-financiers-v2.pages.dev/guides/frais-reels-vs-abattement/" />
+<meta property="og:title" content="Frais réels déduction impôts 2026 : vs abattement 10% — CalcFin" />
+<meta property="og:description" content="Choisir entre frais réels et abattement 10% en 2026 : seuils, frais déductibles, exemple comparatif. Guide complet." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://calculateurs-financiers-v2.pages.dev/guides/frais-reels-vs-abattement/" />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Accueil","item":"https://calculateurs-financiers-v2.pages.dev/"},
+    {"@type":"ListItem","position":2,"name":"Guides","item":"https://calculateurs-financiers-v2.pages.dev/guides/"},
+    {"@type":"ListItem","position":3,"name":"Frais réels vs abattement 10%","item":"https://calculateurs-financiers-v2.pages.dev/guides/frais-reels-vs-abattement/"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "À partir de quel montant les frais réels sont-ils avantageux ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Les frais réels sont avantageux dès que leur montant total dépasse l'abattement forfaitaire de 10 % de votre salaire brut (plafonné à 14 426 € et avec un minimum de 495 € en 2026). Exemple : pour un salaire de 30 000 €, l'abattement de 10 % est de 3 000 €. Si vos frais réels dépassent 3 000 €, il est plus intéressant de les déduire."}
+    },
+    {
+      "@type": "Question",
+      "name": "Peut-on déduire les frais de trajet domicile-travail ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Oui. Les frais de trajet domicile-travail constituent souvent le principal poste des frais réels. Vous pouvez déduire le coût réel des transports en commun (abonnement mensuel, titres de transport) ou, pour les déplacements en voiture, utiliser le barème kilométrique officiel de l'administration fiscale, publié chaque année."}
+    },
+    {
+      "@type": "Question",
+      "name": "Les frais de repas sont-ils déductibles ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Oui, sous conditions. Si vous ne pouvez pas rentrer déjeuner chez vous en raison de la distance ou des horaires, la différence entre le coût du repas sur votre lieu de travail et le prix d'un repas préparé chez vous (évalué à 5,35 € par repas en 2026) est déductible. Un justificatif est recommandé."}
+    },
+    {
+      "@type": "Question",
+      "name": "Faut-il garder les justificatifs des frais réels ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Oui, absolument. En cas de contrôle fiscal, vous devez pouvoir justifier chaque dépense déclarée. Conservez tous les tickets, factures, relevés de frais et notes de déplacement pendant 3 ans (durée de prescription fiscale). Pour le barème kilométrique, notez la distance domicile-travail et le nombre de jours travaillés."}
+    },
+    {
+      "@type": "Question",
+      "name": "Peut-on choisir les frais réels pour un seul conjoint d'un foyer ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Oui. Dans un foyer soumis à imposition commune, chaque conjoint peut opter indépendamment pour les frais réels ou l'abattement de 10 %. Si un conjoint a des frais professionnels élevés et l'autre non, il est possible et courant que l'un opte pour les frais réels et l'autre conserve l'abattement forfaitaire."}
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg: #0A0A0F; --bg-elev: #111118; --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06); --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2; --fg-muted: rgba(245,245,242,0.56); --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0; --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px; --radius-md: 16px; --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8; --bg-elev: #FFFFFF; --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07); --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F; --fg-muted: rgba(10,10,15,0.58); --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D; --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--fg); font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5; }
+  .backdrop-glow { position: fixed; top: -300px; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%); pointer-events: none; z-index: 0; opacity: 0.7; }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); background: color-mix(in oklab, var(--bg) 78%, transparent); border-bottom: 1px solid var(--border); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides" class="active">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Frais réels vs abattement 10 % 2026</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Impôts</div>
+      <h1 class="page-title">Frais réels vs abattement 10 % : <em>que choisir</em> en 2026 ?</h1>
+      <p class="page-sub">Tous les salariés bénéficient d'un abattement forfaitaire de 10 % sur leurs revenus imposables. Mais si vos dépenses professionnelles réelles dépassent ce forfait, déduire les frais réels peut vous faire économiser des centaines d'euros d'impôt.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>Par défaut, l'administration fiscale applique automatiquement un <strong>abattement de 10 %</strong> sur les salaires déclarés pour tenir compte des frais professionnels engagés par les salariés. Cet abattement est simple et ne nécessite aucune justification. Cependant, si vos dépenses professionnelles effectives sont plus importantes, vous pouvez opter pour la <strong>déduction des frais réels</strong>, à condition de pouvoir les justifier.</p>
+
+        <h2 id="abattement">L'abattement forfaitaire de 10 % en 2026</h2>
+        <p>L'abattement forfaitaire de 10 % est appliqué automatiquement sur vos salaires nets déclarés (case 1AJ). Il est encadré par deux limites en 2026 :</p>
+        <table>
+          <tr><th>Paramètre</th><th>Montant 2026</th></tr>
+          <tr><td>Abattement minimum</td><td>495 €</td></tr>
+          <tr><td>Abattement maximum</td><td>14 426 €</td></tr>
+          <tr><td>Taux</td><td>10 % du salaire net imposable</td></tr>
+        </table>
+        <p>Exemple : pour un salaire net imposable de 30 000 €, l'abattement est de 3 000 €. Le revenu pris en compte dans le barème est 27 000 €. Si votre salaire est de 4 000 € (inférieur à 4 950 €), l'abattement minimum de 495 € s'applique.</p>
+
+        <h2 id="frais-reels">Quand opter pour les frais réels ?</h2>
+        <p>Les frais réels sont avantageux dès lors que vos dépenses professionnelles effectives <strong>dépassent l'abattement de 10 %</strong>. Trois profils sont particulièrement concernés :</p>
+        <ul>
+          <li><strong>Les salariés habitant loin de leur lieu de travail</strong> : longs trajets domicile-travail en voiture ou en transports en commun coûteux.</li>
+          <li><strong>Les salariés en déplacement fréquent</strong> : commerciaux, consultants, techniciens itinérants.</li>
+          <li><strong>Les salariés en télétravail régulier</strong> : frais de bureau à domicile, matériel informatique, connexion internet.</li>
+        </ul>
+        <p>Pour un salarié gagnant 25 000 € net imposable, l'abattement forfaitaire est de 2 500 €. Si ses frais réels s'élèvent à 4 000 €, la différence de 1 500 € représente une économie d'impôt de 450 € à la tranche de 30 % ou de 195 € à la tranche de 11 %.</p>
+
+        <h2 id="liste">Liste des principaux frais déductibles</h2>
+        <h3>Frais de transport domicile-travail</h3>
+        <ul>
+          <li>Transports en commun : intégralité des abonnements (SNCF, RATP, Navigo, etc.)</li>
+          <li>Voiture personnelle : barème kilométrique officiel × nombre de km parcourus (aller-retour × jours travaillés)</li>
+          <li>Vélo ou vélo électrique : barème kilométrique spécifique vélo</li>
+          <li>Limite : distance domicile-travail limitée à 80 km (sauf circonstances particulières justifiées)</li>
+        </ul>
+        <h3>Frais de repas</h3>
+        <ul>
+          <li>Repas pris sur le lieu de travail lorsque l'éloignement empêche de rentrer déjeuner</li>
+          <li>Montant déductible = prix du repas − valeur d'un repas maison (5,35 € par repas en 2026)</li>
+        </ul>
+        <h3>Frais de formation et documentation</h3>
+        <ul>
+          <li>Formations professionnelles non prises en charge par l'employeur</li>
+          <li>Abonnements professionnels, revues spécialisées</li>
+          <li>Livres et ouvrages directement liés à l'activité professionnelle</li>
+        </ul>
+        <h3>Équipements et matériel</h3>
+        <ul>
+          <li>Matériel informatique utilisé à des fins professionnelles (pro-rata si usage mixte)</li>
+          <li>Vêtements de travail spécifiques (non portables en dehors du travail)</li>
+          <li>Outillage professionnel non fourni par l'employeur</li>
+        </ul>
+
+        <h2 id="comparatif">Exemple comparatif</h2>
+        <p>Prenons un salarié avec un salaire net imposable de <strong>35 000 €</strong>, domicilié à 45 km de son lieu de travail, utilisant sa voiture (5 CV) :</p>
+        <table>
+          <tr><th>Postes</th><th>Frais réels estimés</th></tr>
+          <tr><td>Trajet domicile-travail (barème 5 CV : 0,548 €/km × 90 km × 210 jours)</td><td>10 357 €</td></tr>
+          <tr><td>Repas sur le lieu de travail (210 j × 7 € − 5,35 €)</td><td>347 €</td></tr>
+          <tr><td>Formation professionnelle</td><td>450 €</td></tr>
+          <tr><td><strong>Total frais réels</strong></td><td><strong>11 154 €</strong></td></tr>
+        </table>
+        <p><strong>Abattement forfaitaire 10 %</strong> = 3 500 €<br/>
+        <strong>Gain sur le revenu imposable</strong> = 11 154 − 3 500 = 7 654 € de moins dans le barème<br/>
+        <strong>Économie d'impôt estimée</strong> (tranche 30 %) = 7 654 × 30 % ≈ <strong>2 296 €</strong></p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>L'abattement forfaitaire 10 % est appliqué <strong>automatiquement</strong> — minimum 495 €, maximum 14 426 € en 2026.</li>
+            <li>Les frais réels sont avantageux dès qu'ils dépassent l'abattement de 10 %.</li>
+            <li>Le trajet domicile-travail (barème kilométrique) est souvent le <strong>principal poste</strong>.</li>
+            <li>Conservez <strong>tous les justificatifs</strong> pendant 3 ans minimum.</li>
+            <li>Dans un foyer, chaque conjoint peut opter <strong>indépendamment</strong> pour son régime.</li>
+          </ul>
+        </div>
+
+        <div class="cta-box">
+          <p>Comparez les deux options et simulez l'impact sur votre impôt 2026.</p>
+          <a href="/fr/impot/" class="cta-btn">Simuler mon impôt 2026 →</a>
+        </div>
+
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+          <div class="faq-item">
+            <div class="faq-q">À partir de quel montant les frais réels sont-ils avantageux ?</div>
+            <div class="faq-a">Les frais réels sont avantageux dès que leur montant total dépasse l'abattement forfaitaire de 10 % de votre salaire brut (plafonné à 14 426 € en 2026). Exemple : pour 30 000 € de salaire, si vos frais réels dépassent 3 000 €, il est plus intéressant de les déduire.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Peut-on déduire les frais de trajet domicile-travail ?</div>
+            <div class="faq-a">Oui. Vous pouvez déduire le coût des transports en commun ou, en voiture, utiliser le barème kilométrique officiel (selon la puissance fiscale du véhicule). La distance domicile-travail est limitée à 80 km sauf circonstances justifiées.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Les frais de repas sont-ils déductibles ?</div>
+            <div class="faq-a">Oui, si vous ne pouvez pas rentrer déjeuner chez vous. La différence entre le coût du repas et le prix d'un repas préparé chez soi (5,35 € en 2026) est déductible. Un justificatif est recommandé.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Faut-il garder les justificatifs des frais réels ?</div>
+            <div class="faq-a">Oui, absolument. En cas de contrôle fiscal, vous devez justifier chaque dépense. Conservez tickets, factures et notes de frais pendant 3 ans minimum.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Peut-on choisir les frais réels pour un seul conjoint d'un foyer ?</div>
+            <div class="faq-a">Oui. Chaque conjoint peut opter indépendamment pour les frais réels ou l'abattement forfaitaire. Si un conjoint a des frais élevés et l'autre non, il est courant d'utiliser les deux options en parallèle.</div>
+          </div>
+        </div>
+
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+            <li><a href="https://www.impots.gouv.fr/particulier/les-frais-professionnels">impots.gouv.fr — Les frais professionnels</a></li>
+            <li><a href="https://www.impots.gouv.fr/particulier/bareme-kilométrique">impots.gouv.fr — Barème kilométrique 2026</a></li>
+            <li><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038836525">Légifrance — Art. 83 du CGI (frais professionnels)</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+            <li><a href="#abattement">Abattement 10 % 2026</a></li>
+            <li><a href="#frais-reels">Quand opter pour les frais réels</a></li>
+            <li><a href="#liste">Frais déductibles</a></li>
+            <li><a href="#comparatif">Exemple comparatif</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+            <a href="/guides/prelevement-a-la-source/" class="similar-link">Prélèvement à la source 2026</a>
+            <a href="/guides/declarer-revenus-2026/" class="similar-link">Déclarer ses revenus 2026</a>
+            <a href="/guides/decote-fiscale/" class="similar-link">Décote fiscale 2026</a>
+            <a href="/guides/csg-crds/" class="similar-link">CSG et CRDS 2026</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Simulez avec frais réels</div>
+        </a>
+        <a href="/guides/declarer-revenus-2026/" class="related-card">
+          <div class="related-card-title">Déclarer ses revenus</div>
+          <div class="related-card-desc">Cases et calendrier 2026</div>
+        </a>
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Calculez votre net imposable</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les résultats sont donnés à titre indicatif. Consultez un professionnel pour votre situation personnelle. Aucune donnée saisie ne transite par un serveur.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() { q.closest('.faq-item').classList.toggle('open'); });
+});
+</script>
+</body>
+</html>

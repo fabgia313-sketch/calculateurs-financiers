@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quotient familial 2026 : calcul et impact sur vos impôts — CalcFin</title>
+<meta name="description" content="Quotient familial 2026 : parts fiscales selon la situation familiale, plafonnement à 1 791 €, parent isolé, garde alternée. Guide complet impots.gouv.fr." />
+<link rel="canonical" href="https://calculateurs-financiers-v2.pages.dev/guides/quotient-familial/" />
+<meta property="og:title" content="Quotient familial 2026 : calcul et impact sur vos impôts — CalcFin" />
+<meta property="og:description" content="Parts fiscales, plafonnement à 1 791 €, parent isolé, garde alternée. Tout comprendre sur le quotient familial 2026." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://calculateurs-financiers-v2.pages.dev/guides/quotient-familial/" />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Accueil","item":"https://calculateurs-financiers-v2.pages.dev/"},
+    {"@type":"ListItem","position":2,"name":"Guides","item":"https://calculateurs-financiers-v2.pages.dev/guides/"},
+    {"@type":"ListItem","position":3,"name":"Quotient familial 2026","item":"https://calculateurs-financiers-v2.pages.dev/guides/quotient-familial/"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Comment calculer son quotient familial ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Le quotient familial s'obtient en divisant le revenu net imposable du foyer par le nombre de parts fiscales. Le résultat est le revenu par part, sur lequel s'applique le barème de l'impôt. L'impôt total est ensuite multiplié par le nombre de parts. Plus le nombre de parts est élevé, plus l'impôt est réduit."}
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est le plafonnement du quotient familial en 2026 ?",
+      "acceptedAnswer": {"@type":"Answer","text":"En 2026, l'avantage fiscal procuré par chaque demi-part supplémentaire au-delà de 2 parts (ou 1 part pour un célibataire) est plafonné à 1 791 € par demi-part. Si la réduction d'impôt théorique dépasse ce plafond, elle est ramenée à 1 791 €."}
+    },
+    {
+      "@type": "Question",
+      "name": "Combien de parts pour un parent isolé avec un enfant ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Un parent isolé (célibataire, divorcé ou séparé) qui élève seul son enfant bénéficie du statut de parent isolé : 1 part pour le parent + 1 part entière pour le 1er enfant = 2 parts au total. Sans ce statut, un célibataire avec un enfant n'aurait que 1 + 0,5 = 1,5 part."}
+    },
+    {
+      "@type": "Question",
+      "name": "Comment est traitée la garde alternée pour le quotient familial ?",
+      "acceptedAnswer": {"@type":"Answer","text":"En cas de garde alternée, chaque parent bénéficie de la moitié des parts supplémentaires liées à l'enfant. Par exemple, pour un premier enfant qui donne normalement 0,5 part, chaque parent obtient 0,25 part supplémentaire. Les deux parents doivent cocher la case correspondante dans leur déclaration."}
+    },
+    {
+      "@type": "Question",
+      "name": "Un enfant majeur rattaché au foyer donne-t-il droit à des parts ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Oui, un enfant majeur peut être rattaché au foyer fiscal de ses parents jusqu'à ses 21 ans (ou 25 ans s'il est étudiant). Le rattachement donne droit aux mêmes parts qu'un enfant mineur. En contrepartie, les revenus de l'enfant s'ajoutent à ceux du foyer et les parents ne peuvent pas déduire de pension alimentaire."}
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg: #0A0A0F; --bg-elev: #111118; --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06); --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2; --fg-muted: rgba(245,245,242,0.56); --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0; --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px; --radius-md: 16px; --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8; --bg-elev: #FFFFFF; --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07); --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F; --fg-muted: rgba(10,10,15,0.58); --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D; --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--fg); font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5; }
+  .backdrop-glow { position: fixed; top: -300px; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%); pointer-events: none; z-index: 0; opacity: 0.7; }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); background: color-mix(in oklab, var(--bg) 78%, transparent); border-bottom: 1px solid var(--border); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides" class="active">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Quotient familial 2026</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Impôts</div>
+      <h1 class="page-title">Quotient familial : <em>calcul et impact</em> sur vos impôts 2026</h1>
+      <p class="page-sub">Le quotient familial réduit votre impôt en fonction de votre situation de famille. Comprendre le nombre de parts, le plafonnement et les cas particuliers vous permet d'optimiser votre déclaration.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>Le <strong>quotient familial</strong> est un mécanisme du système fiscal français qui module l'impôt sur le revenu en fonction de la composition du foyer. Plus le nombre de parts fiscales est élevé, plus le revenu imposable par part est réduit, et donc plus l'impôt diminue. Ce système bénéficie notamment aux familles avec enfants, aux personnes âgées et aux invalides.</p>
+
+        <h2 id="parts">Les parts fiscales selon la situation familiale</h2>
+        <p>Chaque foyer dispose d'un nombre de parts défini par la loi. Voici les règles principales en 2026 :</p>
+        <table>
+          <tr><th>Situation</th><th>Nombre de parts</th></tr>
+          <tr><td>Célibataire, divorcé, veuf sans enfant</td><td>1 part</td></tr>
+          <tr><td>Couple marié ou pacsé sans enfant</td><td>2 parts</td></tr>
+          <tr><td>+ 1er enfant à charge</td><td>+ 0,5 part</td></tr>
+          <tr><td>+ 2e enfant à charge</td><td>+ 0,5 part</td></tr>
+          <tr><td>+ 3e enfant et suivants</td><td>+ 1 part par enfant</td></tr>
+          <tr><td>Parent isolé (célibataire avec enfant)</td><td>1 part + 1 part pour le 1er enfant</td></tr>
+          <tr><td>Veuf avec enfant(s) à charge</td><td>2 parts + parts enfants</td></tr>
+        </table>
+        <p>Exemple : un couple marié avec 3 enfants dispose de 2 + 0,5 + 0,5 + 1 = <strong>4 parts</strong>. Un célibataire avec 2 enfants à charge dispose de 1 + 0,5 + 0,5 = <strong>2 parts</strong>.</p>
+
+        <h2 id="calcul">Comment le quotient familial réduit l'impôt</h2>
+        <p>Le calcul s'effectue en trois étapes :</p>
+        <ol>
+          <li>Diviser le revenu net imposable par le nombre de parts → revenu par part</li>
+          <li>Appliquer le barème progressif à ce revenu par part → impôt par part</li>
+          <li>Multiplier l'impôt par part par le nombre de parts → impôt total du foyer</li>
+        </ol>
+        <p><strong>Exemple :</strong> un couple avec 2 enfants (3 parts) et 60 000 € de revenus imposables. Revenu par part = 20 000 €. L'impôt sur 20 000 € (barème 2026) est d'environ 1 595 €. Impôt total = 1 595 € × 3 = 4 785 €. Sans les enfants (2 parts), l'impôt serait de 3 028 € × 2 = 6 056 €. L'économie liée aux enfants est de 6 056 − 4 785 = <strong>1 271 €</strong>.</p>
+
+        <h2 id="plafonnement">Le plafonnement de l'avantage fiscal</h2>
+        <p>L'avantage fiscal lié aux demi-parts supplémentaires est plafonné. En 2026, le gain maximum par <strong>demi-part supplémentaire</strong> est de <strong>1 791 €</strong>. Si l'économie d'impôt théorique dépasse ce montant, elle est ramenée à 1 791 € par demi-part.</p>
+        <p>Ce plafond s'applique aux parts liées aux enfants mais aussi à certaines demi-parts accordées aux invalides, anciens combattants, personnes seules ayant élevé des enfants, etc. En revanche, il ne s'applique pas à la première part entière accordée au parent isolé pour son premier enfant.</p>
+        <p>Concrètement, les foyers à revenus élevés bénéficient moins du quotient familial car l'économie d'impôt est "plafonnée".</p>
+
+        <h2 id="situations">Situations particulières</h2>
+        <h3>Parent isolé</h3>
+        <p>Le parent qui élève seul son ou ses enfants bénéficie d'une majoration spécifique : il obtient 1 part entière (et non 0,5) pour son premier enfant à charge. Cette règle s'applique aux contribuables célibataires, divorcés ou séparés qui ne vivent pas en concubinage. Dès la naissance du premier enfant, un célibataire isolé passe ainsi de 1 à 2 parts.</p>
+        <h3>Enfant en garde alternée</h3>
+        <p>Lorsqu'un enfant est en résidence alternée, chaque parent bénéficie de la moitié des parts liées à cet enfant. Le premier enfant (qui donnerait 0,5 part en résidence principale) donne 0,25 part à chaque parent. Il est impératif que les deux parents indiquent la garde alternée dans leur déclaration respective ; un enfant ne peut pas être compté deux fois en résidence principale.</p>
+        <h3>Enfant majeur rattaché</h3>
+        <p>Un enfant majeur étudiant peut, avec son accord, être rattaché au foyer fiscal de ses parents jusqu'à 25 ans. Les parents conservent les parts liées à cet enfant mais doivent inclure ses revenus dans leur déclaration. Il n'est pas possible de déduire simultanément une pension alimentaire et de rattacher l'enfant.</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>Chaque enfant à charge apporte <strong>0,5 part</strong> (1 part à partir du 3e).</li>
+            <li>Plafonnement 2026 : avantage max de <strong>1 791 €</strong> par demi-part supplémentaire.</li>
+            <li>Parent isolé : <strong>1 part entière</strong> pour le 1er enfant (au lieu de 0,5).</li>
+            <li>Garde alternée : chaque parent prend <strong>la moitié des parts</strong> liées à l'enfant.</li>
+            <li>Le quotient familial ne change pas l'impôt si le foyer n'est <strong>pas imposable</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="cta-box">
+          <p>Simulez votre impôt 2026 en tenant compte de votre situation familiale et de vos parts fiscales.</p>
+          <a href="/fr/impot/" class="cta-btn">Calculer mon impôt 2026 →</a>
+        </div>
+
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+          <div class="faq-item">
+            <div class="faq-q">Comment calculer son quotient familial ?</div>
+            <div class="faq-a">Le quotient familial s'obtient en divisant le revenu net imposable du foyer par le nombre de parts fiscales. Le résultat est le revenu par part, sur lequel s'applique le barème de l'impôt. L'impôt total est ensuite multiplié par le nombre de parts. Plus le nombre de parts est élevé, plus l'impôt est réduit.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Quel est le plafonnement du quotient familial en 2026 ?</div>
+            <div class="faq-a">En 2026, l'avantage fiscal procuré par chaque demi-part supplémentaire au-delà de 2 parts est plafonné à 1 791 € par demi-part. Si la réduction d'impôt théorique dépasse ce plafond, elle est ramenée à 1 791 €.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Combien de parts pour un parent isolé avec un enfant ?</div>
+            <div class="faq-a">Un parent isolé qui élève seul son enfant bénéficie du statut de parent isolé : 1 part pour le parent + 1 part entière pour le 1er enfant = 2 parts au total. Sans ce statut, un célibataire avec un enfant n'aurait que 1 + 0,5 = 1,5 part.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Comment est traitée la garde alternée pour le quotient familial ?</div>
+            <div class="faq-a">En cas de garde alternée, chaque parent bénéficie de la moitié des parts supplémentaires liées à l'enfant. Pour un premier enfant qui donne normalement 0,5 part, chaque parent obtient 0,25 part supplémentaire.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Un enfant majeur rattaché au foyer donne-t-il droit à des parts ?</div>
+            <div class="faq-a">Oui, un enfant majeur peut être rattaché au foyer fiscal jusqu'à 21 ans (25 ans s'il est étudiant). Le rattachement donne droit aux mêmes parts qu'un enfant mineur. En contrepartie, ses revenus s'ajoutent à ceux du foyer.</div>
+          </div>
+        </div>
+
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+            <li><a href="https://www.impots.gouv.fr/particulier/questions/quest-ce-que-le-quotient-familial">impots.gouv.fr — Quotient familial</a></li>
+            <li><a href="https://www.service-public.fr/particuliers/vosdroits/F2705">Service-Public.fr — Quotient familial : enfants à charge</a></li>
+            <li><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042907410">Légifrance — Art. 194 du CGI (quotient familial)</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+            <li><a href="#parts">Parts fiscales par situation</a></li>
+            <li><a href="#calcul">Comment ça réduit l'impôt</a></li>
+            <li><a href="#plafonnement">Plafonnement 1 791 €</a></li>
+            <li><a href="#situations">Situations particulières</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+            <a href="/guides/prelevement-a-la-source/" class="similar-link">Prélèvement à la source 2026</a>
+            <a href="/guides/declarer-revenus-2026/" class="similar-link">Déclarer ses revenus 2026</a>
+            <a href="/guides/decote-fiscale/" class="similar-link">Décote fiscale 2026</a>
+            <a href="/guides/frais-reels-vs-abattement/" class="similar-link">Frais réels vs abattement 10 %</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Simulez votre IR avec vos parts</div>
+        </a>
+        <a href="/guides/prelevement-a-la-source/" class="related-card">
+          <div class="related-card-title">Prélèvement à la source</div>
+          <div class="related-card-desc">Taux personnalisé et neutre</div>
+        </a>
+        <a href="/guides/decote-fiscale/" class="related-card">
+          <div class="related-card-title">Décote fiscale 2026</div>
+          <div class="related-card-desc">Réduction pour petits impôts</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les résultats sont donnés à titre indicatif. Consultez un professionnel pour votre situation personnelle. Aucune donnée saisie ne transite par un serveur.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() { q.closest('.faq-item').classList.toggle('open'); });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Déclaration revenus 2026 : guide complet étape par étape — CalcFin</title>
+<meta name="description" content="Déclarer ses revenus en 2026 : calendrier par département, cases clés 1AJ/1BJ/7DB, revenus à ne pas oublier (intérêts, dividendes, plus-values). Guide officiel." />
+<link rel="canonical" href="https://calculateurs-financiers-v2.pages.dev/guides/declarer-revenus-2026/" />
+<meta property="og:title" content="Déclaration revenus 2026 : guide complet étape par étape — CalcFin" />
+<meta property="og:description" content="Calendrier, cases importantes, revenus oubliés, pré-remplissage : tout pour déclarer ses revenus correctement en 2026." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://calculateurs-financiers-v2.pages.dev/guides/declarer-revenus-2026/" />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Accueil","item":"https://calculateurs-financiers-v2.pages.dev/"},
+    {"@type":"ListItem","position":2,"name":"Guides","item":"https://calculateurs-financiers-v2.pages.dev/guides/"},
+    {"@type":"ListItem","position":3,"name":"Déclarer ses revenus 2026","item":"https://calculateurs-financiers-v2.pages.dev/guides/declarer-revenus-2026/"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quelle est la date limite pour déclarer ses revenus en 2026 ?",
+      "acceptedAnswer": {"@type":"Answer","text":"La date limite dépend du département. En 2026 (déclaration des revenus 2025), les dates indicatives sont : zone 1 (départements 01 à 19) fin mai, zone 2 (20 à 54) début juin, zone 3 (55 à 976) mi-juin. Ces dates sont publiées par l'administration en avril. La déclaration papier clôture généralement fin mai pour tous les départements."}
+    },
+    {
+      "@type": "Question",
+      "name": "Dois-je déclarer les intérêts de mon livret A ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Non. Les intérêts du Livret A, du LDDS (Livret de développement durable et solidaire) et du LEP (Livret d'épargne populaire) sont exonérés d'impôt sur le revenu et de prélèvements sociaux. Vous n'avez pas à les déclarer. En revanche, les intérêts d'un livret bancaire ordinaire (livret +, compte à terme…) sont imposables et doivent être déclarés."}
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que le pré-remplissage de la déclaration ?",
+      "acceptedAnswer": {"@type":"Answer","text":"L'administration fiscale pré-remplit automatiquement la déclaration avec les informations transmises par les employeurs, caisses de retraite, Pôle emploi et certains organismes financiers. Vous devez vérifier ces données, les corriger si nécessaire et compléter les rubriques non pré-remplies (revenus fonciers, revenus étrangers, plus-values, etc.)."}
+    },
+    {
+      "@type": "Question",
+      "name": "Faut-il déclarer les gains issus de la vente de cryptomonnaies ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Oui. Les plus-values issues de cessions d'actifs numériques (cryptomonnaies) sont imposables au taux global de 30 % (flat tax) ou, sur option, au barème progressif. Elles doivent être déclarées case 3AN (plus-values) ou via le formulaire 2086. Si vous avez réalisé des moins-values, elles peuvent s'imputer sur vos plus-values de l'année."}
+    },
+    {
+      "@type": "Question",
+      "name": "Que se passe-t-il si j'oublie de déclarer un revenu ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Un oubli de déclaration constitue une omission. L'administration peut rectifier votre impôt avec des intérêts de retard (0,20 % par mois, soit 2,4 % par an) et, en cas d'oubli délibéré, une majoration de 40 % ou 80 % selon la gravité. Vous pouvez corriger spontanément votre déclaration en ligne jusqu'à la mi-décembre de l'année de dépôt, ce qui réduit généralement les pénalités."}
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg: #0A0A0F; --bg-elev: #111118; --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06); --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2; --fg-muted: rgba(245,245,242,0.56); --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0; --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px; --radius-md: 16px; --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8; --bg-elev: #FFFFFF; --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07); --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F; --fg-muted: rgba(10,10,15,0.58); --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D; --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--fg); font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5; }
+  .backdrop-glow { position: fixed; top: -300px; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%); pointer-events: none; z-index: 0; opacity: 0.7; }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); background: color-mix(in oklab, var(--bg) 78%, transparent); border-bottom: 1px solid var(--border); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides" class="active">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>Déclarer ses revenus 2026</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Impôts</div>
+      <h1 class="page-title">Déclarer ses revenus en 2026 : <em>guide complet</em> étape par étape</h1>
+      <p class="page-sub">La déclaration de revenus 2026 porte sur vos revenus perçus en 2025. Calendrier, cases importantes, revenus souvent oubliés : ce guide vous accompagne pas à pas pour éviter erreurs et pénalités.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>Même avec le <strong>prélèvement à la source</strong>, la déclaration annuelle des revenus reste obligatoire pour tous les contribuables. Elle permet à l'administration fiscale de calculer le montant définitif de l'impôt et de régulariser les écarts avec les sommes prélevées en cours d'année. En cas de trop-prélevé, vous êtes remboursé ; en cas de sous-prélèvement, vous devez régler le solde.</p>
+
+        <h2 id="calendrier">Calendrier de la déclaration 2026</h2>
+        <p>La campagne de déclaration des revenus 2025 (déclaration 2026) ouvre habituellement début avril. La date limite varie selon le département de résidence :</p>
+        <table>
+          <tr><th>Zone</th><th>Départements</th><th>Date limite (indicative)</th></tr>
+          <tr><td>Zone 1</td><td>01 à 19 + non-résidents</td><td>Fin mai 2026</td></tr>
+          <tr><td>Zone 2</td><td>20 à 54</td><td>Début juin 2026</td></tr>
+          <tr><td>Zone 3</td><td>55 à 976</td><td>Mi-juin 2026</td></tr>
+          <tr><td>Déclaration papier</td><td>Tous départements</td><td>Fin mai 2026</td></tr>
+        </table>
+        <p>Les dates exactes sont publiées par la DGFiP sur impots.gouv.fr en avril. La déclaration en ligne est disponible depuis l'espace particulier ; elle est obligatoire dès lors que vous disposez d'un accès internet (sauf dérogation).</p>
+
+        <h2 id="preremplissage">Le pré-remplissage : à vérifier absolument</h2>
+        <p>L'administration fiscale pré-remplit automatiquement votre déclaration avec les données transmises par :</p>
+        <ul>
+          <li>Votre employeur (salaires, avantages en nature)</li>
+          <li>Les caisses de retraite (pensions)</li>
+          <li>France Travail (allocations chômage)</li>
+          <li>Les établissements bancaires (intérêts soumis au PFU)</li>
+          <li>Les compagnies d'assurance (rachats de contrats d'assurance-vie)</li>
+        </ul>
+        <p>Ces données sont <strong>pré-remplies à titre indicatif</strong> : vous êtes responsable de leur exactitude. En cas d'erreur (salaire mal reporté, revenus manquants), corrigez directement dans le formulaire en ligne.</p>
+
+        <h2 id="cases">Les cases importantes de la déclaration</h2>
+        <h3>Traitements et salaires</h3>
+        <table>
+          <tr><th>Case</th><th>Contenu</th></tr>
+          <tr><td><strong>1AJ</strong></td><td>Salaires du déclarant 1 (net imposable)</td></tr>
+          <tr><td><strong>1BJ</strong></td><td>Salaires du déclarant 2 (conjoint)</td></tr>
+          <tr><td><strong>1AX / 1BX</strong></td><td>Heures supplémentaires exonérées (plafond 7 500 € par an)</td></tr>
+          <tr><td><strong>1GB / 1HB</strong></td><td>Salaires perçus à l'étranger (avec crédit d'impôt)</td></tr>
+        </table>
+        <h3>Revenus de capitaux mobiliers</h3>
+        <table>
+          <tr><th>Case</th><th>Contenu</th></tr>
+          <tr><td><strong>2TR</strong></td><td>Intérêts et produits de placement (livrets imposables, obligations…)</td></tr>
+          <tr><td><strong>2DC</strong></td><td>Dividendes et revenus assimilés (abattement 40 % possible)</td></tr>
+          <tr><td><strong>2BH</strong></td><td>Prélèvements sociaux déjà retenus à la source</td></tr>
+        </table>
+        <h3>Plus-values</h3>
+        <table>
+          <tr><th>Case</th><th>Contenu</th></tr>
+          <tr><td><strong>3VG</strong></td><td>Plus-values mobilières imposables (PFU 30 %)</td></tr>
+          <tr><td><strong>3AN</strong></td><td>Plus-values de cessions d'actifs numériques (cryptos)</td></tr>
+          <tr><td><strong>3VZ</strong></td><td>Plus-values immobilières imposées (formulaire 2048 séparé)</td></tr>
+        </table>
+        <h3>Charges déductibles</h3>
+        <table>
+          <tr><th>Case</th><th>Contenu</th></tr>
+          <tr><td><strong>6DD</strong></td><td>Pensions alimentaires versées (enfants majeurs non rattachés)</td></tr>
+          <tr><td><strong>7DB</strong></td><td>Dons aux associations (réduction d'impôt 66 % ou 75 %)</td></tr>
+          <tr><td><strong>7UF</strong></td><td>Emploi à domicile (crédit d'impôt 50 %)</td></tr>
+          <tr><td><strong>7EF</strong></td><td>Frais de garde d'enfants de moins de 6 ans (crédit d'impôt 50 %)</td></tr>
+        </table>
+
+        <h2 id="oublies">Revenus souvent oubliés</h2>
+        <p>Voici les revenus que les contribuables omettent le plus souvent de déclarer :</p>
+        <ul>
+          <li><strong>Intérêts de comptes à terme et livrets imposables :</strong> contrairement au Livret A, les livrets bancaires ordinaires sont imposables.</li>
+          <li><strong>Dividendes d'actions en compte-titres ordinaire :</strong> les dividendes versés sur un CTO sont soumis au PFU ou au barème, contrairement au PEA.</li>
+          <li><strong>Plus-values sur cessions mobilières :</strong> vente d'actions, obligations, OPCVM hors PEA.</li>
+          <li><strong>Revenus fonciers :</strong> loyers perçus de locations nues ou meublées (régime micro ou réel).</li>
+          <li><strong>Rachats d'assurance-vie :</strong> seule la part des intérêts est imposable, pas le capital remboursé.</li>
+          <li><strong>Revenus d'activités accessoires :</strong> missions freelance, ventes en ligne au-delà des abattements légaux.</li>
+          <li><strong>Indemnités de rupture conventionnelle :</strong> la fraction dépassant les seuils d'exonération est imposable.</li>
+        </ul>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>Vérifiez toutes les cases pré-remplies, notamment <strong>1AJ/1BJ</strong> (salaires).</li>
+            <li>N'oubliez pas les <strong>intérêts de livrets imposables</strong> et <strong>dividendes</strong> sur CTO.</li>
+            <li>Les plus-values crypto (case <strong>3AN</strong>) sont soumises au PFU de 30 %.</li>
+            <li>Les dons (case <strong>7DB</strong>) ouvrent droit à une réduction d'impôt de <strong>66 %</strong> (75 % pour certains organismes).</li>
+            <li>Vous pouvez corriger votre déclaration en ligne jusqu'à <strong>mi-décembre</strong> de l'année de dépôt.</li>
+          </ul>
+        </div>
+
+        <div class="cta-box">
+          <p>Estimez votre impôt sur le revenu 2026 avant de finaliser votre déclaration.</p>
+          <a href="/fr/impot/" class="cta-btn">Simuler mon impôt 2026 →</a>
+        </div>
+
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+          <div class="faq-item">
+            <div class="faq-q">Quelle est la date limite pour déclarer ses revenus en 2026 ?</div>
+            <div class="faq-a">La date limite dépend du département. Zone 1 (01-19) : fin mai ; zone 2 (20-54) : début juin ; zone 3 (55-976) : mi-juin. La déclaration papier clôture fin mai pour tous. Les dates exactes sont publiées sur impots.gouv.fr en avril.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Dois-je déclarer les intérêts de mon livret A ?</div>
+            <div class="faq-a">Non. Les intérêts du Livret A, LDDS et LEP sont exonérés d'impôt et de prélèvements sociaux. En revanche, les intérêts d'un livret bancaire ordinaire (livret +, compte à terme…) sont imposables et doivent être déclarés case 2TR.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Qu'est-ce que le pré-remplissage de la déclaration ?</div>
+            <div class="faq-a">L'administration pré-remplit la déclaration avec les informations transmises par les employeurs, caisses de retraite et certains organismes. Vous devez vérifier ces données, les corriger si nécessaire et compléter les rubriques non pré-remplies (revenus fonciers, plus-values, etc.).</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Faut-il déclarer les gains issus de la vente de cryptomonnaies ?</div>
+            <div class="faq-a">Oui. Les plus-values de cessions d'actifs numériques sont imposables au PFU de 30 % et doivent être déclarées case 3AN ou via le formulaire 2086. Les moins-values peuvent s'imputer sur les plus-values de l'année.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Que se passe-t-il si j'oublie de déclarer un revenu ?</div>
+            <div class="faq-a">Un oubli de déclaration peut entraîner des intérêts de retard (0,20 % par mois) et une majoration de 40 % à 80 % selon la gravité. Vous pouvez corriger spontanément jusqu'à mi-décembre pour limiter les pénalités.</div>
+          </div>
+        </div>
+
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+            <li><a href="https://www.impots.gouv.fr/particulier/ma-declaration-de-revenus">impots.gouv.fr — Ma déclaration de revenus</a></li>
+            <li><a href="https://www.service-public.fr/particuliers/vosdroits/F358">Service-Public.fr — Déclaration de revenus</a></li>
+            <li><a href="https://www.impots.gouv.fr/particulier/les-revenus-a-declarer">impots.gouv.fr — Les revenus à déclarer</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+            <li><a href="#calendrier">Calendrier 2026</a></li>
+            <li><a href="#preremplissage">Pré-remplissage</a></li>
+            <li><a href="#cases">Cases importantes</a></li>
+            <li><a href="#oublies">Revenus oubliés</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+            <a href="/guides/prelevement-a-la-source/" class="similar-link">Prélèvement à la source 2026</a>
+            <a href="/guides/quotient-familial/" class="similar-link">Quotient familial 2026</a>
+            <a href="/guides/frais-reels-vs-abattement/" class="similar-link">Frais réels vs abattement 10 %</a>
+            <a href="/guides/decote-fiscale/" class="similar-link">Décote fiscale 2026</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Simulez votre IR 2026</div>
+        </a>
+        <a href="/guides/quotient-familial/" class="related-card">
+          <div class="related-card-title">Quotient familial</div>
+          <div class="related-card-desc">Nombre de parts et plafond</div>
+        </a>
+        <a href="/guides/frais-reels-vs-abattement/" class="related-card">
+          <div class="related-card-title">Frais réels vs abattement</div>
+          <div class="related-card-desc">Quelle option choisir ?</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les résultats sont donnés à titre indicatif. Consultez un professionnel pour votre situation personnelle. Aucune donnée saisie ne transite par un serveur.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() { q.closest('.faq-item').classList.toggle('open'); });
+});
+</script>
+</body>
+</html>

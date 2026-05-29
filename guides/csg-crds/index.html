@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CSG CRDS 2026 : taux, calcul et impact sur votre salaire — CalcFin</title>
+<meta name="description" content="CSG et CRDS 2026 : taux 9,2% et 0,5%, assiette 98,25% du brut, CSG déductible vs non déductible (6,8% vs 2,4%), impact sur le net imposable. Source URSSAF." />
+<link rel="canonical" href="https://calculateurs-financiers-v2.pages.dev/guides/csg-crds/" />
+<meta property="og:title" content="CSG CRDS 2026 : taux, calcul et impact sur votre salaire — CalcFin" />
+<meta property="og:description" content="Tout comprendre sur la CSG (9,2%) et la CRDS (0,5%) en 2026 : assiette, part déductible, impact sur le net imposable." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://calculateurs-financiers-v2.pages.dev/guides/csg-crds/" />
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Accueil","item":"https://calculateurs-financiers-v2.pages.dev/"},
+    {"@type":"ListItem","position":2,"name":"Guides","item":"https://calculateurs-financiers-v2.pages.dev/guides/"},
+    {"@type":"ListItem","position":3,"name":"CSG et CRDS 2026","item":"https://calculateurs-financiers-v2.pages.dev/guides/csg-crds/"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre CSG déductible et non déductible ?",
+      "acceptedAnswer": {"@type":"Answer","text":"La CSG se divise en deux parts : 6,8 % qui est déductible de votre revenu imposable (elle réduit la base de calcul de l'impôt sur le revenu) et 2,4 % qui est non déductible. Cette distinction est automatiquement reportée sur votre fiche de paie et dans votre déclaration de revenus pré-remplie."}
+    },
+    {
+      "@type": "Question",
+      "name": "Sur quelle base est calculée la CSG-CRDS ?",
+      "acceptedAnswer": {"@type":"Answer","text":"La CSG et la CRDS sont calculées sur 98,25 % du salaire brut (et non sur 100 %). Cet abattement de 1,75 % représente un forfait pour frais professionnels. Ainsi, pour un salaire brut de 3 000 €, la base de calcul est 3 000 × 98,25 % = 2 947,50 €."}
+    },
+    {
+      "@type": "Question",
+      "name": "La CSG s'applique-t-elle aux allocations chômage ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Oui, mais à un taux réduit selon les revenus du foyer. Les allocations chômage (ARE) sont soumises à la CSG au taux de 6,2 % (dont 3,8 % déductible) et à la CRDS au taux de 0,5 % pour les bénéficiaires dont les revenus dépassent certains seuils. Les allocataires à faibles ressources peuvent être exonérés."}
+    },
+    {
+      "@type": "Question",
+      "name": "Comment la CSG déductible apparaît-elle sur ma fiche de paie ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Sur votre fiche de paie, la CSG apparaît généralement en deux lignes distinctes : 'CSG déductible de l'impôt sur le revenu' (6,8 %) et 'CSG/CRDS non déductible de l'impôt sur le revenu' (2,9 %, soit 2,4 % CSG non déductible + 0,5 % CRDS). Le salaire net à payer tient compte de l'ensemble."}
+    },
+    {
+      "@type": "Question",
+      "name": "Pourquoi mon salaire net avant impôt est-il différent de mon net imposable ?",
+      "acceptedAnswer": {"@type":"Answer","text":"Parce que la CSG déductible (6,8 %) est soustraite du salaire brut pour calculer le salaire net à payer, mais elle réduit également le revenu imposable. Le net imposable (case 1AJ) = salaire net à payer + CSG non déductible (2,4 %) + CRDS (0,5 %). Votre employeur calcule ce montant et le reporte directement dans votre déclaration pré-remplie."}
+    }
+  ]
+}
+</script>
+<style>
+  :root {
+    --bg: #0A0A0F; --bg-elev: #111118; --bg-card: #0E0E15;
+    --border: rgba(255,255,255,0.06); --border-hover: rgba(0,229,160,0.35);
+    --fg: #F5F5F2; --fg-muted: rgba(245,245,242,0.56); --fg-faint: rgba(245,245,242,0.38);
+    --accent: #00E5A0; --accent-soft: rgba(0,229,160,0.10);
+    --radius-lg: 24px; --radius-md: 16px; --radius-sm: 10px;
+  }
+  :root[data-theme="light"] {
+    --bg: #FAFAF8; --bg-elev: #FFFFFF; --bg-card: #FFFFFF;
+    --border: rgba(10,10,15,0.07); --border-hover: rgba(0,180,125,0.40);
+    --fg: #0A0A0F; --fg-muted: rgba(10,10,15,0.58); --fg-faint: rgba(10,10,15,0.38);
+    --accent: #00B47D; --accent-soft: rgba(0,180,125,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--fg); font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5; }
+  .backdrop-glow { position: fixed; top: -300px; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse at center, var(--accent-soft) 0%, transparent 65%); pointer-events: none; z-index: 0; opacity: 0.7; }
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); background: color-mix(in oklab, var(--bg) 78%, transparent); border-bottom: 1px solid var(--border); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--fg); text-decoration: none; }
+  .logo-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--accent); display: grid; place-items: center; color: #001A12; font-weight: 700; font-size: 11px; font-family: 'Geist Mono', monospace; }
+  nav.primary { display: none; align-items: center; gap: 32px; }
+  @media (min-width: 768px) { nav.primary { display: flex; } }
+  nav.primary a { color: var(--fg-muted); text-decoration: none; font-size: 14px; font-weight: 450; transition: color 0.15s ease; }
+  nav.primary a:hover { color: var(--fg); }
+  .tools-nav { border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+  .tools-nav::-webkit-scrollbar { display: none; }
+  .tools-nav-inner { display: flex; padding: 0; min-width: max-content; }
+  .tools-nav a { display: inline-flex; align-items: center; padding: 10px 14px; font-size: 12px; color: var(--fg-faint); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s, border-color 0.15s; font-family: 'Geist Mono', monospace; }
+  .tools-nav a:hover { color: var(--fg-muted); }
+  .tools-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; padding: 20px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .breadcrumb a { color: var(--fg-faint); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--fg-muted); }
+  .breadcrumb span { color: var(--fg-muted); }
+  .page-header { padding: 28px 0 36px; }
+  .page-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent); border-radius: 999px; font-size: 11px; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; margin-bottom: 16px; }
+  .page-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 40%, transparent); } 50% { box-shadow: 0 0 0 5px transparent; } }
+  .page-title { font-size: clamp(26px, 4.5vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+  .page-title em { color: var(--accent); font-style: normal; }
+  .page-sub { font-size: 16px; color: var(--fg-muted); max-width: 560px; }
+  .guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 80px; }
+  @media (min-width: 960px) { .guide-layout { grid-template-columns: 1fr 288px; align-items: start; } }
+  .article h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 36px 0 12px; padding-top: 4px; border-top: 1px solid var(--border); }
+  .article h2:first-of-type { border-top: none; margin-top: 8px; }
+  .article h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: var(--fg); }
+  .article p { font-size: 15px; color: var(--fg-muted); line-height: 1.75; margin-bottom: 14px; }
+  .article ul, .article ol { margin: 0 0 14px 20px; color: var(--fg-muted); font-size: 15px; line-height: 1.75; }
+  .article li { margin-bottom: 5px; }
+  .article strong { color: var(--fg); font-weight: 600; }
+  .article table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; overflow-x: auto; display: block; }
+  .article th { background: var(--bg-elev); color: var(--fg); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  .article td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--fg-muted); }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--bg-elev); }
+  .a-retenir { background: var(--accent-soft); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: var(--radius-md); padding: 20px 24px; margin: 28px 0; }
+  .a-retenir-title { font-size: 11px; font-weight: 600; color: var(--accent); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .a-retenir ul { margin: 0 0 0 16px; }
+  .a-retenir li { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-bottom: 5px; }
+  .a-retenir strong { color: var(--fg); }
+  .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin: 32px 0; text-align: center; }
+  .cta-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 14px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #001A12; font-weight: 600; font-size: 14px; border-radius: 999px; text-decoration: none; transition: opacity 0.15s; }
+  .cta-btn:hover { opacity: 0.85; }
+  .faq-section { margin: 40px 0 0; }
+  .faq-section > h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; border-top: none !important; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q { font-size: 15px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--fg); }
+  .faq-q::after { content: '+'; font-size: 20px; color: var(--fg-faint); flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: var(--fg-muted); line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .sources { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); }
+  .sources-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .sources ul { list-style: none; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .sources li { font-size: 12px; color: var(--fg-faint); line-height: 1.5; }
+  .sources a { color: var(--fg-faint); text-decoration: underline; text-underline-offset: 2px; }
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+  @media (min-width: 960px) { .sidebar { position: sticky; top: 88px; } }
+  .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+  .sidebar-card-title { font-size: 11px; font-weight: 600; color: var(--fg-faint); font-family: 'Geist Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .toc ol { margin: 0 0 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .toc li a { font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.15s; line-height: 1.4; }
+  .toc li a:hover { color: var(--accent); }
+  .similar-list { display: flex; flex-direction: column; gap: 2px; }
+  .similar-link { display: block; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--fg-muted); text-decoration: none; font-size: 13px; line-height: 1.4; transition: background 0.15s, color 0.15s; }
+  .similar-link:hover { background: var(--bg-elev); color: var(--fg); }
+  .related { padding: 48px 0; border-top: 1px solid var(--border); }
+  .related-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .related-card { display: block; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; color: var(--fg); transition: border-color 0.18s, transform 0.18s; }
+  .related-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .related-card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .related-card-desc { font-size: 12px; color: var(--fg-faint); }
+  footer.site { border-top: 1px solid var(--border); padding: 24px 0; }
+  .footer-inner { display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center; }
+  @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; } }
+  .footer-disclaimer { font-size: 12px; color: var(--fg-faint); max-width: 600px; line-height: 1.6; }
+  .footer-brand { font-size: 13px; color: var(--fg-faint); font-family: 'Geist Mono', monospace; }
+  @media (max-width: 480px) { .container { padding: 0 16px; } .page-header { padding: 16px 0 20px; } }
+</style>
+</head>
+<body>
+<div class="backdrop-glow"></div>
+<header class="site">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo"><div class="logo-mark">CF</div>CalcFin</a>
+      <nav class="primary">
+        <a href="/#tools">Outils</a>
+        <a href="/guides" class="active">Guides</a>
+        <a href="/a-propos">À propos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<nav class="tools-nav">
+  <div class="container">
+    <div class="tools-nav-inner">
+      <a href="/fr/salaire-brut-net/">Brut → Net</a>
+      <a href="/fr/salaire-net-brut/">Net → Brut</a>
+      <a href="/fr/pret-immobilier/">Prêt immo</a>
+      <a href="/fr/impot/">Impôt IR</a>
+      <a href="/fr/rupture-conventionnelle/">Rupture conv.</a>
+      <a href="/fr/retraite/">Retraite</a>
+      <a href="/fr/tva/">TVA</a>
+      <a href="/fr/are/">Chômage ARE</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Accueil</a><span>›</span>
+      <a href="/guides">Guides</a><span>›</span>
+      <span>CSG et CRDS 2026</span>
+    </div>
+    <div class="page-header">
+      <div class="page-badge"><div class="page-badge-dot"></div>Impôts</div>
+      <h1 class="page-title">CSG et CRDS : <em>taux, calcul</em> et impact sur votre salaire en 2026</h1>
+      <p class="page-sub">La CSG (9,2 %) et la CRDS (0,5 %) représentent ensemble 9,7 % de vos revenus. Comprendre leur calcul, leur assiette et la distinction entre CSG déductible et non déductible vous permet de mieux lire votre fiche de paie.</p>
+    </div>
+    <div class="guide-layout">
+      <article class="article">
+        <p>La <strong>Contribution Sociale Généralisée (CSG)</strong> et la <strong>Contribution au Remboursement de la Dette Sociale (CRDS)</strong> sont deux prélèvements sociaux obligatoires prélevés directement sur les revenus d'activité, de remplacement et du patrimoine. Créées respectivement en 1991 et 1996, elles financent la protection sociale et remboursent la dette de la Sécurité sociale. Elles sont collectées par l'employeur et n'apparaissent pas dans les cotisations patronales.</p>
+
+        <h2 id="taux">Taux CSG et CRDS en 2026</h2>
+        <table>
+          <tr><th>Contribution</th><th>Taux global</th><th>dont déductible</th><th>dont non déductible</th></tr>
+          <tr><td>CSG</td><td>9,2 %</td><td>6,8 %</td><td>2,4 %</td></tr>
+          <tr><td>CRDS</td><td>0,5 %</td><td>0 %</td><td>0,5 %</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>9,7 %</strong></td><td><strong>6,8 %</strong></td><td><strong>2,9 %</strong></td></tr>
+        </table>
+        <p>La CSG déductible (6,8 %) est déduite de votre revenu imposable à l'impôt sur le revenu : elle réduit la base de calcul du barème progressif. La CSG non déductible (2,4 %) et la CRDS (0,5 %) ne sont pas déductibles ; elles s'ajoutent donc à votre revenu imposable.</p>
+
+        <h2 id="assiette">L'assiette de calcul : 98,25 % du brut</h2>
+        <p>La CSG et la CRDS ne sont pas calculées sur 100 % du salaire brut mais sur <strong>98,25 %</strong> de ce salaire. Ce "taux d'abattement" de 1,75 % représente un forfait pour frais professionnels accordé aux salariés. Cet abattement s'applique dans la limite de 4 fois le plafond annuel de la Sécurité sociale (PASS).</p>
+        <p><strong>Formule :</strong></p>
+        <ul>
+          <li>Assiette CSG/CRDS = Salaire brut × 98,25 %</li>
+          <li>CSG = Assiette × 9,2 %</li>
+          <li>CRDS = Assiette × 0,5 %</li>
+          <li>Total = Assiette × 9,7 %</li>
+        </ul>
+
+        <h2 id="exemple">Exemple de calcul sur un salaire de 3 000 € brut</h2>
+        <table>
+          <tr><th>Étape</th><th>Calcul</th><th>Résultat</th></tr>
+          <tr><td>Salaire brut mensuel</td><td>—</td><td>3 000,00 €</td></tr>
+          <tr><td>Assiette (× 98,25 %)</td><td>3 000 × 0,9825</td><td>2 947,50 €</td></tr>
+          <tr><td>CSG déductible (6,8 %)</td><td>2 947,50 × 6,8 %</td><td>200,43 €</td></tr>
+          <tr><td>CSG non déductible (2,4 %)</td><td>2 947,50 × 2,4 %</td><td>70,74 €</td></tr>
+          <tr><td>CRDS (0,5 %)</td><td>2 947,50 × 0,5 %</td><td>14,74 €</td></tr>
+          <tr><td><strong>Total CSG/CRDS</strong></td><td>2 947,50 × 9,7 %</td><td><strong>285,91 €</strong></td></tr>
+        </table>
+        <p>La CSG déductible (200,43 €) est déduite de votre revenu imposable déclaré case 1AJ, ce qui réduit votre impôt sur le revenu. Les 85,48 € de CSG non déductible + CRDS n'ont pas cet effet.</p>
+
+        <h2 id="net-imposable">Impact sur le net imposable</h2>
+        <p>Le <strong>salaire net imposable</strong> (case 1AJ de la déclaration) est différent du salaire net à payer. La relation est :</p>
+        <p><strong>Net imposable = Net à payer + CSG non déductible + CRDS</strong></p>
+        <p>Pour notre exemple : si le net à payer est 2 300 € (après toutes cotisations), le net imposable sera 2 300 + 70,74 + 14,74 = <strong>2 385,48 €</strong>. C'est ce montant qui est reporté case 1AJ et sur lequel s'applique le barème de l'impôt (après abattement de 10 % ou frais réels).</p>
+        <p>Cette distinction est importante : votre taux de prélèvement à la source est calculé sur le net imposable, et non sur le net à payer affiché sur votre bulletin de salaire.</p>
+
+        <div class="a-retenir">
+          <div class="a-retenir-title">À retenir</div>
+          <ul>
+            <li>CSG = <strong>9,2 %</strong> / CRDS = <strong>0,5 %</strong> → total 9,7 % de la base</li>
+            <li>Base de calcul = <strong>98,25 %</strong> du salaire brut (abattement de 1,75 % pour frais pro)</li>
+            <li>CSG déductible : <strong>6,8 %</strong> → réduit votre revenu imposable à l'IR</li>
+            <li>CSG non déductible (2,4 %) + CRDS (0,5 %) = <strong>2,9 %</strong> non déductibles</li>
+            <li>Net imposable = net à payer + <strong>2,9 %</strong> de l'assiette (CSG ND + CRDS)</li>
+          </ul>
+        </div>
+
+        <div class="cta-box">
+          <p>Calculez précisément votre salaire net à payer et votre net imposable après CSG/CRDS.</p>
+          <a href="/fr/salaire-brut-net/" class="cta-btn">Calculer mon salaire net →</a>
+        </div>
+
+        <div class="faq-section">
+          <h2>Questions fréquentes</h2>
+          <div class="faq-item">
+            <div class="faq-q">Quelle est la différence entre CSG déductible et non déductible ?</div>
+            <div class="faq-a">La CSG déductible (6,8 %) réduit votre revenu imposable à l'impôt sur le revenu. La CSG non déductible (2,4 %) et la CRDS (0,5 %) n'ont pas cet effet. Cette distinction est automatiquement reportée sur votre fiche de paie et dans votre déclaration pré-remplie.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Sur quelle base est calculée la CSG-CRDS ?</div>
+            <div class="faq-a">La CSG et la CRDS sont calculées sur 98,25 % du salaire brut. Cet abattement de 1,75 % représente un forfait pour frais professionnels. Pour 3 000 € brut, la base est 2 947,50 €.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">La CSG s'applique-t-elle aux allocations chômage ?</div>
+            <div class="faq-a">Oui, mais à un taux réduit selon les revenus. Les allocations chômage (ARE) sont soumises à la CSG au taux de 6,2 % (dont 3,8 % déductible) et à la CRDS à 0,5 %. Les allocataires à faibles ressources peuvent être exonérés.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Comment la CSG déductible apparaît-elle sur ma fiche de paie ?</div>
+            <div class="faq-a">Sur votre fiche de paie, deux lignes distinctes : "CSG déductible de l'impôt sur le revenu" (6,8 %) et "CSG/CRDS non déductible" (2,9 %). Le salaire net à payer tient compte des deux prélèvements.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Pourquoi mon salaire net avant impôt est-il différent de mon net imposable ?</div>
+            <div class="faq-a">Parce que la CSG non déductible (2,4 %) et la CRDS (0,5 %) s'ajoutent au net à payer pour former le net imposable. C'est ce dernier qui est reporté case 1AJ et utilisé pour calculer l'impôt sur le revenu.</div>
+          </div>
+        </div>
+
+        <div class="sources">
+          <div class="sources-title">Sources officielles</div>
+          <ul>
+            <li><a href="https://www.urssaf.fr/portail/home/employeur/calculer-et-declarer/les-cotisations/la-csg-et-la-crds.html">URSSAF — CSG et CRDS sur les revenus d'activité</a></li>
+            <li><a href="https://www.impots.gouv.fr/particulier/la-csg-deductible">impots.gouv.fr — La CSG déductible</a></li>
+            <li><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000041471544">Légifrance — Art. 154 quinquies du CGI (CSG déductible)</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Sommaire</div>
+          <div class="toc"><ol>
+            <li><a href="#taux">Taux CSG et CRDS 2026</a></li>
+            <li><a href="#assiette">Assiette : 98,25 % du brut</a></li>
+            <li><a href="#exemple">Exemple chiffré</a></li>
+            <li><a href="#net-imposable">Impact sur le net imposable</a></li>
+          </ol></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Guides similaires</div>
+          <div class="similar-list">
+            <a href="/guides/prelevement-a-la-source/" class="similar-link">Prélèvement à la source 2026</a>
+            <a href="/guides/frais-reels-vs-abattement/" class="similar-link">Frais réels vs abattement 10 %</a>
+            <a href="/guides/cotisations-salariales/" class="similar-link">Cotisations salariales 2026</a>
+            <a href="/guides/brut-net-net-imposable/" class="similar-link">Brut, net et net imposable</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="related">
+      <div class="related-title">Outils complémentaires</div>
+      <div class="related-grid">
+        <a href="/fr/salaire-brut-net/" class="related-card">
+          <div class="related-card-title">Salaire brut → net</div>
+          <div class="related-card-desc">Détail de toutes les cotisations</div>
+        </a>
+        <a href="/fr/impot/" class="related-card">
+          <div class="related-card-title">Impôt sur le revenu</div>
+          <div class="related-card-desc">Calculez à partir du net imposable</div>
+        </a>
+        <a href="/guides/prelevement-a-la-source/" class="related-card">
+          <div class="related-card-title">Prélèvement à la source</div>
+          <div class="related-card-desc">Taux et fonctionnement 2026</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="site">
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">Les résultats sont donnés à titre indicatif. Consultez un professionnel pour votre situation personnelle. Aucune donnée saisie ne transite par un serveur.</p>
+      <div class="footer-brand">CalcFin © 2026</div>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() { q.closest('.faq-item').classList.toggle('open'); });
+});
+</script>
+</body>
+</html>
