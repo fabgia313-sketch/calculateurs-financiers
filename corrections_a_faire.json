@@ -1,0 +1,282 @@
+{
+  "date_generation": "2026-05-31",
+  "sources_officielles": {
+    "SMIC_2026": "https://www.legisocial.fr/reperes-sociaux/montant-smic-2026-taux-horaire-net-brut.html",
+    "PASS_2026": "https://www.legisocial.fr/reperes-sociaux/plafond-securite-sociale-2026.html",
+    "IR_2026": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419",
+    "ARE_2026": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14860",
+    "TAUX_IMMO_2026": "https://www.meilleurtaux.com/credit-immobilier/barometre-des-taux.html"
+  },
+  "corrections": [
+    {
+      "id": 1,
+      "fichier": "fr/are/index.html",
+      "ligne": 505,
+      "valeur_actuelle": "12,95 €",
+      "valeur_correcte": "13,18 €",
+      "source": "Service-Public.fr — ARE valeurs juillet 2025",
+      "description": "Partie fixe journalière ARE - affichage HTML"
+    },
+    {
+      "id": 2,
+      "fichier": "fr/are/index.html",
+      "ligne": 547,
+      "valeur_actuelle": "12,95 €",
+      "valeur_correcte": "13,18 €",
+      "source": "Service-Public.fr — ARE valeurs juillet 2025",
+      "description": "Partie fixe journalière ARE - stat card HTML"
+    },
+    {
+      "id": 3,
+      "fichier": "fr/are/index.html",
+      "ligne": 569,
+      "valeur_actuelle": "12,95 €",
+      "valeur_correcte": "13,18 €",
+      "source": "Service-Public.fr — ARE valeurs juillet 2025",
+      "description": "Partie fixe ARE - texte explainer"
+    },
+    {
+      "id": 4,
+      "fichier": "fr/are/index.html",
+      "ligne": 569,
+      "valeur_actuelle": "31,59 €",
+      "valeur_correcte": "32,13 €",
+      "source": "Service-Public.fr — ARE valeurs juillet 2025",
+      "description": "Plancher absolu ARE - texte explainer"
+    },
+    {
+      "id": 5,
+      "fichier": "fr/are/index.html",
+      "ligne": 643,
+      "valeur_actuelle": "12.95",
+      "valeur_correcte": "13.18",
+      "source": "Service-Public.fr — ARE valeurs juillet 2025",
+      "description": "JS - constante PARTIE_FIXE"
+    },
+    {
+      "id": 6,
+      "fichier": "fr/are/index.html",
+      "ligne": 647,
+      "valeur_actuelle": "31.59",
+      "valeur_correcte": "32.13",
+      "source": "Service-Public.fr — ARE valeurs juillet 2025",
+      "description": "JS - constante ARE_MIN_ABS plancher"
+    },
+    {
+      "id": 7,
+      "fichier": "fr/retraite/index.html",
+      "ligne": 652,
+      "valeur_actuelle": "3925",
+      "valeur_correcte": "4005",
+      "source": "legisocial.fr — PASS 2026 = 48 060 € / 12 = 4 005 €",
+      "description": "JS - PLAFOND_SS_MENS (PSS mensuel 2026)"
+    },
+    {
+      "id": 8,
+      "fichier": "guides/smic-2026/index.html",
+      "ligne": 225,
+      "valeur_actuelle": "1er novembre 2024",
+      "valeur_correcte": "1er juin 2026",
+      "source": "legisocial.fr — SMIC 2026 revalorisé au 1er juin 2026",
+      "description": "Date de la dernière revalorisation SMIC"
+    },
+    {
+      "id": 9,
+      "fichier": "guides/smic-2026/index.html",
+      "ligne": 225,
+      "valeur_actuelle": "11,88 €",
+      "valeur_correcte": "12,31 €",
+      "source": "legisocial.fr — SMIC horaire brut depuis 1er juin 2026",
+      "description": "SMIC horaire brut - texte principal"
+    },
+    {
+      "id": 10,
+      "fichier": "guides/smic-2026/index.html",
+      "ligne": 228,
+      "valeur_actuelle": "11,88 €",
+      "valeur_correcte": "12,31 €",
+      "source": "legisocial.fr — SMIC horaire brut depuis 1er juin 2026",
+      "description": "SMIC horaire - tableau"
+    },
+    {
+      "id": 11,
+      "fichier": "guides/smic-2026/index.html",
+      "ligne": 229,
+      "valeur_actuelle": "1 801,80 €",
+      "valeur_correcte": "1 867,02 €",
+      "source": "legisocial.fr — SMIC mensuel brut depuis 1er juin 2026",
+      "description": "SMIC mensuel brut - tableau"
+    },
+    {
+      "id": 12,
+      "fichier": "guides/smic-2026/index.html",
+      "ligne": 229,
+      "valeur_actuelle": "~1 426 €",
+      "valeur_correcte": "~1 477 €",
+      "source": "legisocial.fr — SMIC mensuel net depuis 1er juin 2026",
+      "description": "SMIC mensuel net - tableau"
+    },
+    {
+      "id": 13,
+      "fichier": "guides/smic-2026/index.html",
+      "ligne": 239,
+      "valeur_actuelle": "11,88 €",
+      "valeur_correcte": "12,31 €",
+      "source": "legisocial.fr — SMIC horaire brut depuis 1er juin 2026",
+      "description": "SMIC horaire - exemple temps partiel"
+    },
+    {
+      "id": 14,
+      "fichier": "guides/smic-2026/index.html",
+      "ligne": 239,
+      "valeur_actuelle": "1 030,40 €",
+      "valeur_correcte": "1 067,85 €",
+      "source": "Calcul : 20 × 12,31 × (52/12) = 1 067,85 €",
+      "description": "Exemple temps partiel 20h - montant mensuel"
+    },
+    {
+      "id": 15,
+      "fichier": "guides/smic-2026/index.html",
+      "ligne": 249,
+      "valeur_actuelle": "11,88 €",
+      "valeur_correcte": "12,31 €",
+      "source": "legisocial.fr — SMIC horaire brut depuis 1er juin 2026",
+      "description": "SMIC horaire - liste à retenir"
+    },
+    {
+      "id": 16,
+      "fichier": "guides/smic-2026/index.html",
+      "ligne": 250,
+      "valeur_actuelle": "1 801,80 €",
+      "valeur_correcte": "1 867,02 €",
+      "source": "legisocial.fr — SMIC mensuel brut depuis 1er juin 2026",
+      "description": "SMIC mensuel - liste à retenir"
+    },
+    {
+      "id": 17,
+      "fichier": "guides/smic-2026/index.html",
+      "ligne": 250,
+      "valeur_actuelle": "~1 426 €",
+      "valeur_correcte": "~1 477 €",
+      "source": "legisocial.fr — SMIC mensuel net depuis 1er juin 2026",
+      "description": "SMIC net mensuel - liste à retenir"
+    },
+    {
+      "id": 18,
+      "fichier": "guides/smic-2026/index.html",
+      "ligne": 258,
+      "valeur_actuelle": "1 801,80 €",
+      "valeur_correcte": "1 867,02 €",
+      "source": "legisocial.fr — SMIC mensuel brut depuis 1er juin 2026",
+      "description": "SMIC mensuel - CTA simulateur"
+    },
+    {
+      "id": 19,
+      "fichier": "guides/cotisations-salariales/index.html",
+      "ligne": 226,
+      "valeur_actuelle": "3 925 € / mois",
+      "valeur_correcte": "4 005 € / mois",
+      "source": "legisocial.fr — PASS 2026 = 48 060 € / 12 = 4 005 €",
+      "description": "PSS mensuel 2026"
+    },
+    {
+      "id": 20,
+      "fichier": "guides/cotisations-salariales/index.html",
+      "ligne": 226,
+      "valeur_actuelle": "47 100 € / an",
+      "valeur_correcte": "48 060 € / an",
+      "source": "legisocial.fr — PASS 2026 = 48 060 €",
+      "description": "PASS annuel 2026"
+    },
+    {
+      "id": 21,
+      "fichier": "guides/cotisations-salariales/index.html",
+      "ligne": 242,
+      "valeur_actuelle": "3 925 €",
+      "valeur_correcte": "4 005 €",
+      "source": "legisocial.fr — PASS 2026 = 48 060 € / 12 = 4 005 €",
+      "description": "PSS mensuel - note de bas de tableau"
+    },
+    {
+      "id": 22,
+      "fichier": "guides/cotisations-salariales/index.html",
+      "ligne": 258,
+      "valeur_actuelle": "3 925 €",
+      "valeur_correcte": "4 005 €",
+      "source": "legisocial.fr — PASS 2026 = 48 060 € / 12 = 4 005 €",
+      "description": "PSS mensuel - liste à retenir"
+    },
+    {
+      "id": 23,
+      "fichier": "guides/rupture-conventionnelle-guide/index.html",
+      "ligne": 242,
+      "valeur_actuelle": "94 200 €",
+      "valeur_correcte": "96 120 €",
+      "source": "legisocial.fr — 2 × PASS 2026 = 2 × 48 060 = 96 120 €",
+      "description": "Plafond exonération rupture conventionnelle"
+    },
+    {
+      "id": 24,
+      "fichier": "guides/rupture-conventionnelle-guide/index.html",
+      "ligne": 242,
+      "valeur_actuelle": "47 100 €",
+      "valeur_correcte": "48 060 €",
+      "source": "legisocial.fr — PASS 2026 = 48 060 €",
+      "description": "PASS 2026 - rupture conventionnelle guide"
+    },
+    {
+      "id": 25,
+      "fichier": "guides/rupture-conventionnelle-guide/index.html",
+      "ligne": 254,
+      "valeur_actuelle": "94 200 €",
+      "valeur_correcte": "96 120 €",
+      "source": "legisocial.fr — 2 × PASS 2026 = 96 120 €",
+      "description": "2xPASS - liste à retenir"
+    },
+    {
+      "id": 26,
+      "fichier": "guides/negocier-son-salaire/index.html",
+      "ligne": 225,
+      "valeur_actuelle": "11,88 €/h brut au 1er nov. 2024",
+      "valeur_correcte": "12,31 €/h brut au 1er juin 2026",
+      "source": "legisocial.fr — SMIC horaire brut depuis 1er juin 2026",
+      "description": "SMIC horaire - texte principal"
+    },
+    {
+      "id": 27,
+      "fichier": "guides/interessement-participation/index.html",
+      "ligne": 226,
+      "valeur_actuelle": "47 100 €",
+      "valeur_correcte": "48 060 €",
+      "source": "legisocial.fr — PASS 2026 = 48 060 €",
+      "description": "PASS - intéressement participation"
+    },
+    {
+      "id": 28,
+      "fichier": "guides/interessement-participation/index.html",
+      "ligne": 226,
+      "valeur_actuelle": "35 325 €",
+      "valeur_correcte": "36 045 €",
+      "source": "Calcul : 75% × 48 060 = 36 045 €",
+      "description": "75% PASS - plafond RSP individuelle"
+    },
+    {
+      "id": 29,
+      "fichier": "guides/avantages-en-nature/index.html",
+      "ligne": 237,
+      "valeur_actuelle": "1 801,80 €",
+      "valeur_correcte": "1 867,02 €",
+      "source": "legisocial.fr — SMIC mensuel brut depuis 1er juin 2026",
+      "description": "Seuil 1 SMIC pour barème avantages en nature logement"
+    },
+    {
+      "id": 30,
+      "fichier": "guides/avantages-en-nature/index.html",
+      "ligne": 237,
+      "valeur_actuelle": "2 162,15 €",
+      "valeur_correcte": "2 240,42 €",
+      "source": "Calcul : 1,2 × 1 867,02 = 2 240,42 €",
+      "description": "Seuil 1,2 SMIC pour barème avantages en nature logement"
+    }
+  ]
+}

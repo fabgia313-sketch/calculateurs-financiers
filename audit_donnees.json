@@ -1,0 +1,139 @@
+{
+  "date_audit": "2026-05-31",
+  "fichiers": [
+    {
+      "fichier": "fr/are/index.html",
+      "donnees_trouvees": [
+        {"ligne": 505, "valeur": "12,95 €", "contexte": "Partie fixe journalière ARE (affichage HTML)"},
+        {"ligne": 508, "valeur": "40,4% du SJR", "contexte": "Taux proportionnel ARE"},
+        {"ligne": 547, "valeur": "12,95 €", "contexte": "Stat card - partie fixe journalière"},
+        {"ligne": 551, "valeur": "40,4 %", "contexte": "Stat card - part proportionnelle SJR"},
+        {"ligne": 569, "valeur": "12,95 €", "contexte": "Texte explainer - partie fixe ARE"},
+        {"ligne": 569, "valeur": "31,59 €", "contexte": "Texte explainer - plancher absolu ARE"},
+        {"ligne": 643, "valeur": "12.95", "contexte": "JS - PARTIE_FIXE constante"},
+        {"ligne": 644, "valeur": "0.404", "contexte": "JS - TAUX_PROP"},
+        {"ligne": 645, "valeur": "0.57", "contexte": "JS - TAUX_PLANCHER"},
+        {"ligne": 646, "valeur": "0.75", "contexte": "JS - TAUX_PLAFOND"},
+        {"ligne": 647, "valeur": "31.59", "contexte": "JS - ARE_MIN_ABS plancher absolu"}
+      ]
+    },
+    {
+      "fichier": "fr/impot/index.html",
+      "donnees_trouvees": [
+        {"ligne": 399, "valeur": "11600", "contexte": "JS - tranche IR 0%"},
+        {"ligne": 400, "valeur": "29579", "contexte": "JS - tranche IR 11%"},
+        {"ligne": 401, "valeur": "84577", "contexte": "JS - tranche IR 30%"},
+        {"ligne": 402, "valeur": "181917", "contexte": "JS - tranche IR 41%"},
+        {"ligne": 409, "valeur": "509", "contexte": "JS - abattement salarial minimum"},
+        {"ligne": 409, "valeur": "14555", "contexte": "JS - abattement salarial maximum"},
+        {"ligne": 457, "valeur": "897", "contexte": "JS - décote célibataire"},
+        {"ligne": 458, "valeur": "1483", "contexte": "JS - décote couple"},
+        {"ligne": 459, "valeur": "1982", "contexte": "JS - plafond décote célibataire"},
+        {"ligne": 459, "valeur": "3277", "contexte": "JS - plafond décote couple"},
+        {"ligne": 478, "valeur": "1807", "contexte": "JS - plafonnement demi-part"},
+        {"ligne": 340, "valeur": "11 600 €", "contexte": "HTML table - tranche 0%"},
+        {"ligne": 341, "valeur": "11 601 € à 29 579 €", "contexte": "HTML table - tranche 11%"},
+        {"ligne": 342, "valeur": "29 580 € à 84 577 €", "contexte": "HTML table - tranche 30%"},
+        {"ligne": 343, "valeur": "84 578 € à 181 917 €", "contexte": "HTML table - tranche 41%"},
+        {"ligne": 344, "valeur": "181 917 €", "contexte": "HTML table - tranche 45%"},
+        {"ligne": 241, "valeur": "509 € minimum", "contexte": "HTML - abattement min"},
+        {"ligne": 241, "valeur": "14 555 € maximum", "contexte": "HTML - abattement max"},
+        {"ligne": 352, "valeur": "1 807 €", "contexte": "HTML - plafonnement demi-part"},
+        {"ligne": 355, "valeur": "897 €", "contexte": "HTML - décote célibataire"},
+        {"ligne": 355, "valeur": "1 483 €", "contexte": "HTML - décote couple"}
+      ]
+    },
+    {
+      "fichier": "fr/salaire-brut-net/index.html",
+      "donnees_trouvees": [
+        {"ligne": 649, "valeur": "0.0040", "contexte": "JS - taux maladie salarié"},
+        {"ligne": 650, "valeur": "0.0690", "contexte": "JS - taux retraite base"},
+        {"ligne": 651, "valeur": "0.0315", "contexte": "JS - taux retraite complémentaire non-cadre"},
+        {"ligne": 652, "valeur": "0.0240", "contexte": "JS - taux chômage"},
+        {"ligne": 653, "valeur": "0.0970", "contexte": "JS - taux CSG/CRDS"},
+        {"ligne": 659, "valeur": "0.0430", "contexte": "JS - taux retraite complémentaire cadre"},
+        {"ligne": 553, "valeur": "Assurance maladie (0,40%)", "contexte": "HTML label maladie"},
+        {"ligne": 555, "valeur": "Retraite de base (6,90%)", "contexte": "HTML label retraite base"},
+        {"ligne": 563, "valeur": "Chômage (2,40%)", "contexte": "HTML label chômage"},
+        {"ligne": 566, "valeur": "CSG / CRDS (9,70%)", "contexte": "HTML label CSG/CRDS"}
+      ]
+    },
+    {
+      "fichier": "fr/rupture-conventionnelle/index.html",
+      "donnees_trouvees": [
+        {"ligne": 751, "valeur": "48060", "contexte": "JS - PASS_2026"},
+        {"ligne": 595, "valeur": "96 120 €", "contexte": "HTML - plafond exonération 2 x PASS"},
+        {"ligne": 611, "valeur": "96 120 €", "contexte": "HTML stat card - plafond exonération"}
+      ]
+    },
+    {
+      "fichier": "fr/pret-immobilier/index.html",
+      "donnees_trouvees": [
+        {"ligne": 288, "valeur": "3.50", "contexte": "JS - taux intérêt par défaut"},
+        {"ligne": 295, "valeur": "3,2 % – 3,8 % sur 20 ans", "contexte": "HTML hint - taux marché 2026"},
+        {"ligne": 499, "valeur": "0.075", "contexte": "JS - frais notaire ancien"},
+        {"ligne": 499, "valeur": "0.025", "contexte": "JS - frais notaire neuf"},
+        {"ligne": 302, "valeur": "0.30", "contexte": "JS - assurance par défaut"}
+      ]
+    },
+    {
+      "fichier": "fr/retraite/index.html",
+      "donnees_trouvees": [
+        {"ligne": 652, "valeur": "3925", "contexte": "JS - PLAFOND_SS_MENS (PASS mensuel)"}
+      ]
+    },
+    {
+      "fichier": "guides/smic-2026/index.html",
+      "donnees_trouvees": [
+        {"ligne": 225, "valeur": "1er novembre 2024", "contexte": "Date revalorisation SMIC (obsolète)"},
+        {"ligne": 225, "valeur": "11,88 €", "contexte": "HTML - SMIC horaire brut (obsolète)"},
+        {"ligne": 228, "valeur": "11,88 €", "contexte": "HTML tableau - SMIC horaire (obsolète)"},
+        {"ligne": 229, "valeur": "1 801,80 €", "contexte": "HTML tableau - SMIC mensuel brut (obsolète)"},
+        {"ligne": 229, "valeur": "~1 426 €", "contexte": "HTML tableau - SMIC mensuel net (obsolète)"},
+        {"ligne": 239, "valeur": "11,88 €", "contexte": "HTML - calcul temps partiel (obsolète)"},
+        {"ligne": 239, "valeur": "1 030,40 €", "contexte": "HTML - exemple temps partiel (obsolète)"},
+        {"ligne": 249, "valeur": "11,88 €", "contexte": "HTML liste - SMIC horaire (obsolète)"},
+        {"ligne": 250, "valeur": "1 801,80 €", "contexte": "HTML liste - SMIC mensuel (obsolète)"},
+        {"ligne": 250, "valeur": "~1 426 €", "contexte": "HTML liste - SMIC net (obsolète)"},
+        {"ligne": 258, "valeur": "1 801,80 €", "contexte": "HTML CTA - référence SMIC (obsolète)"}
+      ]
+    },
+    {
+      "fichier": "guides/cotisations-salariales/index.html",
+      "donnees_trouvees": [
+        {"ligne": 226, "valeur": "3 925 € / mois", "contexte": "HTML - PSS mensuel (obsolète, 2025)"},
+        {"ligne": 226, "valeur": "47 100 € / an", "contexte": "HTML - PASS annuel (obsolète, 2025)"},
+        {"ligne": 242, "valeur": "3 925 €", "contexte": "HTML - PSS mensuel (obsolète)"},
+        {"ligne": 258, "valeur": "3 925 €", "contexte": "HTML - PSS mensuel liste (obsolète)"}
+      ]
+    },
+    {
+      "fichier": "guides/rupture-conventionnelle-guide/index.html",
+      "donnees_trouvees": [
+        {"ligne": 242, "valeur": "94 200 €", "contexte": "HTML - 2xPASS exonération (obsolète, 2025)"},
+        {"ligne": 242, "valeur": "47 100 €", "contexte": "HTML - PASS 2026 incorrect (valeur 2025)"},
+        {"ligne": 254, "valeur": "94 200 €", "contexte": "HTML liste - 2xPASS (obsolète, 2025)"}
+      ]
+    },
+    {
+      "fichier": "guides/negocier-son-salaire/index.html",
+      "donnees_trouvees": [
+        {"ligne": 225, "valeur": "11,88 €/h brut au 1er nov. 2024", "contexte": "HTML - SMIC obsolète"}
+      ]
+    },
+    {
+      "fichier": "guides/interessement-participation/index.html",
+      "donnees_trouvees": [
+        {"ligne": 226, "valeur": "47 100 €", "contexte": "HTML - PASS 2026 incorrect (valeur 2025)"},
+        {"ligne": 226, "valeur": "35 325 €", "contexte": "HTML - 75% PASS (calculé sur 47 100, obsolète)"}
+      ]
+    },
+    {
+      "fichier": "guides/avantages-en-nature/index.html",
+      "donnees_trouvees": [
+        {"ligne": 237, "valeur": "1 801,80 €", "contexte": "HTML - référence SMIC mensuel (obsolète)"},
+        {"ligne": 237, "valeur": "2 162,15 €", "contexte": "HTML - 1,2 SMIC calculé sur base obsolète"}
+      ]
+    }
+  ]
+}
